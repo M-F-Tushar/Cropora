@@ -1,0 +1,15 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <style name="Theme.Cropora" parent="Theme.Material3.DayNight.NoActionBar">
+        <item name="colorPrimary">@color/leaf_green_700</item>
+        <item name="colorOnPrimary">@color/white</item>
+        <item name="colorPrimaryContainer">@color/leaf_green_100</item>
+        <item name="colorOnPrimaryContainer">@color/leaf_text_primary</item>
+        <item name="colorSecondary">@color/leaf_accent</item>
+        <item name="colorOnSecondary">@color/leaf_text_primary</item>
+        <item name="colorSurface">@color/leaf_surface</item>
+        <item name="colorOnSurface">@color/leaf_text_primary</item>
+        <item name="android:statusBarColor">@color/leaf_green_800</item>
+        <item name="android:navigationBarColor">@color/soil_brown_700</item>
+        <item name="android:windowLightStatusBar" tools:targetApi="23">false</item>
+    </style>
+</resources>

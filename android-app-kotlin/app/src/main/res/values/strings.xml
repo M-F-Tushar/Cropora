@@ -1,0 +1,122 @@
+<resources>
+    <string name="app_name">Cropora</string>
+    <string name="main_subtitle">Plant disease starter app</string>
+    <string name="plant_image_preview">Selected plant leaf image preview</string>
+    <string name="image_hint_default">Pick a clear leaf image from the camera or gallery to begin.</string>
+    <string name="image_selected_message">Image ready: %1$s</string>
+    <string name="open_camera">Open Camera</string>
+    <string name="open_gallery">Open Gallery</string>
+    <string name="mode_toggle_title">Detection mode</string>
+    <string name="mode_cloud">Cloud</string>
+    <string name="mode_offline">Offline</string>
+    <string name="cloud_mode_description">Cloud mode sends the image to the FastAPI backend for server-side prediction.</string>
+    <string name="offline_mode_description">Offline mode runs on-device inference from the bundled TensorFlow Lite classifier and fallback starter model.</string>
+    <string name="detect_disease">Detect Disease</string>
+    <string name="view_history">View Scan History</string>
+    <string name="open_disease_library">Open Disease Library</string>
+    <string name="open_settings">Settings</string>
+    <string name="image_prepare_error">Unable to prepare image upload: %1$s</string>
+    <string name="cloud_prediction_failed">Cloud prediction failed. Check the backend URL and server logs.</string>
+    <string name="invalid_backend_url">Enter a valid backend URL beginning with http:// or https:// in About.</string>
+    <string name="network_error_format">Network error: %1$s</string>
+    <string name="offline_prediction_failed">Offline prediction failed: %1$s</string>
+    <string name="low_confidence_warning">Uncertain result. Retake a clear, close-up leaf image and verify manually.</string>
+    <string name="uncertain_prediction_title">Uncertain / retake image (top match: %1$s)</string>
+    <string name="uncertain_prediction_details">Confidence is below your configured threshold, so this result should not be treated as a diagnosis.</string>
+    <string name="uncertain_prediction_action">Retake the image in good light with one leaf filling the frame, then verify with a local agricultural expert.</string>
+    <string name="uncertain_prediction_prevention">Do not take treatment action based only on this uncertain result.</string>
+    <string name="permissions_required_message">Required permissions were denied. Please enable them and try again.</string>
+    <string name="camera_cancelled_message">Camera capture was cancelled.</string>
+    <string name="camera_prepare_error">Unable to prepare camera file: %1$s</string>
+    <string name="select_image_first">Select or capture an image before starting detection.</string>
+    <string name="result_screen_title">Detection Result</string>
+    <string name="confidence_label">Confidence</string>
+    <string name="confidence_format">%1$d%%</string>
+    <string name="symptoms_label">Symptoms</string>
+    <string name="treatment_label">Treatment</string>
+    <string name="prevention_label">Prevention</string>
+    <string name="share_result">Share Result</string>
+    <string name="save_to_history">Save to History</string>
+    <string name="saved_to_history_label">Saved to History</string>
+    <string name="back_to_home">Back to Home</string>
+    <string name="share_subject">Cropora Prediction</string>
+    <string name="share_chooser_title">Share scan result</string>
+    <string name="share_result_template">Cropora detected: %1$s\nConfidence: %2$d%%\n\nSymptoms:\n%3$s\n\nTreatment:\n%4$s\n\nPrevention:\n%5$s</string>
+    <string name="history_saved_message">Result saved to local history.</string>
+    <string name="history_screen_title">Scan History</string>
+    <string name="history_empty_state">No saved scans yet. Save a result to see it appear here.</string>
+    <string name="history_confidence_format">%1$.0f%% confidence</string>
+    <string name="delete_history_item">Delete history item</string>
+    <string name="history_item_deleted">Deleted %1$s from scan history.</string>
+    <string name="result_unknown_disease">Unknown disease</string>
+    <string name="placeholder_symptoms">Symptom details were not supplied.</string>
+    <string name="placeholder_treatment">Treatment details were not supplied.</string>
+    <string name="placeholder_prevention">Prevention details were not supplied.</string>
+    <string name="notification_channel_name">Leaf scan reminders</string>
+    <string name="notification_channel_description">Reminds students to capture fresh leaf scans and review plant health.</string>
+    <!-- Disease Library -->
+    <string name="disease_library_screen_title">Disease Library</string>
+    <string name="disease_library_empty_state">No diseases loaded. Add assets/diseases.xml to populate this library.</string>
+    <!-- History Detail -->
+    <string name="history_detail_screen_title">Scan Detail</string>
+    <string name="detail_delete_button">Delete This Record</string>
+    <string name="detail_deleted_message">Record deleted from history.</string>
+    <string name="detail_invalid_id_error">Could not open scan record.</string>
+    <string name="detail_record_not_found">Scan record no longer exists.</string>
+    <!-- Settings -->
+    <string name="settings_screen_title">Settings</string>
+    <string name="settings_backend_section">Backend Server</string>
+    <string name="settings_backend_url_hint">Backend URL</string>
+    <string name="settings_backend_url_hint_note">Use http://10.0.2.2:8000 from the emulator. On a real phone, use the HTTPS URL of a deployed backend.</string>
+    <string name="settings_confidence_section">Confidence Threshold</string>
+    <string name="settings_confidence_value_format">%1$d%%</string>
+    <string name="settings_confidence_hint_note">Predictions with confidence below this threshold will be shown with a low-confidence warning.</string>
+    <string name="settings_about_section">About</string>
+    <string name="settings_version_format">Version %1$s</string>
+    <string name="settings_reset_button">Reset to Defaults</string>
+
+    <!-- Bottom Navigation (shared by Home, Scan, Analytics, Library, About) -->
+    <string name="nav_home">Home</string>
+    <string name="nav_scan">Scan</string>
+    <string name="nav_analytics">Analytics</string>
+    <string name="nav_library">Library</string>
+    <string name="nav_about">About</string>
+
+    <!-- Home Dashboard -->
+    <string name="home_dashboard_title">🍃 Cropora</string>
+    <string name="home_dashboard_subtitle">Plant Disease Detection System</string>
+    <string name="quick_scan_title">Quick Scan</string>
+    <string name="quick_scan_subtitle">Detect diseases instantly</string>
+    <string name="start_scanning">Start Scanning</string>
+    <string name="history_card_title">History</string>
+    <string name="history_count_format">%1$d scans</string>
+    <string name="library_card_title">Library</string>
+    <string name="library_count_format">%1$d diseases</string>
+    <string name="technical_features_title">Technical Features</string>
+    <string name="cloud_architecture_row">☁️  Cloud AI Architecture</string>
+    <string name="ondevice_tflite_row">📶  On-Device TFLite</string>
+
+    <!-- Scan screen -->
+    <string name="scan_screen_title">Scan Leaf</string>
+    <string name="scan_screen_subtitle">Upload or capture image</string>
+    <string name="tap_to_upload">Tap to upload image</string>
+    <string name="choose_image_source_title">Select Image Source</string>
+    <string name="choose_image_source_camera">Take Photo</string>
+    <string name="choose_image_source_gallery">Choose from Gallery</string>
+
+    <!-- Analytics screen -->
+    <string name="analytics_screen_title">Analytics</string>
+    <string name="analytics_subtitle">Private summaries calculated from scan history stored on this device.</string>
+    <string name="analytics_total_label">Total saved scans</string>
+    <string name="analytics_average_label">Average confidence</string>
+    <string name="analytics_top_disease_label">Most frequent result</string>
+    <string name="analytics_confidence_format">%1$d%%</string>
+    <string name="analytics_no_data">No data</string>
+    <string name="analytics_empty_message">Save a scan result to start building analytics.</string>
+
+    <!-- Disease Library: search + severity -->
+    <string name="library_search_hint">Search diseases…</string>
+    <string name="severity_high">high</string>
+    <string name="severity_medium">medium</string>
+    <string name="severity_low">low</string>
+</resources>

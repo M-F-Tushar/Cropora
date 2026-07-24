@@ -1,0 +1,13 @@
+<resources>
+    <color name="leaf_green_100">#DDEFD8</color>
+    <color name="leaf_green_300">#93C572</color>
+    <color name="leaf_green_500">#4CAF50</color>
+    <color name="leaf_green_700">#2E7D32</color>
+    <color name="leaf_green_800">#1F5B25</color>
+    <color name="soil_brown_700">#5D4037</color>
+    <color name="leaf_surface">#F7FBF5</color>
+    <color name="leaf_text_primary">#1B281A</color>
+    <color name="leaf_text_secondary">#4E5D4A</color>
+    <color name="leaf_accent">#8BC34A</color>
+    <color name="white">#FFFFFF</color>
+</resources>

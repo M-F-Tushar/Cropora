@@ -357,7 +357,39 @@
 
 
 ```
-
+┌──────────────────────────────────────────────────────────────────┐
+│                   OFFLINE PREDICTION PROCESSING                  │
+├──────────────────────────────────────────────────────────────────┤
+│                                                                  │
+│  Input: TensorFlow Lite output probability array                 │
+│                                                                  │
+│  Process:                                                        │
+│  1. Read all class confidence values                             │
+│  2. Find the highest probability                                 │
+│  3. Get its output index                                         │
+│  4. Match index with labels.txt                                  │
+│  5. Build a prediction result                                    │
+│                                                                  │
+└──────────────────────────────────────────────────────────────────┘
+                                  │
+                                  ▼
+                ┌────────────────────────────────┐
+                │  MODEL OUTPUT PROBABILITIES    │
+                │ [0.03, 0.92, 0.04, 0.01]       │
+                └────────────────────────────────┘
+                                  │
+                                  ▼
+                ┌────────────────────────────────┐
+                │   HIGHEST CONFIDENCE CLASS     │
+                │   Index: 1                     │
+                │   Confidence: 0.92             │
+                └────────────────────────────────┘
+                                  │
+                                  ▼
+                ┌────────────────────────────────┐
+                │     LABEL LOOKUP               │
+                │   Index 1 → Early Blight       │
+                └────────────────────────────────┘
 
 ```
 
@@ -367,20 +399,112 @@
 
 
 ```
-
+┌──────────────────────────────────────────────────────────────────┐
+│                    UNIFIED PREDICTION RESULT                     │
+├──────────────────────────────────────────────────────────────────┤
+│                                                                  │
+│  Both Cloud Mode and Offline Mode must produce one common        │
+│  prediction structure so the result screen works the same way.   │
+│                                                                  │
+└──────────────────────────────────────────────────────────────────┘
+                     │                           │
+                     ▼                           ▼
+     ┌────────────────────────┐    ┌────────────────────────┐
+     │ CLOUD MODE RESULT      │    │ OFFLINE MODE RESULT    │
+     │ - Disease              │    │ - Disease              │
+     │ - Confidence           │    │ - Confidence           │
+     │ - API metadata         │    │ - Local model metadata │
+     └────────────────────────┘    └────────────────────────┘
+                     │                           │
+                     └─────────────┬─────────────┘
+                                   ▼
+                ┌────────────────────────────────┐
+                │     UNIFIED PREDICTION DATA    │
+                │                                │
+                │  - Disease name                │
+                │  - Confidence score            │
+                │  - Prediction mode             │
+                │  - Scan date and time          │
+                │  - Plant image reference       │
+                └────────────────────────────────┘
 
 ```
 #### 11. Result Processing
 
 ```
-
+┌──────────────────────────────────────────────────────────────────┐
+│                        RESULT PROCESSING                         │
+├──────────────────────────────────────────────────────────────────┤
+│                                                                  │
+│  Input: Disease prediction from Cloud or Offline Mode            │
+│                                                                  │
+│  Responsibilities:                                               │
+│  - Format disease and confidence information                     │
+│  - Retrieve disease details                                      │
+│  - Prepare content for the result screen                         │
+│  - Store the diagnosis in local history                          │
+│                                                                  │
+└──────────────────────────────────────────────────────────────────┘
+                                  │
+                                  ▼
+                ┌────────────────────────────────┐
+                │      DISEASE INFORMATION       │
+                │ - Disease description          │
+                │ - Symptoms                     │
+                │ - Treatment                    │
+                │ - Prevention                   │
+                └────────────────────────────────┘
+                                  │
+                                  ▼
+                ┌────────────────────────────────┐
+                │       RESULT SCREEN DATA       │
+                │ - Image                        │
+                │ - Disease name                 │
+                │ - Confidence                   │
+                │ - Guidance                     │
+                └────────────────────────────────┘
 
 ```
 
 #### 12. XML Disease Information Library
 
 ```
-
+┌──────────────────────────────────────────────────────────────────┐
+│                   XML DISEASE INFORMATION LIBRARY                │
+├──────────────────────────────────────────────────────────────────┤
+│                                                                  │
+│  Purpose: Store detailed local information about plant diseases. │
+│                                                                  │
+│  Each disease record can contain:                                │
+│  - Disease name                                                  │
+│  - Plant type                                                    │
+│  - Description                                                   │
+│  - Symptoms                                                      │
+│  - Treatment suggestions                                         │
+│  - Prevention methods                                            │
+│                                                                  │
+└──────────────────────────────────────────────────────────────────┘
+                                  │
+                                  ▼
+                ┌────────────────────────────────┐
+                │  PREDICTED DISEASE NAME        │
+                │  Tomato Early Blight           │
+                └────────────────────────────────┘
+                                  │
+                                  ▼
+                ┌────────────────────────────────┐
+                │     XML RECORD LOOKUP          │
+                │  Find matching disease record  │
+                └────────────────────────────────┘
+                                  │
+                                  ▼
+                ┌────────────────────────────────┐
+                │       DISEASE GUIDANCE         │
+                │ - Description                  │
+                │ - Symptoms                     │
+                │ - Treatment                    │
+                │ - Prevention                   │
+                └────────────────────────────────┘
 
 ```
 
