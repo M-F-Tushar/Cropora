@@ -15,7 +15,7 @@ Scan results are stored locally (Room database) so users can review their
 scan history, and an in-app disease library (backed by an XML dataset)
 provides symptom/treatment/prevention information for each supported disease.
 
-## Cropora Image
+## Cropora Pipleline Diagram
 
 ![Cropora screenshot](docs/evidence/week-01/Cropora.jpg)
 
