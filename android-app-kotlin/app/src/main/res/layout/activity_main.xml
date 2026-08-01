@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="24dp"
+    android:background="@color/screen_background">
+
+    <TextView
+        android:id="@+id/textHomeTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/home_title"
+        android:textColor="@color/leaf_green_dark"
+        android:textSize="28sp" />
+
+    <TextView
+        android:id="@+id/textHomeSubtitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="@string/home_subtitle"
+        android:textColor="@color/text_secondary"
+        android:textSize="16sp" />
+
+    <Button
+        android:id="@+id/buttonOpenScan"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="@string/open_scan" />
+
+    <Button
+        android:id="@+id/buttonOpenResult"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/open_result" />
+
+    <Button
+        android:id="@+id/buttonOpenHistory"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/open_history" />
+
+    <Button
+        android:id="@+id/buttonOpenLibrary"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/open_library" />
+
+    <Button
+        android:id="@+id/buttonOpenSettings"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/open_settings" />
+
+    <Button
+        android:id="@+id/buttonOpenAnalytics"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/open_analytics" />
+
+</LinearLayout>
