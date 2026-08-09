@@ -12,14 +12,24 @@
     <string name="open_settings">Open Settings</string>
     <string name="open_analytics">Open Analytics</string>
 
-    <string name="scan_title">Scan</string>
+    <string name="scan_title">Scan Leaf</string>
     <string name="result_title">Result</string>
     <string name="history_title">History</string>
     <string name="library_title">Disease Library</string>
     <string name="settings_title">Settings and About</string>
     <string name="analytics_title">Analytics</string>
 
-    <string name="placeholder_scan">Camera and gallery image input will be added in Week 03.</string>
+    <string name="scan_instruction">Take a photo or choose an image from your device.</string>
+    <string name="scan_preview_description">Preview of the selected leaf image</string>
+    <string name="take_photo">Take Photo</string>
+    <string name="choose_from_gallery">Choose from Gallery</string>
+    <string name="no_image_selected">No image selected yet.</string>
+    <string name="image_selected">Image selected. Detection will be added later.</string>
+    <string name="camera_permission_denied">Camera permission denied. You can still choose from gallery.</string>
+    <string name="camera_cancelled">Camera cancelled. No image selected.</string>
+    <string name="gallery_cancelled">Gallery closed. No image selected.</string>
+    <string name="camera_file_error">Could not prepare a file for the camera.</string>
+
     <string name="placeholder_result">Real cloud and offline predictions will be added in later weeks.</string>
     <string name="placeholder_history">Saved scan history will be added in Week 07.</string>
     <string name="placeholder_library">The XML disease library will be added in Week 08.</string>

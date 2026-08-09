@@ -1,26 +1,60 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:padding="24dp"
     android:background="@color/screen_background">
 
-    <TextView
-        android:id="@+id/textScanTitle"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/scan_title"
-        android:textColor="@color/text_primary"
-        android:textSize="24sp" />
+        android:orientation="vertical"
+        android:padding="24dp">
 
-    <TextView
-        android:id="@+id/textScanPlaceholder"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
-        android:text="@string/placeholder_scan"
-        android:textColor="@color/text_secondary"
-        android:textSize="16sp" />
+        <TextView
+            android:id="@+id/textScanTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/scan_title"
+            android:textColor="@color/text_primary"
+            android:textSize="24sp" />
 
-</LinearLayout>
+        <TextView
+            android:id="@+id/textScanInstruction"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="@string/scan_instruction"
+            android:textColor="@color/text_secondary"
+            android:textSize="16sp" />
+
+        <ImageView
+            android:id="@+id/imagePreview"
+            android:layout_width="match_parent"
+            android:layout_height="280dp"
+            android:layout_marginTop="20dp"
+            android:background="#E8F5E9"
+            android:contentDescription="@string/scan_preview_description"
+            android:scaleType="centerCrop" />
+
+        <TextView
+            android:id="@+id/textImageStatus"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="@string/no_image_selected"
+            android:textColor="@color/text_secondary" />
+
+        <Button
+            android:id="@+id/buttonTakePhoto"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="@string/take_photo" />
+
+        <Button
+            android:id="@+id/buttonChooseGallery"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/choose_from_gallery" />
+    </LinearLayout>
+</ScrollView>
