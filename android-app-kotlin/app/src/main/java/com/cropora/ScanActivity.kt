@@ -1,4 +1,4 @@
-package com.leafguard
+package com.cropora
 
 import android.Manifest
 import android.content.pm.PackageManager
@@ -110,7 +110,7 @@ class ScanActivity : AppCompatActivity() {
         val imageFile = File(imageDirectory, "leafguard_${System.currentTimeMillis()}.jpg")
         return FileProvider.getUriForFile(
             this,
-            "${BuildConfig.APPLICATION_ID}.fileprovider",
+            "$packageName.fileprovider",
             imageFile
         )
     }
