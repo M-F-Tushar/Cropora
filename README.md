@@ -4,7 +4,7 @@
 Cropora is an Android plant-disease detection application. A user photographs
 or selects a picture of a plant leaf and the app returns the most likely
 disease, a confidence score, and care/treatment guidance. Predictions can be
-made in two ways:
+made in two ways: 
 
 - **Cloud Mode** — the photo is uploaded to the Cropora backend API (FastAPI +
   a TensorFlow/Keras model) which returns a JSON prediction.
