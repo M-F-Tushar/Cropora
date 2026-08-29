@@ -11,7 +11,7 @@ flow, and initial FastAPI backend are available, while model integration and
 several application features are still in progress.
 
 > Cropora is an educational project and is not a substitute for diagnosis or
-> advice from a qualified agricultural professional.
+> advice from a qualified agricultural professional. 
 
 ## Original product plan
 
