@@ -42,7 +42,7 @@ More detail about the original architecture is available in
 | FastAPI backend structure | Implemented | Configuration, label loading, image validation, preprocessing, prediction response handling, and API tests are present. |
 | Mock backend prediction | Implemented | Allows API development and testing without TensorFlow or a trained model. It is not a real diagnosis. |
 | Real cloud prediction | Prepared, model required | The backend supports a Keras model, but `backend-api/models/cropora_model.keras` is not included. |
-| Android-to-backend connection | Planned | Retrofit multipart upload and response mapping are part of the original design but are not connected in the Android app yet. |
+| Android-to-backend connection | Implemented | Retrofit uploads selected images to `POST /predict` and maps successful responses into the result screen. |
 | Offline TensorFlow Lite prediction | Planned | No `.tflite` model or Android inference integration is included yet. |
 | Local scan history | Planned | The history screen exists, but Room database persistence is not implemented yet. |
 | Local disease library | Planned | The screen exists, but the planned XML-backed Android library is not implemented yet. |
@@ -82,7 +82,7 @@ Cropora/
 ### Requirements
 
 - Android Studio with Android SDK 34
-- JDK 11 or a compatible JDK supported by the configured Android Gradle plugin
+- JDK 17, as required by the configured Android Gradle plugin
 - An Android device or emulator running API 24 or newer
 
 ### Run the app
@@ -101,8 +101,18 @@ cd android-app-kotlin
 
 On Windows PowerShell, use `./gradlew.bat assembleDebug`.
 
-The current Android build can capture or select an image and display its preview.
-It does not yet send the image to the backend or perform local inference.
+The Android app uses `http://10.0.2.2:8000/` by default so an Android emulator
+can reach a backend running on the development computer. To use a connected
+physical device, bind Uvicorn to `0.0.0.0`, replace the host with the computer's
+LAN address, and pass it as a Gradle property:
+
+```bash
+./gradlew assembleDebug -PCROPORA_API_BASE_URL=http://192.168.1.10:8000/
+```
+
+The device and development computer must be on the same network. The debug build
+allows cleartext HTTP for local hosts; use HTTPS outside local development. Cloud
+prediction is connected, while local inference remains planned.
 
 ## Backend API
 
@@ -141,6 +151,12 @@ real Keras model. Start the API with:
 
 ```bash
 uvicorn main:app --reload
+```
+
+For a physical Android device on the same network, listen on all interfaces:
+
+```bash
+uvicorn main:app --reload --host 0.0.0.0
 ```
 
 The service runs at `http://127.0.0.1:8000` by default. Interactive API

@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
+import com.cropora.network.PredictionResponse
 
 class MainActivity : AppCompatActivity() {
 
@@ -16,7 +17,17 @@ class MainActivity : AppCompatActivity() {
         }
 
         findViewById<Button>(R.id.buttonOpenResult).setOnClickListener {
-            startActivity(Intent(this, ResultActivity::class.java))
+            val samplePrediction = PredictionResponse(
+                modelLabel = getString(R.string.sample_model_label),
+                disease = getString(R.string.sample_disease),
+                confidence = 0.96f,
+                uncertain = false,
+                guidanceAvailable = true,
+                symptoms = getString(R.string.sample_symptoms),
+                treatment = getString(R.string.sample_treatment),
+                prevention = getString(R.string.sample_prevention)
+            )
+            startActivity(ResultActivity.createIntent(this, samplePrediction))
         }
 
         findViewById<Button>(R.id.buttonOpenHistory).setOnClickListener {

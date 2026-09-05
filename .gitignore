@@ -1,0 +1,12 @@
+# Android and Gradle
+.gradle/
+**/build/
+local.properties
+.idea/
+*.iml
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+backend-api/.env

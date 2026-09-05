@@ -56,5 +56,21 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/choose_from_gallery" />
+
+        <Button
+            android:id="@+id/buttonDetectDisease"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:enabled="false"
+            android:text="@string/detect_disease" />
+
+        <ProgressBar
+            android:id="@+id/progressUpload"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="12dp"
+            android:contentDescription="@string/upload_progress_description"
+            android:visibility="gone" />
     </LinearLayout>
 </ScrollView>
