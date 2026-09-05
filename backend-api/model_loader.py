@@ -5,6 +5,12 @@ from typing import List, Sequence, Tuple
 import numpy as np
 
 from config import IMAGE_SIZE, MODEL_PATH, USE_MOCK
+from inference_contract import (
+    EXPECTED_INPUT_SHAPE,
+    find_embedded_rescaling,
+    validate_keras_model,
+    validate_prediction,
+)
 
 logger = logging.getLogger(__name__)
 
@@ -12,7 +18,7 @@ try:
     import tensorflow as tf
 except Exception as exc:  # pragma: no cover - depends on environment
     tf = None
-    logger.warning("TensorFlow import failed, mock predictor will be used: %s", exc)
+    logger.warning("TensorFlow import failed; real inference is unavailable: %s", exc)
 
 
 class ModelPredictor:
@@ -31,22 +37,16 @@ class ModelPredictor:
             raise RuntimeError("Real model is unavailable. Check /health and server logs.")
 
         predictions = self.model.predict(image_batch, verbose=0)
-        predictions = np.asarray(predictions, dtype=np.float32)
-        if predictions.ndim == 1:
-            predictions = np.expand_dims(predictions, axis=0)
-
-        scores = predictions[0]
+        scores = validate_prediction(predictions, self.class_names)
         best_index = int(np.argmax(scores))
-        confidence = max(0.0, min(1.0, float(scores[best_index])))
-        disease_name = self.class_names[best_index] if best_index < len(self.class_names) else f"Class {best_index}"
-        return disease_name, confidence
+        return self.class_names[best_index], float(scores[best_index])
 
     def _mock_predict(self, image_batch: np.ndarray) -> Tuple[str, float]:
         if not self.class_names:
             return "Unknown disease", 0.50
 
         mean_intensity = float(np.mean(image_batch))
-        scaled_index = int(round(mean_intensity * (len(self.class_names) - 1)))
+        scaled_index = int(round((mean_intensity / 255.0) * (len(self.class_names) - 1)))
         best_index = max(0, min(len(self.class_names) - 1, scaled_index))
         confidence = round(0.70 + ((best_index % 3) * 0.08), 2)
         return self.class_names[best_index], min(confidence, 0.99)
@@ -63,23 +63,16 @@ def load_predictor(class_names: Sequence[str]) -> ModelPredictor:
         logger.error("TensorFlow is unavailable. Real inference is disabled.")
         return ModelPredictor(class_names=class_names)
 
-    if not model_path.exists():
+    if not model_path.is_file():
         logger.error("Model file not found at %s. Real inference is disabled.", model_path)
         return ModelPredictor(class_names=class_names)
 
     try:
-        model = tf.keras.models.load_model(model_path)
-        input_shape = tuple(model.input_shape)
-        output_shape = tuple(model.output_shape)
-        if len(input_shape) != 4 or input_shape[1:] != (IMAGE_SIZE, IMAGE_SIZE, 3):
-            raise ValueError(
-                f"Expected model input shape (None, {IMAGE_SIZE}, {IMAGE_SIZE}, 3), "
-                f"got {input_shape}"
-            )
-        if len(output_shape) != 2 or output_shape[-1] != len(class_names):
-            raise ValueError(
-                f"Model output count {output_shape[-1]} does not match label count {len(class_names)}"
-            )
+        if IMAGE_SIZE != EXPECTED_INPUT_SHAPE[1]:
+            raise ValueError(f"The approved model requires IMAGE_SIZE={EXPECTED_INPUT_SHAPE[1]}")
+        model = tf.keras.models.load_model(model_path, compile=False)
+        validate_keras_model(model, class_names)
+        find_embedded_rescaling(model)
         logger.info("Loaded Keras model from %s", model_path)
         return ModelPredictor(class_names=class_names, model=model)
     except Exception:

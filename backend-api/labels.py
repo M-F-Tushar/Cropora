@@ -1,21 +1,19 @@
 from pathlib import Path
 from typing import List
 
+from inference_contract import load_labels as load_contract_labels, validate_labels
+
 
 def load_labels(path: str) -> List[str]:
     label_path = Path(path)
     if not label_path.is_file():
         raise RuntimeError(f"Canonical labels file not found: {label_path}")
 
-    labels = [
-        line.strip()
-        for line in label_path.read_text(encoding="utf-8").splitlines()
-        if line.strip() and not line.lstrip().startswith("#")
-    ]
-    if not labels:
-        raise RuntimeError(f"Canonical labels file is empty: {label_path}")
-    if len(labels) != len(set(labels)):
-        raise RuntimeError(f"Canonical labels file contains duplicates: {label_path}")
+    try:
+        labels = load_contract_labels(label_path)
+        validate_labels(labels)
+    except ValueError as exc:
+        raise RuntimeError(f"Invalid canonical labels in {label_path}: {exc}") from exc
     return labels
 
 

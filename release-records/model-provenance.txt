@@ -1,0 +1,74 @@
+
+Status: Approved for academic cloud-inference validation
+
+Record scope: Approval assertions and validation claims below are historical
+records, not new verification by this documentation review. The current project
+name is Cropora; historical approval wording is preserved as recorded.
+
+Model name: model_4_mobilenet_finetuned.keras
+Model role: Canonical Keras model for FastAPI real-mode inference
+Source repository: https://github.com/Muhammad-Hassan12/Plant-Disease-Detector
+Pinned source commit: f6165bd93524dfb77a9629aae70db845832d1b01
+Source artifact path: Models/model_4_mobilenet_finetuned.keras
+Pinned raw URL: https://raw.githubusercontent.com/Muhammad-Hassan12/Plant-Disease-Detector/f6165bd93524dfb77a9629aae70db845832d1b01/Models/model_4_mobilenet_finetuned.keras
+Source repository license claim: MIT
+
+Local model path: backend-api/models/cropora_model.keras
+Local availability: Artifact supplied in the current workspace; this does not
+establish version-control or release inclusion. Docker requires external supply.
+Canonical serving labels: backend-api/labels-38.txt
+Matching tooling labels: model/labels-38.txt; preserve exact serving order
+Framework dependency: TensorFlow 2.19.1; Keras version is resolved separately
+Expected input: One RGB float32 tensor [1, 224, 224, 3], raw [0,255]
+Expected output: One float32 tensor [1, 38]
+Accepted signature batch dimension: None or 1; API batch size is 1
+Required IMAGE_SIZE: 224
+Embedded preprocessing: [0,255] to [-1,1], via supported Keras Rescaling or
+Divide/Subtract operations
+Runtime output contract: Finite probabilities in [0,1], summing to one within
+numerical tolerance; invalid outputs are rejected, not silently clipped
+
+Downloaded by: M-F-Tushar
+Download date: 2026-09-05
+Local file size: 25143175 bytes
+SHA-256: 08f285aff6d9e1ab88d4d5b2269f1cc977714003755f8553887edbf8691b325f
+
+Historical approval assertions (preserved; not re-reviewed here):
+License reviewed personally: Yes
+Approved for LeafGuard academic use: Yes
+Approved for redistribution/release: Yes
+
+Recorded validation claims (prior assertions; not independently rerun):
+- Model identity matched size and SHA-256.
+- Keras input, output, dtype, labels, and embedded rescaling passed inspection.
+- FastAPI /health reported use_mock=false, model_loaded=true, class_count=38.
+- A real-mode /predict request returned HTTP 200 with the unchanged eight fields.
+
+Evidence status for this documentation review:
+- No saved hash output, inspection logs, health response, or prediction JSON was
+  provided to substantiate the recorded validation claims above.
+- No runtime, tests, model inference, builds, or artifact hash verification were
+  performed. The recorded size and SHA-256 are not fresh measurements.
+- /health flags indicate readiness, not successful inference, artifact identity,
+  or accuracy. Preserve separate evidence for each validation step.
+- See model/model_notes.md for the non-skipping inspector gate and the distinction
+  between pure tests, optional artifact tests, and runtime prediction checks.
+
+Pre-push static verification (2026-09-05):
+- sha256sum and wc -c matched the SHA-256 and 25143175-byte size recorded above.
+- cmp confirmed both label files are byte-identical.
+- ast.parse accepted all 11 backend/tooling Python files without executing them.
+- Archive JSON records Keras 3.10.0, RGB input [None,224,224,3], raw /127.5 -1
+  preprocessing, a MobileNetV2 backbone, and a 38-unit softmax output.
+- The validator now allows the archive's RandomFlip/RandomRotation/RandomZoom
+  layers as inference-time no-ops. Keras 3.10.0 Functional.operation_fn propagates
+  training=False during prediction, overriding serialized training kwargs.
+- No model loading, inference, API requests, builds, or test suites were run.
+
+Limitations:
+- Source-author accuracy is not independent Cropora accuracy evidence.
+- Real phone-camera and broader class evaluation remain incomplete.
+- TFLite conversion, offline inference, and device parity are later-week gates.
+- Do not duplicate or replace the approved artifact without provenance review;
+  decide version-control and release inclusion explicitly. Never commit secrets
+  or private environment values.

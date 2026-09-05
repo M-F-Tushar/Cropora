@@ -115,7 +115,7 @@ def preprocess_image(raw_bytes: bytes) -> np.ndarray:
         raise HTTPException(status_code=400, detail="Invalid image file supplied.") from exc
 
     resized_image = image.resize((IMAGE_SIZE, IMAGE_SIZE))
-    # The approved model's embedded Rescaling layer converts raw [0, 255] RGB to [-1, 1].
+    # The approved model's embedded preprocessing converts raw [0, 255] RGB to [-1, 1].
     image_array = np.asarray(resized_image, dtype=np.float32)
     return np.expand_dims(image_array, axis=0)
 
