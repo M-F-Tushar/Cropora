@@ -111,5 +111,12 @@
             android:layout_height="wrap_content"
             android:text="@string/guidance_unavailable"
             android:textColor="@color/text_secondary" />
+
+        <Button
+            android:id="@+id/buttonSaveHistory"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:text="@string/save_to_history" />
     </LinearLayout>
 </ScrollView>
