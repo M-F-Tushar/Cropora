@@ -3,6 +3,8 @@
     <color name="leaf_green">#2E7D32</color>
     <color name="leaf_green_dark">#1B5E20</color>
     <color name="screen_background">#F7FAF4</color>
+    <color name="leaf_surface">#E8F5E9</color>
+    <color name="danger_red">#B3261E</color>
     <color name="text_primary">#1F2933</color>
     <color name="text_secondary">#52606D</color>
     <color name="white">#FFFFFF</color>
