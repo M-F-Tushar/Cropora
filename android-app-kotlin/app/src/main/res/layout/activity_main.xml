@@ -1,63 +1,131 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:padding="24dp"
-    android:background="@color/screen_background">
+    android:background="@color/screen_background"
+    android:fillViewport="true">
 
-    <TextView
-        android:id="@+id/textHomeTitle"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/home_title"
-        android:textColor="@color/leaf_green_dark"
-        android:textSize="28sp" />
+        android:orientation="vertical"
+        android:padding="20dp">
 
-    <TextView
-        android:id="@+id/textHomeSubtitle"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:text="@string/home_subtitle"
-        android:textColor="@color/text_secondary"
-        android:textSize="16sp" />
+        <!-- Header Hero Banner -->
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="16dp"
+            app:cardElevation="2dp"
+            app:cardBackgroundColor="@color/leaf_surface"
+            app:strokeWidth="0dp">
 
-    <Button
-        android:id="@+id/buttonOpenScan"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:text="@string/open_scan" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="20dp">
 
-    <Button
-        android:id="@+id/buttonOpenResult"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/open_result" />
+                <TextView
+                    android:id="@+id/textHomeTitle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/home_title"
+                    android:textColor="@color/leaf_green_dark"
+                    android:textSize="26sp"
+                    android:textStyle="bold" />
 
-    <Button
-        android:id="@+id/buttonOpenHistory"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/open_history" />
+                <TextView
+                    android:id="@+id/textHomeSubtitle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="6dp"
+                    android:text="@string/home_subtitle"
+                    android:textColor="@color/text_secondary"
+                    android:textSize="15sp"
+                    android:lineSpacingExtra="2dp" />
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
 
-    <Button
-        android:id="@+id/buttonOpenLibrary"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/open_library" />
+        <!-- Main Action: Plant Scan -->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/buttonOpenScan"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:layout_marginTop="20dp"
+            android:text="@string/open_scan"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:backgroundTint="@color/leaf_green"
+            app:cornerRadius="12dp"
+            app:elevation="3dp" />
 
-    <Button
-        android:id="@+id/buttonOpenSettings"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/open_settings" />
+        <!-- Quick Access Section -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:layout_marginBottom="8dp"
+            android:text="@string/quick_actions"
+            android:textColor="@color/text_primary"
+            android:textSize="18sp"
+            android:textStyle="bold" />
 
-    <Button
-        android:id="@+id/buttonOpenAnalytics"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/open_analytics" />
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/buttonOpenResult"
+            style="?attr/materialButtonOutlinedStyle"
+            android:layout_width="match_parent"
+            android:layout_height="52dp"
+            android:layout_marginTop="6dp"
+            android:text="@string/open_result"
+            android:textColor="@color/leaf_green_dark"
+            app:strokeColor="@color/leaf_green"
+            app:cornerRadius="10dp" />
 
-</LinearLayout>
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/buttonOpenHistory"
+            style="?attr/materialButtonOutlinedStyle"
+            android:layout_width="match_parent"
+            android:layout_height="52dp"
+            android:layout_marginTop="8dp"
+            android:text="@string/open_history"
+            android:textColor="@color/leaf_green_dark"
+            app:strokeColor="@color/leaf_green"
+            app:cornerRadius="10dp" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/buttonOpenLibrary"
+            style="?attr/materialButtonOutlinedStyle"
+            android:layout_width="match_parent"
+            android:layout_height="52dp"
+            android:layout_marginTop="8dp"
+            android:text="@string/open_library"
+            android:textColor="@color/leaf_green_dark"
+            app:strokeColor="@color/leaf_green"
+            app:cornerRadius="10dp" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/buttonOpenSettings"
+            style="?attr/materialButtonOutlinedStyle"
+            android:layout_width="match_parent"
+            android:layout_height="52dp"
+            android:layout_marginTop="8dp"
+            android:text="@string/open_settings"
+            android:textColor="@color/leaf_green_dark"
+            app:strokeColor="@color/leaf_green"
+            app:cornerRadius="10dp" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/buttonOpenAnalytics"
+            style="?attr/materialButtonOutlinedStyle"
+            android:layout_width="match_parent"
+            android:layout_height="52dp"
+            android:layout_marginTop="8dp"
+            android:text="@string/open_analytics"
+            android:textColor="@color/leaf_green_dark"
+            app:strokeColor="@color/leaf_green"
+            app:cornerRadius="10dp" />
+
+    </LinearLayout>
+</ScrollView>
