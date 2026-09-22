@@ -4,6 +4,7 @@
 
     <string name="home_title">Cropora</string>
     <string name="home_subtitle">Plant disease detection learning app</string>
+    <string name="quick_actions">Quick Actions</string>
 
     <string name="open_scan">Open Scan</string>
     <string name="open_result">Open Sample Result</string>
