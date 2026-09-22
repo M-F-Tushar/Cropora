@@ -1,76 +1,117 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/screen_background">
+    android:background="@color/screen_background"
+    android:fillViewport="true">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:padding="24dp">
+        android:padding="20dp">
 
         <TextView
             android:id="@+id/textScanTitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/scan_title"
-            android:textColor="@color/text_primary"
-            android:textSize="24sp" />
+            android:textColor="@color/leaf_green_dark"
+            android:textSize="26sp"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/textScanInstruction"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="6dp"
             android:text="@string/scan_instruction"
             android:textColor="@color/text_secondary"
-            android:textSize="16sp" />
+            android:textSize="15sp" />
 
-        <ImageView
-            android:id="@+id/imagePreview"
+        <!-- Image Preview Card -->
+        <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
-            android:layout_height="280dp"
-            android:layout_marginTop="20dp"
-            android:background="@color/leaf_surface"
-            android:contentDescription="@string/scan_preview_description"
-            android:scaleType="centerCrop" />
+            android:layout_height="260dp"
+            android:layout_marginTop="16dp"
+            app:cardCornerRadius="16dp"
+            app:cardElevation="2dp"
+            app:cardBackgroundColor="@color/leaf_surface"
+            app:strokeWidth="1dp"
+            app:strokeColor="@color/leaf_green">
+
+            <ImageView
+                android:id="@+id/imagePreview"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:contentDescription="@string/scan_preview_description"
+                android:scaleType="centerCrop" />
+        </com.google.android.material.card.MaterialCardView>
 
         <TextView
             android:id="@+id/textImageStatus"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="10dp"
             android:text="@string/no_image_selected"
-            android:textColor="@color/text_secondary" />
+            android:textColor="@color/text_secondary"
+            android:textSize="14sp" />
 
-        <Button
-            android:id="@+id/buttonTakePhoto"
+        <!-- Source Selection Buttons -->
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:text="@string/take_photo" />
+            android:layout_marginTop="16dp"
+            android:orientation="horizontal">
 
-        <Button
-            android:id="@+id/buttonChooseGallery"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/choose_from_gallery" />
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/buttonTakePhoto"
+                style="?attr/materialButtonOutlinedStyle"
+                android:layout_width="0dp"
+                android:layout_height="52dp"
+                android:layout_weight="1"
+                android:layout_marginEnd="6dp"
+                android:text="@string/take_photo"
+                android:textColor="@color/leaf_green_dark"
+                app:strokeColor="@color/leaf_green"
+                app:cornerRadius="10dp" />
 
-        <Button
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/buttonChooseGallery"
+                style="?attr/materialButtonOutlinedStyle"
+                android:layout_width="0dp"
+                android:layout_height="52dp"
+                android:layout_weight="1"
+                android:layout_marginStart="6dp"
+                android:text="@string/choose_from_gallery"
+                android:textColor="@color/leaf_green_dark"
+                app:strokeColor="@color/leaf_green"
+                app:cornerRadius="10dp" />
+        </LinearLayout>
+
+        <!-- Detect Action Button -->
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/buttonDetectDisease"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="56dp"
+            android:layout_marginTop="16dp"
             android:enabled="false"
-            android:text="@string/detect_disease" />
+            android:text="@string/detect_disease"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:backgroundTint="@color/leaf_green"
+            app:cornerRadius="12dp"
+            app:elevation="3dp" />
 
         <ProgressBar
             android:id="@+id/progressUpload"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:layout_marginTop="12dp"
+            android:layout_marginTop="16dp"
             android:contentDescription="@string/upload_progress_description"
             android:visibility="gone" />
+
     </LinearLayout>
 </ScrollView>
