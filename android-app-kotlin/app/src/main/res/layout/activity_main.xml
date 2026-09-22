@@ -24,27 +24,43 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
                 android:padding="20dp">
 
-                <TextView
-                    android:id="@+id/textHomeTitle"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/home_title"
-                    android:textColor="@color/leaf_green_dark"
-                    android:textSize="26sp"
-                    android:textStyle="bold" />
+                <ImageView
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:layout_marginEnd="16dp"
+                    android:src="@drawable/ic_leaf"
+                    android:contentDescription="@string/app_name" />
 
-                <TextView
-                    android:id="@+id/textHomeSubtitle"
-                    android:layout_width="match_parent"
+                <LinearLayout
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="6dp"
-                    android:text="@string/home_subtitle"
-                    android:textColor="@color/text_secondary"
-                    android:textSize="15sp"
-                    android:lineSpacingExtra="2dp" />
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/textHomeTitle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/home_title"
+                        android:textColor="@color/leaf_green_dark"
+                        android:textSize="26sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/textHomeSubtitle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:text="@string/home_subtitle"
+                        android:textColor="@color/text_secondary"
+                        android:textSize="14sp"
+                        android:lineSpacingExtra="2dp" />
+                </LinearLayout>
+
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
 
@@ -57,6 +73,9 @@
             android:text="@string/open_scan"
             android:textSize="16sp"
             android:textStyle="bold"
+            app:icon="@drawable/ic_camera_scan"
+            app:iconGravity="textStart"
+            app:iconPadding="10dp"
             app:backgroundTint="@color/leaf_green"
             app:cornerRadius="12dp"
             app:elevation="3dp" />
@@ -80,6 +99,10 @@
             android:layout_marginTop="6dp"
             android:text="@string/open_result"
             android:textColor="@color/leaf_green_dark"
+            app:icon="@drawable/ic_sample_result"
+            app:iconTint="@color/leaf_green_dark"
+            app:iconGravity="textStart"
+            app:iconPadding="10dp"
             app:strokeColor="@color/leaf_green"
             app:cornerRadius="10dp" />
 
@@ -91,6 +114,10 @@
             android:layout_marginTop="8dp"
             android:text="@string/open_history"
             android:textColor="@color/leaf_green_dark"
+            app:icon="@drawable/ic_history"
+            app:iconTint="@color/leaf_green_dark"
+            app:iconGravity="textStart"
+            app:iconPadding="10dp"
             app:strokeColor="@color/leaf_green"
             app:cornerRadius="10dp" />
 
@@ -102,6 +129,10 @@
             android:layout_marginTop="8dp"
             android:text="@string/open_library"
             android:textColor="@color/leaf_green_dark"
+            app:icon="@drawable/ic_library"
+            app:iconTint="@color/leaf_green_dark"
+            app:iconGravity="textStart"
+            app:iconPadding="10dp"
             app:strokeColor="@color/leaf_green"
             app:cornerRadius="10dp" />
 
@@ -113,6 +144,10 @@
             android:layout_marginTop="8dp"
             android:text="@string/open_settings"
             android:textColor="@color/leaf_green_dark"
+            app:icon="@drawable/ic_settings"
+            app:iconTint="@color/leaf_green_dark"
+            app:iconGravity="textStart"
+            app:iconPadding="10dp"
             app:strokeColor="@color/leaf_green"
             app:cornerRadius="10dp" />
 
@@ -124,6 +159,10 @@
             android:layout_marginTop="8dp"
             android:text="@string/open_analytics"
             android:textColor="@color/leaf_green_dark"
+            app:icon="@drawable/ic_analytics"
+            app:iconTint="@color/leaf_green_dark"
+            app:iconGravity="textStart"
+            app:iconPadding="10dp"
             app:strokeColor="@color/leaf_green"
             app:cornerRadius="10dp" />
 
