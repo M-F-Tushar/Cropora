@@ -191,7 +191,7 @@ class ScanActivity : AppCompatActivity() {
         val mimeType = contentResolver.getType(imageUri) ?: "image/*"
         val requestBody = uploadFile.asRequestBody(mimeType.toMediaTypeOrNull())
         val imagePart = MultipartBody.Part.createFormData("image", uploadFile.name, requestBody)
-        val uploadCall = RetrofitClient.apiService.uploadImage(imagePart)
+        val uploadCall = RetrofitClient.apiService(this).uploadImage(imagePart)
         activeUploadCall = uploadCall
         activeUploadFile = uploadFile
 
