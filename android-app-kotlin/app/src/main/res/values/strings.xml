@@ -20,7 +20,7 @@
     <string name="analytics_title">Analytics</string>
 
     <string name="placeholder_library">The XML disease library will be added in Week 08.</string>
-    <string name="placeholder_settings">Course project shell. Settings options will grow in later weeks.</string>
+    <string name="placeholder_settings">Settings options will grow in later weeks.</string>
 
     <string name="server_url_label">Backend server address</string>
     <string name="server_url_hint">https://your-server.example.com/</string>
