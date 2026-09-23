@@ -103,6 +103,7 @@ class ResultActivity : AppCompatActivity() {
                     R.string.history_saved,
                     Toast.LENGTH_SHORT
                 ).show()
+                startActivity(Intent(this@ResultActivity, HistoryActivity::class.java))
             } catch (error: CancellationException) {
                 throw error
             } catch (_: Exception) {
