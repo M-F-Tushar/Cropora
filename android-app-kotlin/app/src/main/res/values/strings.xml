@@ -21,6 +21,12 @@
 
     <string name="placeholder_library">The XML disease library will be added in Week 08.</string>
     <string name="placeholder_settings">Course project shell. Settings options will grow in later weeks.</string>
+
+    <string name="server_url_label">Backend server address</string>
+    <string name="server_url_hint">https://your-server.example.com/</string>
+    <string name="save_server_url">Save</string>
+    <string name="server_url_saved">Server address saved.</string>
+    <string name="server_url_invalid">Enter a valid address starting with http:// or https://</string>
     <string name="placeholder_analytics">Analytics will be added during the later app-polish work.</string>
 
     <string name="scan_instruction">Take a photo or choose an image from your device.</string>
