@@ -30,21 +30,34 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
+/**
+ * ScanActivity
+ * Responsible for the image capture / selection UI and uploading the selected image
+ * to the backend prediction API. Handles camera permissions, FileProvider URIs,
+ * preparing an upload file in the cache, performing the multipart upload via
+ * Retrofit, and routing the prediction response to the Result screen.
+ */
+ 
 class ScanActivity : AppCompatActivity() {
 
+    // UI references 
     private lateinit var imagePreview: ImageView
     private lateinit var textImageStatus: TextView
     private lateinit var buttonDetectDisease: Button
     private lateinit var progressUpload: ProgressBar
 
-    private var selectedImageUri: Uri? = null
-    private var pendingCameraUri: Uri? = null
+    // State and helpers 
+    private var selectedImageUri: Uri? = null          // currently chosen image URI
+    private var pendingCameraUri: Uri? = null          // URI reserved when invoking camera
     private var activeUploadCall: Call<PredictionResponse>? = null
     private var activeUploadFile: File? = null
     private var isPreparingUpload = false
     private val gson = Gson()
     private val imagePreparationExecutor = Executors.newSingleThreadExecutor()
 
+    /**
+     * Launcher that requests the CAMERA permission. If granted, starts the camera.
+     */
     private val cameraPermissionLauncher = registerForActivityResult(
         ActivityResultContracts.RequestPermission()
     ) { granted ->
@@ -55,6 +68,12 @@ class ScanActivity : AppCompatActivity() {
         }
     }
 
+    /**
+     * Launcher that takes a picture using the built-in camera. The image is
+     * saved to a FileProvider URI created earlier. On success, we update the
+     * selected image to that URI.
+     */
+     
     private val cameraLauncher = registerForActivityResult(
         ActivityResultContracts.TakePicture()
     ) { success ->
@@ -67,6 +86,11 @@ class ScanActivity : AppCompatActivity() {
         pendingCameraUri = null
     }
 
+    /**
+     * Launcher that opens the system picker for content. We request an image
+     * and update the selected image when the user chooses one.
+     */
+     
     private val galleryLauncher = registerForActivityResult(
         ActivityResultContracts.GetContent()
     ) { uri ->
@@ -77,6 +101,15 @@ class ScanActivity : AppCompatActivity() {
         }
     }
 
+    /**
+     * onCreate
+     * - Hook up UI
+     * - Restore minimal instance state (pending camera URI, selected image, or
+     *   interrupted upload status)
+     * - Wire button click handlers for camera, gallery, and upload
+     */
+
+     
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_scan)
@@ -86,16 +119,20 @@ class ScanActivity : AppCompatActivity() {
         buttonDetectDisease = findViewById(R.id.buttonDetectDisease)
         progressUpload = findViewById(R.id.progressUpload)
 
+        // Open camera (with permission check) when user taps Take Photo
         findViewById<Button>(R.id.buttonTakePhoto).setOnClickListener {
             openCameraWithPermissionCheck()
         }
+        // Open gallery picker
         findViewById<Button>(R.id.buttonChooseGallery).setOnClickListener {
             galleryLauncher.launch("image/*")
         }
+        // Start upload when Detect button is tapped
         buttonDetectDisease.setOnClickListener {
             uploadSelectedImage()
         }
 
+        // Restore any in-progress state after rotation / process restart
         pendingCameraUri = savedInstanceState
             ?.getString(KEY_PENDING_CAMERA_URI)
             ?.let(Uri::parse)
@@ -107,6 +144,10 @@ class ScanActivity : AppCompatActivity() {
         }
     }
 
+    /**
+     * Check camera permission; if granted, launch the camera flow. Otherwise
+     * request the permission using the Activity Result API.
+     */
     private fun openCameraWithPermissionCheck() {
         val granted = ContextCompat.checkSelfPermission(
             this,
@@ -120,6 +161,10 @@ class ScanActivity : AppCompatActivity() {
         }
     }
 
+    /**
+     * Attempt to reserve a FileProvider-backed file and launch the camera. If
+     * creating the file fails, show an error toast.
+     */
     private fun launchCamera() {
         try {
             val imageUri = createImageUri()
@@ -131,6 +176,10 @@ class ScanActivity : AppCompatActivity() {
         }
     }
 
+    /**
+     * Create a file path under the app's external files directory and return a
+     * FileProvider URI for it. Throws IOException on failure.
+     */
     @Throws(IOException::class)
     private fun createImageUri(): Uri {
         val imageDirectory = File(getExternalFilesDir(Environment.DIRECTORY_PICTURES), "captures")
@@ -146,6 +195,9 @@ class ScanActivity : AppCompatActivity() {
         )
     }
 
+    /**
+     * Update UI and internal state to reflect the newly selected image URI.
+     */
     private fun updateSelectedImage(uri: Uri) {
         selectedImageUri = uri
         imagePreview.setImageURI(uri)
@@ -153,6 +205,12 @@ class ScanActivity : AppCompatActivity() {
         buttonDetectDisease.isEnabled = true
     }
 
+    /**
+     * Prepare the currently selected image for upload:
+     * - copy its contents into a cache file (on a background thread)
+     * - then start the multipart upload on the main thread
+     * Handles basic error conditions and displays toasts.
+     */
     private fun uploadSelectedImage() {
         val imageUri = selectedImageUri
         if (imageUri == null) {
@@ -187,6 +245,10 @@ class ScanActivity : AppCompatActivity() {
         }
     }
 
+    /**
+     * Start the Retrofit multipart upload and handle the asynchronous callbacks.
+     * On success, transitions to ResultActivity with the parsed prediction.
+     */
     private fun startUpload(imageUri: Uri, uploadFile: File) {
         val mimeType = contentResolver.getType(imageUri) ?: "image/*"
         val requestBody = uploadFile.asRequestBody(mimeType.toMediaTypeOrNull())
@@ -236,6 +298,14 @@ class ScanActivity : AppCompatActivity() {
         })
     }
 
+    /**
+     * Common cleanup after an upload finishes or fails. Deletes the temporary
+     * upload file and clears active upload references. Returns true if the
+     * completed call was the active upload (caller should proceed) or false if
+     * another upload replaced it.
+     */
+
+     
     private fun finishUpload(call: Call<PredictionResponse>, uploadFile: File): Boolean {
         uploadFile.delete()
         if (call !== activeUploadCall) {
@@ -250,6 +320,11 @@ class ScanActivity : AppCompatActivity() {
         return true
     }
 
+    /**
+     * Helper to extract a useful error message from a non-2xx response. If the
+     * backend returns JSON `{ "detail": "..." }` this returns that string;
+     * otherwise it returns a generic formatted message with the response code.
+     */
     private fun serverErrorMessage(response: Response<PredictionResponse>): String {
         val detail = runCatching {
             response.errorBody()
@@ -267,6 +342,11 @@ class ScanActivity : AppCompatActivity() {
         }
     }
 
+    /**
+     * Copy the content addressed by `uri` into a new file in the app's cache
+     * directory and return the File. Throws IOException if reading or writing
+     * fails.
+     */
     @Throws(IOException::class)
     private fun copyUriToCacheFile(uri: Uri): File {
         val uploadFile = File(cacheDir, "leafguard_upload_${System.currentTimeMillis()}.jpg")
@@ -289,6 +369,10 @@ class ScanActivity : AppCompatActivity() {
         return uploadFile
     }
 
+    /**
+     * Update UI controls to reflect whether an upload is in progress. Disables
+     * buttons while busy to prevent duplicate actions.
+     */
     private fun setUploadInProgress(inProgress: Boolean) {
         progressUpload.visibility = if (inProgress) View.VISIBLE else View.GONE
         buttonDetectDisease.isEnabled = !inProgress && selectedImageUri != null
@@ -296,6 +380,10 @@ class ScanActivity : AppCompatActivity() {
         findViewById<Button>(R.id.buttonChooseGallery).isEnabled = !inProgress
     }
 
+    /**
+     * Preserve minimal state across configuration changes so a pending camera
+     * URI or interrupted upload state can be restored.
+     */
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
         outState.putString(KEY_SELECTED_IMAGE_URI, selectedImageUri?.toString())
@@ -306,6 +394,10 @@ class ScanActivity : AppCompatActivity() {
         )
     }
 
+    /**
+     * Cancel any in-flight upload, remove temp files, and shut down background
+     * executors when the activity is destroyed.
+     */
     override fun onDestroy() {
         activeUploadCall?.cancel()
         activeUploadCall = null
@@ -316,6 +408,7 @@ class ScanActivity : AppCompatActivity() {
     }
 
     companion object {
+        // Keys used for saving minimal instance state
         private const val KEY_SELECTED_IMAGE_URI = "selected_image_uri"
         private const val KEY_PENDING_CAMERA_URI = "pending_camera_uri"
         private const val KEY_UPLOAD_IN_PROGRESS = "upload_in_progress"
