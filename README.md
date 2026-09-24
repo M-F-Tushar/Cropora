@@ -29,7 +29,7 @@ confidence score, prediction mode, scan time, and image reference. A later stage
 of the app will use this result to display disease guidance and save scan
 history locally.
 
-![Cropora pipeline diagram](docs/evidence/week-01/Cropora.jpg)
+![Cropora logo](android-app-kotlin/app_icon_source.png.jpg)
 
 More detail about the original architecture is available in
 [`docs/evidence/week-01/system-sketch.md`](docs/evidence/week-01/system-sketch.md).
@@ -43,9 +43,9 @@ More detail about the original architecture is available in
 | FastAPI backend structure | Implemented | Configuration, label loading, image validation, preprocessing, prediction response handling, and API tests are present. |
 | Mock backend prediction | Implemented | Allows API development and testing without TensorFlow or a trained model. It is not a real diagnosis. |
 | Real cloud prediction | Local artifact supplied | The model is available locally at `backend-api/models/cropora_model.keras`. Prior validation claims are recorded in the provenance file; they were not independently rerun in this documentation review. |
-| Android-to-backend connection | Implemented | Retrofit uploads selected images to `POST /predict` and maps successful responses into the result screen. |
+| Android-to-backend connection | Implemented | Retrofit uploads selected images to `POST /predict` and maps successful responses into the result screen. The backend address can be overridden at runtime from the Settings screen without rebuilding the app. |
 | Offline TensorFlow Lite prediction | Planned | No `.tflite` model or Android inference integration is included yet. |
-| Local scan history | Planned | The history screen exists, but Room database persistence is not implemented yet. |
+| Local scan history | Implemented | The result screen can save a scan to a local Room database. The history screen lists saved scans, and a detail screen shows the full record with a delete action. |
 | Local disease library | Planned | The screen exists, but the planned XML-backed Android library is not implemented yet. |
 
 The backend includes 38 model labels. Reviewed symptom, treatment, and prevention
@@ -66,7 +66,7 @@ flowchart TD
     G --> I[Unified prediction result]
     H --> I
     I --> J[Result and disease guidance]
-    J --> K[Local scan history - planned]
+    J --> K[Local scan history - Room database]
 ```
 
 ## Repository structure
@@ -116,6 +116,10 @@ LAN address, and pass it as a Gradle property:
 The device and development computer must be on the same network. The debug build
 allows cleartext HTTP for local hosts; use HTTPS outside local development. Cloud
 prediction is connected, while local inference remains planned.
+
+The backend address can also be changed after install from the app's Settings
+screen. The entered value is validated, persisted, and overrides the compiled
+default immediately, so switching servers does not require a rebuild.
 
 ## Backend API
 
@@ -288,8 +292,7 @@ The remaining integration and validation steps are:
 1. Capture reproducible approved-artifact inspection and real-mode API evidence,
    including the already-connected Android scan flow and result mapping.
 2. Add a matching TensorFlow Lite model and labels for Offline Mode.
-3. Extend the existing result screen with Room-based scan history and a local
-   disease information library.
+3. Add a local, XML-backed disease information library.
 
 These plans describe the intended direction of the developing product and may be
 adjusted as implementation and model testing continue.
