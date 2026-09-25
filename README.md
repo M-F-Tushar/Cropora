@@ -4,7 +4,7 @@ Cropora is a developing Android application for plant-leaf disease detection. Th
 planned workflow allows a user to capture a leaf photo or select one from the
 device, analyze it through either a cloud service or an on-device model, and view
 the predicted disease, confidence score, symptoms, treatment guidance, and 
-prevention information.
+prevention information. 
 
 The project is being developed in stages. The Android interface, image-selection
 flow, and cloud API integration are available, with a Keras artifact supplied
