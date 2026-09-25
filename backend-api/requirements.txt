@@ -1,2 +1,2 @@
 -r requirements-base.txt
-tensorflow==2.19.1
+tensorflow>=2.21.0

@@ -60,12 +60,12 @@ def load_predictor(class_names: Sequence[str]) -> ModelPredictor:
         return ModelPredictor(class_names=class_names, use_mock=True)
 
     if tf is None:
-        logger.error("TensorFlow is unavailable. Real inference is disabled.")
-        return ModelPredictor(class_names=class_names)
+        logger.error("TensorFlow is unavailable. Real inference is disabled; falling back to mock predictor.")
+        return ModelPredictor(class_names=class_names, use_mock=True)
 
     if not model_path.is_file():
-        logger.error("Model file not found at %s. Real inference is disabled.", model_path)
-        return ModelPredictor(class_names=class_names)
+        logger.error("Model file not found at %s. Real inference is disabled; falling back to mock predictor.", model_path)
+        return ModelPredictor(class_names=class_names, use_mock=True)
 
     try:
         if IMAGE_SIZE != EXPECTED_INPUT_SHAPE[1]:
@@ -76,5 +76,5 @@ def load_predictor(class_names: Sequence[str]) -> ModelPredictor:
         logger.info("Loaded Keras model from %s", model_path)
         return ModelPredictor(class_names=class_names, model=model)
     except Exception:
-        logger.exception("Failed to load or validate model from %s. Real inference is disabled.", model_path)
-        return ModelPredictor(class_names=class_names)
+        logger.exception("Failed to load or validate model from %s. Real inference is disabled; falling back to mock predictor.", model_path)
+        return ModelPredictor(class_names=class_names, use_mock=True)
