@@ -11,7 +11,7 @@ import com.cropora.database.AppDatabase
 import com.cropora.database.ScanRecord
 import java.text.DateFormat
 import java.util.Date
-import kotlin.math.roundToInt
+
 import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.launch
 
@@ -82,8 +82,8 @@ class HistoryDetailActivity : AppCompatActivity() {
             record.modelLabel
         )
         findViewById<TextView>(R.id.textDetailConfidence).text = getString(
-            R.string.confidence_format,
-            (record.confidence * 100f).roundToInt()
+            R.string.history_confidence_format,
+            record.confidence * 100f
         )
         findViewById<TextView>(R.id.textDetailUncertain).text = getString(
             if (record.uncertain) R.string.result_uncertain else R.string.result_confident
