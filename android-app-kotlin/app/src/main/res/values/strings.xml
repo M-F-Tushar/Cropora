@@ -42,7 +42,7 @@
     <string name="take_photo">Take Photo</string>
     <string name="choose_from_gallery">Choose from Gallery</string>
     <string name="no_image_selected">No image selected yet.</string>
-    <string name="image_ready_for_upload">Image selected and ready for detection.</string>
+    <string name="image_ready_for_detection">Image selected and ready for detection.</string>
     <string name="upload_interrupted">Upload stopped after the screen changed. Tap Detect Disease to retry.</string>
     <string name="camera_permission_denied">Camera permission denied. You can still choose from gallery.</string>
     <string name="camera_cancelled">Camera cancelled. No image selected.</string>
@@ -50,7 +50,13 @@
     <string name="camera_file_error">Could not prepare a file for the camera.</string>
 
     <string name="detect_disease">Detect Disease</string>
-    <string name="upload_progress_description">Uploading image for prediction</string>
+    <string name="detection_mode_title">Detection mode</string>
+    <string name="detection_mode_cloud">Cloud</string>
+    <string name="detection_mode_offline">Offline</string>
+    <string name="detection_mode_cloud_description">Cloud mode uploads the image to the configured backend.</string>
+    <string name="detection_mode_offline_description">Offline mode runs the converted TFLite model on this device.</string>
+    <string name="offline_prediction_error">Offline prediction failed. Verify model and label assets.</string>
+    <string name="detection_progress_description">Analyzing leaf image</string>
     <string name="select_image_first">Select or capture an image first.</string>
     <string name="image_prepare_error">Could not prepare the selected image for upload.</string>
     <string name="server_error_format">Server rejected the request (HTTP %1$d).</string>
@@ -64,7 +70,7 @@
     <string name="confidence_placeholder">Confidence: 0%%</string>
     <string name="confidence_format">Confidence: %1$d%%</string>
     <string name="result_uncertain">Low-confidence result: verify before acting.</string>
-    <string name="result_confident">Confidence is above the configured server threshold.</string>
+    <string name="result_confident">Confidence is above the configured uncertainty threshold.</string>
     <string name="guidance_available">Reviewed project guidance is available.</string>
     <string name="guidance_not_reviewed">Detailed project guidance is not reviewed for this label.</string>
     <string name="symptoms_heading">Symptoms</string>
@@ -77,6 +83,7 @@
     <string name="history_saved">Result saved locally.</string>
     <string name="history_save_error">Could not save this result. Try again.</string>
     <string name="history_empty">No saved scans yet.</string>
+    <string name="history_confidence_format">Confidence: %1$.1f%%</string>
     <string name="history_load_error">Could not load saved scans.</string>
     <string name="history_detail_load_error">Could not load this saved scan.</string>
     <string name="history_saved_at_format">Saved: %1$s</string>
