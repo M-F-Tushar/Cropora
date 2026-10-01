@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.cropora.database.ScanRecord
 import java.text.DateFormat
 import java.util.Date
-import kotlin.math.roundToInt
+
 
 class HistoryAdapter(
     private val onItemSelected: (ScanRecord) -> Unit
@@ -42,8 +42,8 @@ class HistoryAdapter(
         fun bind(record: ScanRecord, onItemSelected: (ScanRecord) -> Unit) {
             textDisease.text = record.disease
             textConfidence.text = itemView.context.getString(
-                R.string.confidence_format,
-                (record.confidence * 100f).roundToInt()
+                R.string.history_confidence_format,
+                record.confidence * 100f
             )
             val formattedTimestamp = DateFormat.getDateTimeInstance(
                 DateFormat.MEDIUM,
