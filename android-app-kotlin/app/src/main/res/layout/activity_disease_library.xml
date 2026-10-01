@@ -15,12 +15,39 @@
         android:textSize="24sp" />
 
     <TextView
-        android:id="@+id/textLibraryPlaceholder"
+        android:id="@+id/textLibraryDescription"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
-        android:text="@string/placeholder_library"
+        android:text="@string/library_description"
         android:textColor="@color/text_secondary"
         android:textSize="16sp" />
+
+    <ProgressBar
+        android:id="@+id/progressLibrary"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="16dp"
+        android:contentDescription="@string/disease_library_loading" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerDiseases"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="12dp"
+        android:layout_weight="1"
+        android:clipToPadding="false"
+        android:visibility="gone" />
+
+    <TextView
+        android:id="@+id/textLibraryEmpty"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:gravity="center"
+        android:text="@string/disease_library_empty"
+        android:textColor="@color/text_secondary"
+        android:visibility="gone" />
 
 </LinearLayout>
