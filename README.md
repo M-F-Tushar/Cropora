@@ -46,7 +46,7 @@ More detail about the original architecture is available in
 | Android-to-backend connection | Implemented | Retrofit uploads selected images to `POST /predict` and maps successful responses into the result screen. The backend address can be overridden at runtime from the Settings screen without rebuilding the app. |
 | Offline TensorFlow Lite prediction | Planned | No `.tflite` model or Android inference integration is included yet. |
 | Local scan history | Implemented | The result screen can save a scan to a local Room database. The history screen lists saved scans, and a detail screen shows the full record with a delete action. |
-| Local disease library | Planned | The screen exists, but the planned XML-backed Android library is not implemented yet. |
+| Local disease library | Implemented | The Android app loads reviewed disease guidance from `android-app-kotlin/app/src/main/assets/diseases.xml` and opens detail views for each entry. |
 
 The backend includes 38 model labels. Reviewed symptom, treatment, and prevention
 guidance is currently available for 10 classes; other recognized classes return
