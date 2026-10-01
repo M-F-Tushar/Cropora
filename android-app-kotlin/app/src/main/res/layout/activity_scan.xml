@@ -57,6 +57,41 @@
             android:layout_height="wrap_content"
             android:text="@string/choose_from_gallery" />
 
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="@string/detection_mode_title"
+            android:textColor="@color/text_primary"
+            android:textStyle="bold" />
+
+        <RadioGroup
+            android:id="@+id/radioDetectionMode"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:checkedButton="@id/radioCloudMode"
+            android:orientation="horizontal">
+
+            <RadioButton
+                android:id="@+id/radioCloudMode"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/detection_mode_cloud" />
+
+            <RadioButton
+                android:id="@+id/radioOfflineMode"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/detection_mode_offline" />
+        </RadioGroup>
+
+        <TextView
+            android:id="@+id/textDetectionModeDescription"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/detection_mode_cloud_description"
+            android:textColor="@color/text_secondary" />
+
         <Button
             android:id="@+id/buttonDetectDisease"
             android:layout_width="match_parent"
@@ -65,12 +100,12 @@
             android:text="@string/detect_disease" />
 
         <ProgressBar
-            android:id="@+id/progressUpload"
+            android:id="@+id/progressDetection"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="12dp"
-            android:contentDescription="@string/upload_progress_description"
+            android:contentDescription="@string/detection_progress_description"
             android:visibility="gone" />
     </LinearLayout>
 </ScrollView>
