@@ -19,8 +19,16 @@
     <string name="settings_title">Settings and About</string>
     <string name="analytics_title">Analytics</string>
 
-    <string name="placeholder_library">The XML disease library will be added in Week 08.</string>
+    <string name="library_description">Browse reviewed disease guidance from the local XML library.</string>
     <string name="placeholder_settings">Settings options will grow in later weeks.</string>
+
+    <string name="disease_library_loading">Loading local disease library</string>
+    <string name="disease_library_empty">No reviewed disease entries are available.</string>
+    <string name="disease_library_error">Could not read the local disease library.</string>
+    <string name="disease_invalid_name">Invalid disease selection.</string>
+    <string name="disease_not_found">Disease entry not found.</string>
+    <string name="disease_plant_format">Plant: %1$s</string>
+    <string name="guidance_local_library">Guidance loaded from the reviewed local XML library.</string>
 
     <string name="server_url_label">Backend server address</string>
     <string name="server_url_hint">https://your-server.example.com/</string>
