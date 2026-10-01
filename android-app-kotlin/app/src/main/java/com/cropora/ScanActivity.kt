@@ -2,6 +2,8 @@ package com.cropora
 
 import android.Manifest
 import android.content.pm.PackageManager
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.net.Uri
 import android.os.Bundle
 import android.os.Environment
@@ -9,12 +11,14 @@ import android.view.View
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.ProgressBar
+import android.widget.RadioGroup
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.core.content.FileProvider
+import com.cropora.ml.TFLiteClassifier
 import com.cropora.network.PredictionResponse
 import com.cropora.network.RetrofitClient
 import com.google.gson.Gson
@@ -32,10 +36,9 @@ import retrofit2.Response
 
 /**
  * ScanActivity
- * Responsible for the image capture / selection UI and uploading the selected image
- * to the backend prediction API. Handles camera permissions, FileProvider URIs,
- * preparing an upload file in the cache, performing the multipart upload via
- * Retrofit, and routing the prediction response to the Result screen.
+ * Handles image capture/selection and routes predictions through either the
+ * Cloud API or the on-device TensorFlow Lite model. Both paths send the shared
+ * prediction response to the Result screen.
  */
  
 class ScanActivity : AppCompatActivity() {
@@ -44,7 +47,9 @@ class ScanActivity : AppCompatActivity() {
     private lateinit var imagePreview: ImageView
     private lateinit var textImageStatus: TextView
     private lateinit var buttonDetectDisease: Button
-    private lateinit var progressUpload: ProgressBar
+    private lateinit var progressDetection: ProgressBar
+    private lateinit var radioDetectionMode: RadioGroup
+    private lateinit var textDetectionModeDescription: TextView
 
     // State and helpers 
     private var selectedImageUri: Uri? = null          // currently chosen image URI
@@ -52,8 +57,9 @@ class ScanActivity : AppCompatActivity() {
     private var activeUploadCall: Call<PredictionResponse>? = null
     private var activeUploadFile: File? = null
     private var isPreparingUpload = false
+    private var localClassifier: TFLiteClassifier? = null
     private val gson = Gson()
-    private val imagePreparationExecutor = Executors.newSingleThreadExecutor()
+    private val imageProcessingExecutor = Executors.newSingleThreadExecutor()
 
     /**
      * Launcher that requests the CAMERA permission. If granted, starts the camera.
@@ -106,7 +112,7 @@ class ScanActivity : AppCompatActivity() {
      * - Hook up UI
      * - Restore minimal instance state (pending camera URI, selected image, or
      *   interrupted upload status)
-     * - Wire button click handlers for camera, gallery, and upload
+     * - Wire button click handlers for camera, gallery, and detection mode
      */
 
      
@@ -117,7 +123,19 @@ class ScanActivity : AppCompatActivity() {
         imagePreview = findViewById(R.id.imagePreview)
         textImageStatus = findViewById(R.id.textImageStatus)
         buttonDetectDisease = findViewById(R.id.buttonDetectDisease)
-        progressUpload = findViewById(R.id.progressUpload)
+        progressDetection = findViewById(R.id.progressDetection)
+        radioDetectionMode = findViewById(R.id.radioDetectionMode)
+        textDetectionModeDescription = findViewById(R.id.textDetectionModeDescription)
+
+        radioDetectionMode.setOnCheckedChangeListener { _, checkedId ->
+            textDetectionModeDescription.setText(
+                if (checkedId == R.id.radioOfflineMode) {
+                    R.string.detection_mode_offline_description
+                } else {
+                    R.string.detection_mode_cloud_description
+                }
+            )
+        }
 
         // Open camera (with permission check) when user taps Take Photo
         findViewById<Button>(R.id.buttonTakePhoto).setOnClickListener {
@@ -127,9 +145,13 @@ class ScanActivity : AppCompatActivity() {
         findViewById<Button>(R.id.buttonChooseGallery).setOnClickListener {
             galleryLauncher.launch("image/*")
         }
-        // Start upload when Detect button is tapped
+        // Run the selected prediction path when Detect Disease is tapped.
         buttonDetectDisease.setOnClickListener {
-            uploadSelectedImage()
+            if (radioDetectionMode.checkedRadioButtonId == R.id.radioOfflineMode) {
+                classifySelectedImageLocally()
+            } else {
+                uploadSelectedImage()
+            }
         }
 
         // Restore any in-progress state after rotation / process restart
@@ -201,8 +223,50 @@ class ScanActivity : AppCompatActivity() {
     private fun updateSelectedImage(uri: Uri) {
         selectedImageUri = uri
         imagePreview.setImageURI(uri)
-        textImageStatus.setText(R.string.image_ready_for_upload)
+        textImageStatus.setText(R.string.image_ready_for_detection)
         buttonDetectDisease.isEnabled = true
+    }
+
+    /**
+     * Run on-device classification for the currently selected image.
+     */
+    private fun classifySelectedImageLocally() {
+        val imageUri = selectedImageUri
+        if (imageUri == null) {
+            Toast.makeText(this, R.string.select_image_first, Toast.LENGTH_SHORT).show()
+            return
+        }
+
+        setDetectionInProgress(true)
+        imageProcessingExecutor.execute {
+            var bitmap: Bitmap? = null
+            val predictionResult = try {
+                bitmap = contentResolver.openInputStream(imageUri)?.use { input ->
+                    BitmapFactory.decodeStream(input)
+                } ?: throw IOException("Unable to decode selected image")
+                val classifier = localClassifier
+                    ?: TFLiteClassifier(applicationContext).also { localClassifier = it }
+                Result.success(classifier.classify(bitmap))
+            } catch (exception: Exception) {
+                Result.failure(exception)
+            } finally {
+                bitmap?.recycle()
+            }
+
+            runOnUiThread {
+                if (isFinishing || isDestroyed) return@runOnUiThread
+                setDetectionInProgress(false)
+                predictionResult.onSuccess { prediction ->
+                    startActivity(ResultActivity.createIntent(this@ScanActivity, prediction))
+                }.onFailure {
+                    Toast.makeText(
+                        this@ScanActivity,
+                        getString(R.string.offline_prediction_error),
+                        Toast.LENGTH_LONG
+                    ).show()
+                }
+            }
+        }
     }
 
     /**
@@ -218,9 +282,9 @@ class ScanActivity : AppCompatActivity() {
             return
         }
 
-        setUploadInProgress(true)
+        setDetectionInProgress(true)
         isPreparingUpload = true
-        imagePreparationExecutor.execute {
+        imageProcessingExecutor.execute {
             val uploadFile = try {
                 copyUriToCacheFile(imageUri)
             } catch (exception: IOException) {
@@ -236,7 +300,7 @@ class ScanActivity : AppCompatActivity() {
                     return@runOnUiThread
                 }
                 if (uploadFile == null) {
-                    setUploadInProgress(false)
+                    setDetectionInProgress(false)
                     Toast.makeText(this, R.string.image_prepare_error, Toast.LENGTH_LONG).show()
                     return@runOnUiThread
                 }
@@ -316,7 +380,7 @@ class ScanActivity : AppCompatActivity() {
         if (isFinishing || isDestroyed) {
             return false
         }
-        setUploadInProgress(false)
+        setDetectionInProgress(false)
         return true
     }
 
@@ -370,14 +434,16 @@ class ScanActivity : AppCompatActivity() {
     }
 
     /**
-     * Update UI controls to reflect whether an upload is in progress. Disables
-     * buttons while busy to prevent duplicate actions.
+     * Update the scan controls while either prediction path is running.
      */
-    private fun setUploadInProgress(inProgress: Boolean) {
-        progressUpload.visibility = if (inProgress) View.VISIBLE else View.GONE
+    private fun setDetectionInProgress(inProgress: Boolean) {
+        progressDetection.visibility = if (inProgress) View.VISIBLE else View.GONE
         buttonDetectDisease.isEnabled = !inProgress && selectedImageUri != null
         findViewById<Button>(R.id.buttonTakePhoto).isEnabled = !inProgress
         findViewById<Button>(R.id.buttonChooseGallery).isEnabled = !inProgress
+        for (index in 0 until radioDetectionMode.childCount) {
+            radioDetectionMode.getChildAt(index).isEnabled = !inProgress
+        }
     }
 
     /**
@@ -395,15 +461,19 @@ class ScanActivity : AppCompatActivity() {
     }
 
     /**
-     * Cancel any in-flight upload, remove temp files, and shut down background
-     * executors when the activity is destroyed.
+     * Cancel any in-flight upload, remove temporary files, close the local
+     * interpreter, and stop background work when the activity is destroyed.
      */
     override fun onDestroy() {
         activeUploadCall?.cancel()
         activeUploadCall = null
         activeUploadFile?.delete()
         activeUploadFile = null
-        imagePreparationExecutor.shutdownNow()
+        imageProcessingExecutor.execute {
+            localClassifier?.close()
+            localClassifier = null
+        }
+        imageProcessingExecutor.shutdown()
         super.onDestroy()
     }
 
