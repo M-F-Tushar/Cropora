@@ -1,4 +1,4 @@
-# Cropora 38-Class Cloud Model Contract
+# Cropora 38-Class Model Contract
 
 ## Recorded Approved Artifact
 
@@ -115,4 +115,65 @@ correctness or the behavior of arbitrary custom layers.
 
 The source author's published 98.75% score is not independently measured Cropora accuracy. Controlled PlantVillage images do not represent every phone-camera background, crop, disease, blur, or lighting condition. Confidence is not certainty. Low-confidence output must remain uncertain, and users should verify serious cases with a qualified agricultural source.
 
-TFLite conversion and offline Android inference are later-week work.
+## TensorFlow Lite and Android Offline Inference
+
+The Android scanner exposes Cloud and Offline modes. Both produce the existing
+`PredictionResponse` contract and use the same result, disease-guidance, and
+history screens. Cloud mode uploads to `POST /predict`; Offline mode runs the
+TFLite interpreter on the device without a network request. The local XML catalog
+currently provides reviewed guidance for 10 labels; other labels use the same
+generic fallback guidance text as the API.
+
+The offline model contract matches the cloud contract:
+
+- Exactly one float32 input tensor shaped `[1, 224, 224, 3]` and one float32 output
+  tensor shaped `[1, 38]`.
+- The 38 outputs are finite probabilities in `[0, 1]` summing to one. Logits,
+  quantized tensors, multiple inputs/outputs, and mismatched label counts are
+  rejected.
+- `labels.txt` preserves the order in `model/labels-38.txt` and
+  `backend-api/labels-38.txt`; the converter synchronizes the Android copy.
+- Input preprocessing is RGB resize to 224x224 with bilinear filtering and raw
+  float32 values `[0, 255]`. Android's filtered bitmap scaling and the Python
+  cloud/tooling preprocessing use bilinear resize. Do not normalize in the caller;
+  the approved model embeds the `[0, 255]` to `[-1, 1]` transform.
+- The predicted class is `argmax`; confidence is its probability, and the local
+  uncertainty threshold is 0.50, matching the backend default.
+
+### Convert and validate
+
+Use the project Python environment with TensorFlow 2.19.1 and Pillow installed.
+From the project root:
+
+```bash
+python model/convert_model.py
+python -m unittest discover -s model -p "test_*.py" -v
+```
+
+The converter refuses an artifact with the wrong pinned size or SHA-256, verifies
+the Keras input, output, labels, and embedded rescaling contract, converts without
+quantization, then allocates the converted model and runs a probability-output
+smoke test. On success it writes `android-app-kotlin/app/src/main/assets/model.tflite`
+and synchronizes `labels.txt` in that assets directory. The Android build uses
+TensorFlow Lite runtime 2.14.0 and leaves `.tflite` assets uncompressed for
+memory-mapped loading. Because conversion uses TensorFlow 2.19.1, verify the
+model with the Android runtime on a device or emulator before release. The required
+filename is `model.tflite` (the extension is `.tflite`, not `.tf-lite`).
+
+`test_tflite_contract.py` compares the converted model with Keras on deterministic
+synthetic RGB fixtures, checks raw-value preprocessing and tensor details, and
+checks the Android label ordering. TensorFlow-dependent checks skip when TensorFlow
+or the generated model is absent; run the converter first for full coverage. For
+an additional image-specific check, pass a representative leaf photo to:
+
+```bash
+python model/validate_tflite.py path/to/leaf.jpg \
+  --model android-app-kotlin/app/src/main/assets/model.tflite
+python model/parity_test.py path/to/leaf.jpg \
+  --tflite-model android-app-kotlin/app/src/main/assets/model.tflite
+```
+
+After a successful conversion, record TensorFlow version, output byte size, and
+SHA-256 in [`../release-records/tflite-provenance.txt`](../release-records/tflite-provenance.txt).
+A successful conversion or parity check is not an accuracy evaluation; do not
+interpret confidence as certainty.
