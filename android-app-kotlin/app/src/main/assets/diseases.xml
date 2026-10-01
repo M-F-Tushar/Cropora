@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<diseases>
+    <disease>
+        <name>Tomato Early Blight</name>
+        <plant>Tomato</plant>
+        <symptoms>Small brown spots with concentric rings, yellowing around lesions, and damage starting on older leaves.</symptoms>
+        <treatment>Remove infected leaves, improve airflow, mulch soil, and apply a labeled fungicide when pressure is high.</treatment>
+        <prevention>Rotate crops, avoid wetting foliage in the evening, and disinfect tools between plants.</prevention>
+    </disease>
+    <disease>
+        <name>Tomato Late Blight</name>
+        <plant>Tomato</plant>
+        <symptoms>Water-soaked patches that quickly darken, white fuzzy growth underneath leaves, and rapid whole-plant collapse.</symptoms>
+        <treatment>Isolate infected plants, remove severely affected tissue, and apply an appropriate late blight fungicide immediately.</treatment>
+        <prevention>Use disease-free seedlings, space plants well, and avoid overhead irrigation during humid weather.</prevention>
+    </disease>
+    <disease>
+        <name>Tomato Healthy</name>
+        <plant>Tomato</plant>
+        <symptoms>Leaf remains green, evenly colored, and free from lesions, mold, curling, or necrotic patches.</symptoms>
+        <treatment>No treatment needed. Continue normal watering, feeding, and routine scouting.</treatment>
+        <prevention>Maintain balanced nutrition, monitor weekly, and keep weeds and debris away from the crop.</prevention>
+    </disease>
+    <disease>
+        <name>Potato Early Blight</name>
+        <plant>Potato</plant>
+        <symptoms>Dark target-like rings on older leaves followed by yellowing and premature leaf drop.</symptoms>
+        <treatment>Prune affected leaves, support plant vigor with correct fertilization, and treat with fungicide if needed.</treatment>
+        <prevention>Rotate away from solanaceous crops and water at soil level instead of soaking the canopy.</prevention>
+    </disease>
+    <disease>
+        <name>Potato Late Blight</name>
+        <plant>Potato</plant>
+        <symptoms>Dark blotches expand rapidly, stems blacken, and white mold may appear at lesion edges in humid conditions.</symptoms>
+        <treatment>Remove badly infected foliage, avoid moving spores between rows, and apply a recommended protectant fungicide.</treatment>
+        <prevention>Plant resistant varieties where possible and destroy volunteer potatoes after harvest.</prevention>
+    </disease>
+    <disease>
+        <name>Potato Healthy</name>
+        <plant>Potato</plant>
+        <symptoms>Leaves look firm, green, and free of spots, halos, wilting, or unusual discoloration.</symptoms>
+        <treatment>No treatment required beyond standard crop care.</treatment>
+        <prevention>Keep monitoring field hygiene, irrigation balance, and nutrient supply.</prevention>
+    </disease>
+    <disease>
+        <name>Corn Gray Leaf Spot</name>
+        <plant>Corn</plant>
+        <symptoms>Rectangular gray or tan lesions running parallel to leaf veins, usually beginning on lower leaves.</symptoms>
+        <treatment>Scout regularly, remove heavily damaged leaves where practical, and apply fungicide based on local guidance.</treatment>
+        <prevention>Rotate fields, manage residue, and choose resistant hybrids when available.</prevention>
+    </disease>
+    <disease>
+        <name>Corn Northern Leaf Blight</name>
+        <plant>Corn</plant>
+        <symptoms>Long cigar-shaped gray-green lesions that enlarge and reduce photosynthetic area.</symptoms>
+        <treatment>Use a registered fungicide if disease pressure is high and preserve plant vigor with good agronomy.</treatment>
+        <prevention>Rotate crops, select resistant seed, and avoid continuous corn where blight is common.</prevention>
+    </disease>
+    <disease>
+        <name>Corn Healthy</name>
+        <plant>Corn</plant>
+        <symptoms>Leaves are uniformly green with normal vein structure and no blight or spotting patterns.</symptoms>
+        <treatment>No treatment required.</treatment>
+        <prevention>Continue regular monitoring, balanced fertilization, and integrated pest management.</prevention>
+    </disease>
+    <disease>
+        <name>Apple Scab</name>
+        <plant>Apple</plant>
+        <symptoms>Olive-brown velvety leaf lesions, fruit spotting, and leaf distortion in wet spring conditions.</symptoms>
+        <treatment>Prune for airflow, remove fallen leaves, and apply protectant fungicides during susceptible growth stages.</treatment>
+        <prevention>Use resistant cultivars, sanitize orchard litter, and monitor wet periods carefully.</prevention>
+    </disease>
+</diseases>
