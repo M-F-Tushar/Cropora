@@ -9,7 +9,7 @@ building the TensorFlow Lite asset as described below.
 The project is being developed in stages. The Android interface, image-selection
 flow, cloud API integration, and offline inference integration are available. The
 approved Keras artifact is supplied locally; the TFLite asset is generated locally
-and is not included in this checkout. Model validation and several application
+and is not included in this checkout. Model validation and several applications
 features remain in progress.
 
 > Cropora is an educational project and is not a substitute for diagnosis or
