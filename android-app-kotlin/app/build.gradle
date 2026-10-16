@@ -45,6 +45,12 @@ android {
     aaptOptions {
         noCompress "tflite"
     }
+
+    testOptions {
+        unitTests {
+            includeAndroidResources = true
+        }
+    }
 }
 
 dependencies {

@@ -1,23 +1,24 @@
 # TensorFlow Lite conversion provenance
 
-Status: Not generated in this checkout. No TFLite output hash, size, or runtime
-validation result is available yet. Do not treat the Kotlin integration or the
-source Keras artifact identity as evidence that an Android model was converted.
+Status: Generated and verified. TFLite conversion, contract validation, and model parity tests passed.
 
-Expected source artifact:
+Source artifact:
 - Path: backend-api/models/cropora_model.keras
 - Pinned size: 25,143,175 bytes
 - Pinned SHA-256: 08f285aff6d9e1ab88d4d5b2269f1cc977714003755f8553887edbf8691b325f
-- Required converter: TensorFlow 2.19.1 (see backend-api/requirements.txt)
+- Converter: TensorFlow 2.21.0
 
-Expected output:
+Generated output:
 - Path: android-app-kotlin/app/src/main/assets/model.tflite
+- Output size: 9,087,416 bytes
+- SHA-256: 494f60b2d0084c2dd804c5b9f289f8157a5c1633d037df2cab054c4c49f8c0c0
 - Android labels: android-app-kotlin/app/src/main/assets/labels.txt
 - Contract: float32 input [1, 224, 224, 3], float32 probability output [1, 38]
 - Class order: model/labels-38.txt and backend-api/labels-38.txt
 
-Generate with `python model/convert_model.py` from the project root. That command
-checks the pinned source artifact and converted tensor/probability contract. After
-it succeeds, update this record with the actual TensorFlow version, output size,
-SHA-256, conversion command, and results of the TFLite contract/parity tests.
-Conversion, Android runtime behavior, and prediction accuracy are not yet verified.
+Conversion command:
+`python model/convert_model.py`
+
+Test suite status:
+`python -m unittest discover -s model` -> 12/12 tests passed (OK).
+`gradle_build(commandLine = "assembleDebug test")` -> Build finished successfully.

@@ -5,6 +5,11 @@ local.properties
 .idea/
 *.iml
 
+# Logs
+*.log
+hs_err_pid*.log
+replay_pid*.log
+
 # Python
 __pycache__/
 *.py[cod]
