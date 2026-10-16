@@ -10,12 +10,17 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import com.cropora.database.AppDatabase
+import com.cropora.data.DiseaseRepository
 import com.cropora.database.ScanRecord
 import com.cropora.network.PredictionResponse
+import java.io.IOException
 import java.util.UUID
 import kotlin.math.roundToInt
 import kotlinx.coroutines.CancellationException
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
+import org.xmlpull.v1.XmlPullParserException
 
 class ResultActivity : AppCompatActivity() {
 
@@ -25,6 +30,7 @@ class ResultActivity : AppCompatActivity() {
     private var confidence: Float = 0f
     private var uncertain: Boolean = true
     private var guidanceAvailable: Boolean = false
+    private var guidanceLoadComplete: Boolean = false
     private lateinit var symptoms: String
     private lateinit var treatment: String
     private lateinit var prevention: String
@@ -69,13 +75,53 @@ class ResultActivity : AppCompatActivity() {
         findViewById<TextView>(R.id.textResultPrevention).text = prevention
         savedToHistory = savedInstanceState?.getBoolean(STATE_SAVED_TO_HISTORY) ?: false
         findViewById<Button>(R.id.buttonSaveHistory).apply {
-            isEnabled = !savedToHistory
+            isEnabled = !savedToHistory && guidanceLoadComplete
             if (savedToHistory) {
                 setText(R.string.saved_to_history)
             }
             setOnClickListener {
                 saveToHistory(this)
             }
+        }
+        loadLocalGuidance()
+    }
+
+    private fun loadLocalGuidance() {
+        lifecycleScope.launch {
+            var localGuidanceFound = false
+            try {
+                val localDisease = withContext(Dispatchers.IO) {
+                    DiseaseRepository.getInstance(applicationContext).findByName(disease)
+                }
+                if (localDisease != null) {
+                    symptoms = localDisease.symptoms
+                    treatment = localDisease.treatment
+                    prevention = localDisease.prevention
+                    guidanceAvailable = true
+                    localGuidanceFound = true
+                }
+            } catch (_: IOException) {
+                localGuidanceFound = false
+            } catch (_: XmlPullParserException) {
+                localGuidanceFound = false
+            } catch (error: CancellationException) {
+                throw error
+            } catch (_: Exception) {
+                localGuidanceFound = false
+            }
+
+            findViewById<TextView>(R.id.textGuidanceStatus).text = getString(
+                when {
+                    localGuidanceFound -> R.string.guidance_local_library
+                    guidanceAvailable -> R.string.guidance_available
+                    else -> R.string.guidance_not_reviewed
+                }
+            )
+            findViewById<TextView>(R.id.textResultSymptoms).text = symptoms
+            findViewById<TextView>(R.id.textResultTreatment).text = treatment
+            findViewById<TextView>(R.id.textResultPrevention).text = prevention
+            guidanceLoadComplete = true
+            findViewById<Button>(R.id.buttonSaveHistory).isEnabled = !savedToHistory
         }
     }
 

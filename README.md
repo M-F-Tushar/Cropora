@@ -1,14 +1,15 @@
 # Cropora
 
-Cropora is a developing Android application for plant-leaf disease detection. The
-planned workflow allows a user to capture a leaf photo or select one from the
-device, analyze it through either a cloud service or an on-device model, and view
-the predicted disease, confidence score, symptoms, treatment guidance, and 
-prevention information.
+Cropora is a developing Android application for plant-leaf disease detection. A
+user can capture a leaf photo or select one from the device, choose Cloud or
+Offline detection, and view the predicted disease, confidence score, symptoms,
+treatment guidance, and prevention information. Offline detection requires
+building the TensorFlow Lite asset as described below.
 
 The project is being developed in stages. The Android interface, image-selection
-flow, and cloud API integration are available, with a Keras artifact supplied
-locally. Reproducible model validation, offline inference, and several application
+flow, cloud API integration, and offline inference integration are available. The
+approved Keras artifact is supplied locally; the TFLite asset is generated locally
+and is not included in this checkout. Model validation and several applications
 features remain in progress.
 
 > Cropora is an educational project and is not a substitute for diagnosis or
@@ -29,7 +30,7 @@ confidence score, prediction mode, scan time, and image reference. A later stage
 of the app will use this result to display disease guidance and save scan
 history locally.
 
-![Cropora pipeline diagram](docs/evidence/week-01/Cropora.jpg)
+![Cropora logo](android-app-kotlin/app_icon_source.png.jpg)
 
 More detail about the original architecture is available in
 [`docs/evidence/week-01/system-sketch.md`](docs/evidence/week-01/system-sketch.md).
@@ -43,10 +44,10 @@ More detail about the original architecture is available in
 | FastAPI backend structure | Implemented | Configuration, label loading, image validation, preprocessing, prediction response handling, and API tests are present. |
 | Mock backend prediction | Implemented | Allows API development and testing without TensorFlow or a trained model. It is not a real diagnosis. |
 | Real cloud prediction | Local artifact supplied | The model is available locally at `backend-api/models/cropora_model.keras`. Prior validation claims are recorded in the provenance file; they were not independently rerun in this documentation review. |
-| Android-to-backend connection | Implemented | Retrofit uploads selected images to `POST /predict` and maps successful responses into the result screen. |
-| Offline TensorFlow Lite prediction | Planned | No `.tflite` model or Android inference integration is included yet. |
-| Local scan history | Planned | The history screen exists, but Room database persistence is not implemented yet. |
-| Local disease library | Planned | The screen exists, but the planned XML-backed Android library is not implemented yet. |
+| Android-to-backend connection | Implemented | Retrofit uploads selected images to `POST /predict` and maps successful responses into the result screen. The backend address can be overridden at runtime from the Settings screen without rebuilding the app. |
+| Offline TensorFlow Lite prediction | Integration added; asset required | The app runs `model.tflite` locally when Offline is selected. Generate and validate the asset with `python model/convert_model.py`; it is not present in this checkout. |
+| Local scan history | Implemented | The result screen can save a scan to a local Room database. The history screen lists saved scans, and a detail screen shows the full record with a delete action. |
+| Local disease library | Implemented | The Android app loads reviewed disease guidance from `android-app-kotlin/app/src/main/assets/diseases.xml` and opens detail views for each entry. |
 
 The backend includes 38 model labels. Reviewed symptom, treatment, and prevention
 guidance is currently available for 10 classes; other recognized classes return
@@ -59,14 +60,14 @@ flowchart TD
     A[Android app] --> B[Capture or select leaf image]
     B --> C{Prediction mode}
     C --> D[Cloud Mode]
-    C --> E[Offline Mode - planned]
+    C --> E[Offline Mode]
     D --> F[FastAPI POST /predict]
     F --> G[Keras model - supplied locally]
-    E --> H[TensorFlow Lite model - planned]
+    E --> H[TensorFlow Lite model - generated locally]
     G --> I[Unified prediction result]
     H --> I
     I --> J[Result and disease guidance]
-    J --> K[Local scan history - planned]
+    J --> K[Local scan history - Room database]
 ```
 
 ## Repository structure
@@ -87,6 +88,19 @@ Cropora/
 - Android Studio with Android SDK 34
 - JDK 17, as required by the configured Android Gradle plugin
 - An Android device or emulator running API 24 or newer
+
+Offline mode also requires the locally generated `model.tflite` asset. With
+TensorFlow 2.19.1 installed, run this from the project root before building or
+using offline prediction:
+
+```bash
+python model/convert_model.py
+```
+
+The converter validates the pinned Keras source, tensor contract, and probability
+output before writing the Android asset. See [`model/model_notes.md`](model/model_notes.md)
+for contract, parity, and provenance details. Cloud mode does not require the TFLite
+asset.
 
 ### Run the app
 
@@ -115,7 +129,13 @@ LAN address, and pass it as a Gradle property:
 
 The device and development computer must be on the same network. The debug build
 allows cleartext HTTP for local hosts; use HTTPS outside local development. Cloud
-prediction is connected, while local inference remains planned.
+prediction uploads to the configured backend. Offline prediction runs locally and
+does not require a connection, but the generated `model.tflite` asset must be
+present in the app assets directory.
+
+The backend address can also be changed after install from the app's Settings
+screen. The entered value is validated, persisted, and overrides the compiled
+default immediately, so switching servers does not require a rebuild.
 
 ## Backend API
 
@@ -286,10 +306,10 @@ validator are inside `backend-api/`; no sibling `model/` mount is required.
 The remaining integration and validation steps are:
 
 1. Capture reproducible approved-artifact inspection and real-mode API evidence,
-   including the already-connected Android scan flow and result mapping.
-2. Add a matching TensorFlow Lite model and labels for Offline Mode.
-3. Extend the existing result screen with Room-based scan history and a local
-   disease information library.
+   including the Android scan flow and result mapping.
+2. Generate and validate the TFLite asset, then verify offline Android inference on
+   a device or emulator.
+3. Expand reviewed disease guidance beyond the current 10 classes.
 
 These plans describe the intended direction of the developing product and may be
 adjusted as implementation and model testing continue.
