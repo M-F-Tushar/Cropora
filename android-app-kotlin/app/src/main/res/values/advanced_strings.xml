@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Mode descriptions (settings and first-run setup) -->
+    <string name="visual_mode_description">Advanced adds a dashboard, insights and a richer diagnosis view. Normal keeps every screen simple.</string>
+    <string name="visual_setup_description">Normal: simple and clear. Advanced: dashboard, charts and insights.</string>
+
+    <!-- Bottom navigation -->
+    <string name="adv_nav_home">Home</string>
+    <string name="adv_nav_scans">Scans</string>
+    <string name="adv_nav_scan">New scan</string>
+    <string name="adv_nav_library">Library</string>
+    <string name="adv_nav_insights">Insights</string>
+
+    <!-- Home -->
+    <string name="adv_greeting_morning">Good morning</string>
+    <string name="adv_greeting_afternoon">Good afternoon</string>
+    <string name="adv_greeting_evening">Good evening</string>
+    <string name="adv_home_badge">AI plant doctor</string>
+    <string name="adv_home_hero_title">Quick scan</string>
+    <string name="adv_home_hero_subtitle">Snap a leaf. Get a diagnosis in seconds.</string>
+    <string name="adv_home_start_scan">Start scanning</string>
+    <string name="adv_home_scans_label">Saved scans</string>
+    <string name="adv_home_library_label">Conditions</string>
+    <string name="adv_plant_health">Plant health</string>
+    <string name="adv_healthy">Healthy</string>
+    <string name="adv_diseased">Diseased</string>
+    <string name="adv_needs_review">Needs review</string>
+    <string name="adv_healthy_caption">healthy</string>
+    <string name="adv_percent">%1$d%%</string>
+    <string name="adv_recent_scans">Recent scans</string>
+    <string name="adv_see_all">See all</string>
+    <string name="adv_no_scans_title">No scans yet</string>
+    <string name="adv_no_scans_body">Your saved diagnoses will appear here.</string>
+    <string name="adv_engines">Detection engines</string>
+    <string name="adv_engine_cloud">Cloud AI</string>
+    <string name="adv_engine_device">On-device</string>
+    <string name="adv_engine_device_caption">TFLite · works offline</string>
+    <string name="adv_sample_title">Sample result</string>
+    <string name="adv_sample_caption">See what a diagnosis looks like</string>
+
+    <!-- Scans and library -->
+    <string name="adv_filter_all">All</string>
+    <string name="adv_filter_empty">No scans match this filter.</string>
+    <string name="adv_search_hint">Search diseases or crops</string>
+    <string name="adv_badge_disease">Disease</string>
+    <string name="adv_library_no_match">No matches</string>
+
+    <!-- Insights -->
+    <string name="adv_avg_confidence">Avg. confidence</string>
+    <string name="adv_with_location">With location</string>
+    <string name="adv_conditions_found">Diseases found</string>
+    <string name="adv_most_common">Most common</string>
+    <string name="adv_last_7_days">Last 7 days</string>
+    <string name="adv_top_results">Top results</string>
+    <string name="adv_insights_empty_title">No insights yet</string>
+    <string name="adv_insights_empty_body">Save a few scans to see trends.</string>
+    <string name="adv_health_summary_desc">%1$d healthy, %2$d diseased, %3$d need review</string>
+    <string name="adv_chart_day_value">%1$s: %2$d</string>
+    <string name="adv_total_scans_caption">scans</string>
+
+    <!-- Scan -->
+    <string name="adv_scan_title">New scan</string>
+    <string name="adv_scan_placeholder_title">Frame a single leaf</string>
+    <string name="adv_scan_placeholder_hint">Good light, sharp focus</string>
+    <string name="adv_camera">Camera</string>
+    <string name="adv_gallery">Gallery</string>
+    <string name="adv_engine">Engine</string>
+    <string name="adv_analyze">Analyze leaf</string>
+    <string name="adv_analyzing">Analyzing leaf…</string>
+    <string name="adv_back">Back</string>
+
+    <!-- Result and saved scan -->
+    <string name="adv_result_title">Diagnosis</string>
+    <string name="adv_confidence_caption">confidence</string>
+    <string name="adv_status_healthy">Healthy</string>
+    <string name="adv_status_disease">Disease detected</string>
+    <string name="adv_status_review">Needs review</string>
+    <string name="adv_details">Details</string>
+    <string name="adv_model_label">Model label</string>
+    <string name="adv_guidance">Guidance</string>
+    <string name="adv_care_plan">Care plan</string>
+    <string name="adv_care_signs">Signs</string>
+    <string name="adv_care_treatment">Treatment</string>
+    <string name="adv_care_prevention">Prevention</string>
+    <string name="adv_add_location">Add location</string>
+    <string name="adv_saved_on">Saved</string>
+    <string name="adv_location">Location</string>
+    <string name="adv_location_value">%1$.5f, %2$.5f</string>
+    <string name="adv_location_none">Not saved</string>
+    <string name="adv_open_map">Open in maps</string>
+    <string name="adv_no_map_app">No maps app is installed.</string>
+    <string name="adv_scan_a_leaf">Scan a leaf</string>
+
+    <!-- Settings -->
+    <string name="adv_settings_interface">Interface</string>
+    <string name="adv_settings_notifications">Notifications</string>
+    <string name="adv_settings_server">Cloud server</string>
+    <string name="adv_version">Cropora %1$s</string>
+
+    <plurals name="adv_scans_count">
+        <item quantity="one">%d scan</item>
+        <item quantity="other">%d scans</item>
+    </plurals>
+    <plurals name="adv_library_count">
+        <item quantity="one">%d condition</item>
+        <item quantity="other">%d conditions</item>
+    </plurals>
+    <plurals name="adv_insights_subtitle">
+        <item quantity="one">Based on %d saved scan</item>
+        <item quantity="other">Based on %d saved scans</item>
+    </plurals>
+    <plurals name="adv_week_count">
+        <item quantity="one">%d this week</item>
+        <item quantity="other">%d this week</item>
+    </plurals>
+</resources>
