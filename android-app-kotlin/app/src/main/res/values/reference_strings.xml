@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="reference_history_eyebrow">SAVED EVIDENCE</string>
+    <string name="reference_history_intro">Revisit a scan in context. Open a saved record to review its result and guidance.</string>
+    <string name="reference_history_section">Your scan records</string>
+    <string name="reference_history_hint">Saved results are observations, not a confirmed diagnosis.</string>
+    <string name="reference_library_eyebrow">CROP HEALTH REFERENCE</string>
+    <string name="reference_library_intro">Browse by disease. Review the signs, then explore care and prevention.</string>
+    <string name="reference_library_section">Browse disease guides</string>
+    <string name="reference_library_hint">Compare the guide with your plant before taking action.</string>
+    <string name="reference_detail_eyebrow">DISEASE FIELD GUIDE</string>
+    <string name="reference_detail_intro">Recognize the signs. Plan care. Reduce future risk.</string>
+    <string name="reference_detail_signs">01 / Recognize the signs</string>
+    <string name="reference_detail_action">02 / Plan your response</string>
+    <string name="reference_detail_prevention">03 / Prevent recurrence</string>
+</resources>
