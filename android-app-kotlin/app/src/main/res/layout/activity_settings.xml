@@ -20,6 +20,33 @@
         android:textColor="@color/text_primary"
         android:textSize="24sp" />
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="@string/settings_language"
+        android:textColor="@color/text_primary"
+        android:textSize="16sp" />
+
+    <RadioGroup
+        android:id="@+id/groupLanguage"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <RadioButton
+            android:id="@+id/radioEnglish"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:minHeight="48dp"
+            android:text="@string/language_english" />
+        <RadioButton
+            android:id="@+id/radioBangla"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:minHeight="48dp"
+            android:text="@string/language_bangla" />
+    </RadioGroup>
+
     <androidx.appcompat.widget.SwitchCompat
         android:id="@+id/switchAdvancedMode"
         android:layout_width="match_parent"
