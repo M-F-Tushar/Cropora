@@ -10,60 +10,113 @@
         android:orientation="vertical"
         android:padding="24dp">
 
-        <TextView
-            android:id="@+id/textDiseaseDetailName"
+        <LinearLayout
+            android:id="@+id/referenceDetailHeader"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="@color/leaf_green_dark"
-            android:textSize="24sp" />
+            android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/textDiseaseDetailPlant"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
-            android:textColor="@color/text_secondary" />
+            <TextView
+                android:id="@+id/referenceDetailEyebrow"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:text="@string/reference_detail_eyebrow"
+                android:textColor="#D3EEE1"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                android:visibility="gone" />
 
-        <TextView
+            <TextView
+                android:id="@+id/textDiseaseDetailName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/leaf_green_dark"
+                android:textSize="24sp" />
+
+            <TextView
+                android:id="@+id/textDiseaseDetailPlant"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:textColor="@color/text_secondary" />
+
+            <TextView
+                android:id="@+id/referenceDetailIntro"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:lineSpacingExtra="3dp"
+                android:text="@string/reference_detail_intro"
+                android:textColor="#E4F2EB"
+                android:textSize="16sp"
+                android:visibility="gone" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/referenceDetailSigns"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
-            android:text="@string/symptoms_heading"
-            android:textColor="@color/text_primary"
-            android:textStyle="bold" />
+            android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/textDiseaseDetailSymptoms"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textColor="@color/text_secondary" />
+            <TextView
+                android:id="@+id/referenceDetailSignsHeading"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/symptoms_heading"
+                android:textColor="@color/text_primary"
+                android:textStyle="bold" />
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:text="@string/treatment_heading"
-            android:textColor="@color/text_primary"
-            android:textStyle="bold" />
+            <TextView
+                android:id="@+id/textDiseaseDetailSymptoms"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/text_secondary" />
+        </LinearLayout>
 
-        <TextView
-            android:id="@+id/textDiseaseDetailTreatment"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textColor="@color/text_secondary" />
-
-        <TextView
+        <LinearLayout
+            android:id="@+id/referenceDetailAction"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:text="@string/prevention_heading"
-            android:textColor="@color/text_primary"
-            android:textStyle="bold" />
+            android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/textDiseaseDetailPrevention"
+            <TextView
+                android:id="@+id/referenceDetailActionHeading"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/treatment_heading"
+                android:textColor="@color/text_primary"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/textDiseaseDetailTreatment"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/text_secondary" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/referenceDetailPrevention"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="@color/text_secondary" />
+            android:layout_marginTop="16dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/referenceDetailPreventionHeading"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/prevention_heading"
+                android:textColor="@color/text_primary"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/textDiseaseDetailPrevention"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/text_secondary" />
+        </LinearLayout>
     </LinearLayout>
 </ScrollView>
