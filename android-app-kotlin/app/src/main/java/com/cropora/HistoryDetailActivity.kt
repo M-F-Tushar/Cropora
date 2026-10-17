@@ -1,6 +1,7 @@
 package com.cropora
 
 import android.os.Bundle
+import android.view.View
 import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
@@ -18,6 +19,7 @@ import kotlinx.coroutines.launch
 class HistoryDetailActivity : AppCompatActivity() {
     private var scanId: Long = INVALID_SCAN_ID
     private var isDeleting = false
+    private var uncertain = true
     private lateinit var deleteButton: Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -43,6 +45,25 @@ class HistoryDetailActivity : AppCompatActivity() {
         } else {
             loadRecord()
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        applyUiMode()
+    }
+
+    private fun applyUiMode() {
+        val advanced = UiPreferences.isAdvanced(this)
+        listOf(R.id.textDetailModelLabel, R.id.textDetailConfidence).forEach { viewId ->
+            findViewById<View>(viewId).visibility = if (advanced) View.VISIBLE else View.GONE
+        }
+        findViewById<TextView>(R.id.textDetailUncertain).setText(
+            when {
+                uncertain -> R.string.result_uncertain
+                advanced -> R.string.result_confident
+                else -> R.string.result_simple_suggestion
+            }
+        )
     }
 
     private fun loadRecord() {
@@ -85,9 +106,8 @@ class HistoryDetailActivity : AppCompatActivity() {
             R.string.history_confidence_format,
             record.confidence * 100f
         )
-        findViewById<TextView>(R.id.textDetailUncertain).text = getString(
-            if (record.uncertain) R.string.result_uncertain else R.string.result_confident
-        )
+        uncertain = record.uncertain
+        applyUiMode()
         findViewById<TextView>(R.id.textDetailGuidanceStatus).text = getString(
             if (record.guidanceAvailable) {
                 R.string.guidance_available
