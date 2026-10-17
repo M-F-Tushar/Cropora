@@ -113,6 +113,15 @@ class LanguageInstrumentedTest {
         }
         val bangla = context.createConfigurationContext(configuration)
         val repository = DiseaseRepository.getInstance(context)
+        assertEquals(38, repository.getAllDiseases().size)
+        assertEquals(38, repository.getLocalizedDiseases(bangla).size)
+        context.resources.getStringArray(R.array.disease_keys).forEach { canonical ->
+            val local = repository.findByName(canonical)
+            val localized = repository.findLocalizedByName(bangla, canonical)
+            assertTrue("Missing English guidance: $canonical", local != null)
+            assertTrue("Missing Bangla guidance: $canonical", localized != null)
+            assertEquals(local!!.name, localized!!.name)
+        }
         val english = repository.findByName("Tomato Early Blight")!!
         val translated = repository.findLocalizedByName(bangla, english.name)!!
         assertEquals(english.name, translated.name)
