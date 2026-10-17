@@ -24,8 +24,8 @@
     <string name="setup_title">Welcome to Cropora / ক্রপোরায় স্বাগতম</string>
     <string name="setup_language">Language / ভাষা</string>
     <string name="setup_mode">Mode / মোড</string>
-    <string name="setup_simple">Simple / সহজ</string>
-    <string name="setup_advanced">Advanced / বিস্তারিত</string>
+    <string name="setup_simple">Normal / সাধারণ</string>
+    <string name="setup_advanced">Advanced / উন্নত</string>
     <string name="setup_continue">Continue / শুরু করুন</string>
     <string name="settings_advanced_mode">Advanced mode</string>
     <string name="analytics_title">Analytics</string>
@@ -46,6 +46,15 @@
     <string name="server_url_saved">Server address saved.</string>
     <string name="server_url_invalid">Enter a valid address starting with http:// or https://</string>
     <string name="placeholder_analytics">Analytics will be added during the later app-polish work.</string>
+    <string name="analytics_empty">No scan data available yet. Save leaf scans to view analytics.</string>
+    <string name="analytics_total_scans_format">Total Scans: %1$d</string>
+    <string name="analytics_healthy_scans_format">Healthy Scans: %1$d</string>
+    <string name="analytics_diseased_scans_format">Diseased Scans: %1$d</string>
+    <string name="analytics_avg_confidence_format">Average Confidence: %1$.1f%%</string>
+    <string name="analytics_uncertain_scans_format">Uncertain Scans: %1$d</string>
+    <string name="analytics_location_scans_format">Location Saved: %1$d</string>
+    <string name="analytics_top_disease_format">Most Common: %1$s</string>
+    <string name="analytics_no_disease_detected">None</string>
 
     <string name="scan_instruction">Take a photo or choose an image from your device.</string>
     <string name="scan_preview_description">Preview of the selected leaf image</string>
