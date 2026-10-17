@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="visual_mode_description">সাধারণ মোডে মডেলের লেবেল, আস্থার মাত্রা, নমুনা ফলাফল ও পরিসংখ্যান থাকে। উন্নত মোডে দৃশ্যভিত্তিক কর্মক্ষেত্র, কাজের ধাপচিত্র ও বিন্যস্ত তথ্য যোগ হয়। উভয় মোডে একই পূর্বাভাস ও সংরক্ষিত স্ক্যান ব্যবহৃত হয়।</string>
+    <string name="visual_setup_description">সাধারণ: সম্পূর্ণ ফলাফল ও আস্থার মাত্রা। উন্নত: দৃশ্যভিত্তিক কাজের ধাপ ও বিন্যস্ত তথ্য।</string>
+    <string name="visual_evidence_eyebrow">উন্নত মোড • তথ্য পর্যালোচনার কর্মক্ষেত্র</string>
+    <string name="visual_evidence_title">মডেলের সংকেত বুঝুন।\nতথ্য যাচাই করুন।</string>
+    <string name="visual_evidence_subtitle">মডেলের সম্ভাব্য ফলাফল ও মাঠে যাচাই করা লক্ষণ আলাদা করে দেখুন।</string>
+    <string name="visual_model_confidence">মডেলের আস্থার মাত্রা</string>
+    <string name="visual_confidence_value">%1$d%%</string>
+    <string name="visual_confidence_explanation">আস্থার মাত্রা মডেলের ফলাফল বোঝায়; এটি সঠিক রোগনির্ণয়ের সম্ভাবনা বা রোগের তীব্রতা নয়।</string>
+    <string name="visual_review_required">বিশেষজ্ঞের পর্যালোচনা প্রয়োজন</string>
+    <string name="visual_threshold_met">অনিশ্চয়তার নির্ধারিত সীমার উপরে</string>
+    <string name="visual_guide_heading">পরিচর্যার নির্দেশিকার উৎস</string>
+    <string name="visual_decision_heading">ধাপে ধাপে পর্যালোচনার পথ</string>
+    <string name="visual_step_signal">মডেলের সংকেত</string>
+    <string name="visual_step_observe">লক্ষণ মেলান</string>
+    <string name="visual_step_verify">বিশেষজ্ঞের পরামর্শ</string>
+    <string name="visual_step_plan">পরিচর্যার পরিকল্পনা</string>
+    <string name="visual_decision_note">এটি পড়ার নির্দেশনা, সম্পন্ন কাজের তালিকা নয়। চিকিৎসার আগে লক্ষণ মিলিয়ে সম্ভাব্য ফলাফল যাচাই করুন।</string>
+    <string name="visual_current_stage">%1$s (বর্তমান ধাপ)</string>
+    <string name="visual_signs">০১  /  পর্যবেক্ষণ • যেসব লক্ষণ দেখবেন</string>
+    <string name="visual_action">০২  /  করণীয় • পরিচর্যা ও চিকিৎসা</string>
+    <string name="visual_prevention">০৩  /  সুরক্ষা • প্রতিরোধের পরিকল্পনা</string>
+</resources>
