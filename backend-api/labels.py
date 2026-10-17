@@ -20,6 +20,7 @@ def load_labels(path: str) -> List[str]:
 def display_label(model_label: str) -> str:
     overrides = {
         "Apple___Apple_scab": "Apple Scab",
+        "Orange___Haunglongbing_(Citrus_greening)": "Orange Huanglongbing (Citrus Greening)",
         "Corn___Cercospora_leaf_spot Gray_leaf_spot": "Corn Gray Leaf Spot",
         "Corn___Northern_Leaf_Blight": "Corn Northern Leaf Blight",
         "Potato___Early_blight": "Potato Early Blight",
