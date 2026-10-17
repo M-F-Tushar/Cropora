@@ -99,16 +99,30 @@ show a translated advisory. Model labels remain unchanged, and historical HLB
 names still resolve after correcting its displayed spelling. Android 13 and newer
 also expose these languages in system app settings.
 
-Normal (সাধারণ) is the default (`advanced_ui_enabled = false`) and includes all
-previously advanced features: sample-result and analytics navigation on home,
-model labels and confidence on results and saved scan details, and the result
-confidence bar. Advanced (উন্নত, `advanced_ui_enabled = true`) adds a visual
-workspace with workflow diagrams and structured evidence panels; it does not
-unlock predictions or data. The visual confidence uses the same prediction, and
-the evidence panel's care-guide source follows the loaded guidance status.
-Saved scan details follow the same mode preference. The selection is saved across
-app restarts; returning to a screen refreshes its presentation. Uncertainty
-warnings remain visible in both modes.
+Normal (সাধারণ) is the default (`advanced_ui_enabled = false`): a simple home
+menu with buttons for scanning, the sample result, history, the disease library,
+analytics and settings. Results and saved-scan details show the model label,
+confidence and a confidence bar.
+
+Advanced (উন্নত, `advanced_ui_enabled = true`) is a redesigned, visual
+interface with its own theme. It has the same features and data and does not
+unlock anything else:
+
+- A floating bottom bar with Home, Scans, Library and Insights tabs and a
+  central scan button.
+- Home: a Quick scan card, saved-scan and library counts, a plant-health donut,
+  recent scans, shortcuts for the cloud and on-device engines, and the sample
+  result.
+- Scans: saved history with Healthy, Diseased and Needs-review filters.
+- Library: search and crop filters.
+- Insights: health split, average confidence, review and location counts, the
+  most common result, a seven-day chart and top results.
+- Scan, result, saved-scan, disease and settings screens show the circular
+  confidence ring, status pills and a care plan.
+
+Changing the mode in Settings switches that screen immediately; other screens
+switch when you return to them. Uncertainty warnings remain visible in both
+modes.
 
 This is a preference-based presentation choice, not a role
 or permission system. Both modes reuse the same activities, prediction pipeline,
