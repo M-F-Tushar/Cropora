@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="reference_history_eyebrow">সংরক্ষিত পর্যবেক্ষণ</string>
+    <string name="reference_history_intro">আগের স্ক্যানটি আবার দেখুন। ফলাফল ও পরামর্শ পর্যালোচনা করতে সংরক্ষিত রেকর্ড খুলুন।</string>
+    <string name="reference_history_section">আপনার স্ক্যানের রেকর্ড</string>
+    <string name="reference_history_hint">সংরক্ষিত ফলাফল পর্যবেক্ষণমাত্র, নিশ্চিত রোগনির্ণয় নয়।</string>
+    <string name="reference_library_eyebrow">ফসলের স্বাস্থ্য নির্দেশিকা</string>
+    <string name="reference_library_intro">রোগের তালিকা দেখুন। লক্ষণ মিলিয়ে পরিচর্যা ও প্রতিরোধের উপায় জানুন।</string>
+    <string name="reference_library_section">রোগের নির্দেশিকা দেখুন</string>
+    <string name="reference_library_hint">ব্যবস্থা নেওয়ার আগে নির্দেশিকার সঙ্গে আপনার গাছের লক্ষণ মিলিয়ে দেখুন।</string>
+    <string name="reference_detail_eyebrow">মাঠে রোগ চেনার নির্দেশিকা</string>
+    <string name="reference_detail_intro">লক্ষণ চিনুন। পরিচর্যার পরিকল্পনা করুন। ভবিষ্যতের ঝুঁকি কমান।</string>
+    <string name="reference_detail_signs">০১ / লক্ষণ চিনুন</string>
+    <string name="reference_detail_action">০২ / করণীয় ঠিক করুন</string>
+    <string name="reference_detail_prevention">০৩ / পুনরায় রোগ হওয়া ঠেকান</string>
+</resources>
