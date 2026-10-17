@@ -10,11 +10,18 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import com.cropora.database.AppDatabase
 import com.cropora.database.ScanRecord
+import com.cropora.data.Disease
+import com.cropora.data.DiseasePresentation
+import com.cropora.data.DiseaseRepository
 import java.text.DateFormat
 import java.util.Date
+import java.io.IOException
+import org.xmlpull.v1.XmlPullParserException
 
 import kotlinx.coroutines.CancellationException
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class HistoryDetailActivity : AppCompatActivity() {
     private var scanId: Long = INVALID_SCAN_ID
@@ -80,7 +87,17 @@ class HistoryDetailActivity : AppCompatActivity() {
                     ).show()
                     finish()
                 } else {
-                    renderRecord(record)
+                    val guidance = withContext(Dispatchers.IO) {
+                        try {
+                            DiseaseRepository.getInstance(applicationContext)
+                                .findLocalizedByName(this@HistoryDetailActivity, record.disease)
+                        } catch (_: IOException) {
+                            null
+                        } catch (_: XmlPullParserException) {
+                            null
+                        }
+                    }
+                    renderRecord(record, guidance)
                     deleteButton.isEnabled = true
                 }
             } catch (error: CancellationException) {
@@ -96,8 +113,8 @@ class HistoryDetailActivity : AppCompatActivity() {
         }
     }
 
-    private fun renderRecord(record: ScanRecord) {
-        findViewById<TextView>(R.id.textDetailDisease).text = record.disease
+    private fun renderRecord(record: ScanRecord, guidance: Disease?) {
+        findViewById<TextView>(R.id.textDetailDisease).text = DiseasePresentation.name(this, record.disease, record.modelLabel)
         findViewById<TextView>(R.id.textDetailModelLabel).text = getString(
             R.string.model_label_format,
             record.modelLabel
@@ -116,7 +133,7 @@ class HistoryDetailActivity : AppCompatActivity() {
             }
         )
         val formattedTimestamp = DateFormat
-            .getDateTimeInstance(DateFormat.LONG, DateFormat.SHORT)
+            .getDateTimeInstance(DateFormat.LONG, DateFormat.SHORT, resources.configuration.locales[0])
             .format(Date(record.timestamp))
         findViewById<TextView>(R.id.textDetailTimestamp).text = getString(
             R.string.history_saved_at_format,
@@ -129,9 +146,16 @@ class HistoryDetailActivity : AppCompatActivity() {
         } else {
             getString(R.string.history_location_unavailable)
         }
-        findViewById<TextView>(R.id.textDetailSymptoms).text = record.symptoms
-        findViewById<TextView>(R.id.textDetailTreatment).text = record.treatment
-        findViewById<TextView>(R.id.textDetailPrevention).text = record.prevention
+        val bangla = resources.configuration.locales[0].language == "bn"
+        findViewById<TextView>(R.id.textDetailSymptoms).text = if (bangla) {
+            guidance?.symptoms ?: getString(R.string.generic_symptoms)
+        } else record.symptoms
+        findViewById<TextView>(R.id.textDetailTreatment).text = if (bangla) {
+            guidance?.treatment ?: getString(R.string.generic_treatment)
+        } else record.treatment
+        findViewById<TextView>(R.id.textDetailPrevention).text = if (bangla) {
+            guidance?.prevention ?: getString(R.string.generic_prevention)
+        } else record.prevention
     }
 
     private fun confirmDelete() {
