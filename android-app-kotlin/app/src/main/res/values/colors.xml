@@ -10,4 +10,35 @@
     <color name="white">#FFFFFF</color>
 
     <color name="ic_launcher_background">#A5DFBF</color>
+
+    <!-- Advanced mode palette -->
+    <color name="adv_bg">#F3F6F1</color>
+    <color name="adv_surface">#FFFFFF</color>
+    <color name="adv_surface_muted">#EAF0E6</color>
+    <color name="adv_stroke">#DFE7DA</color>
+    <color name="adv_ink">#122019</color>
+    <color name="adv_ink_soft">#5E6E64</color>
+    <color name="adv_ink_faint">#8A988F</color>
+    <color name="adv_primary">#1E6B3A</color>
+    <color name="adv_primary_dark">#0E3B21</color>
+    <color name="adv_primary_soft">#DDEFE2</color>
+    <color name="adv_primary_muted">#B9DCC4</color>
+    <color name="adv_accent">#A5D86A</color>
+    <color name="adv_on_accent">#0F2E1A</color>
+    <color name="adv_on_hero_soft">#CBE6D3</color>
+    <color name="adv_healthy">#239150</color>
+    <color name="adv_healthy_soft">#DDF3E5</color>
+    <color name="adv_warn">#B86E00</color>
+    <color name="adv_warn_soft">#FFEFD2</color>
+    <color name="adv_danger">#C2412D</color>
+    <color name="adv_danger_soft">#FCE5E1</color>
+    <color name="adv_info">#2D67C4</color>
+    <color name="adv_info_soft">#E3ECFB</color>
+    <color name="adv_violet">#6B4FC8</color>
+    <color name="adv_violet_soft">#ECE7FB</color>
+    <color name="adv_viewfinder">#0D2618</color>
+    <color name="adv_viewfinder_soft">#A9C7B4</color>
+    <color name="adv_scrim">#CC0D2618</color>
+    <color name="adv_glass">#1FFFFFFF</color>
+    <color name="adv_disabled">#C7D1CA</color>
 </resources>
