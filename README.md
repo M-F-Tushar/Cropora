@@ -47,12 +47,15 @@ More detail about the original architecture is available in
 | Android-to-backend connection | Implemented | Retrofit uploads selected images to `POST /predict` and maps successful responses into the result screen. The backend address can be overridden at runtime from the Settings screen without rebuilding the app. |
 | Offline TensorFlow Lite prediction | Integration added; asset present | The app runs `model.tflite` locally when Offline is selected. The asset is committed at `android-app-kotlin/app/src/main/assets/model.tflite` and its conversion is recorded in `release-records/tflite-provenance.txt`. On-device verification is still pending. |
 | Local scan history | Implemented | The result screen can save a scan to a local Room database. The history screen lists saved scans, and a detail screen shows the full record with a delete action. |
-| Local disease library | Implemented | The Android app loads reviewed disease guidance from `android-app-kotlin/app/src/main/assets/diseases.xml` and opens detail views for each entry. |
+| Local disease library | Implemented | The Android app loads source-backed guidance for all 38 classes from `android-app-kotlin/app/src/main/assets/diseases.xml`, with matching Bangla entries and detail views. |
 | Daily scan reminder | Implemented | A toggle in Settings schedules a periodic WorkManager reminder (every 24 hours) that posts a notification. |
 
-The backend includes 38 model labels. Reviewed symptom, treatment, and prevention
-guidance is currently available for 10 classes; other recognized classes return
-generic guidance until their content is added.
+All 38 model labels have symptom, management and prevention guidance in both
+cloud and offline modes. The original ten entries were improved and 28 added,
+including crop-specific healthy-care advice. See [the source audit](docs/guidance-sources.md)
+for references and safety limits. Guidance is a source-based synthesis, not a
+confirmed diagnosis or independent agronomist review. Unknown labels retain the
+generic fallback.
 
 ## Architecture
 
@@ -89,11 +92,12 @@ Cropora/
 On first launch, choose English or Bangla and Simple or Advanced mode. Both
 choices are saved. Change the language under **Settings > Language** and the
 interface mode under **Settings > Advanced mode** at any time. Language changes
-refresh open screens and apply to navigation, disease names, the 10 reviewed
+refresh open screens and apply to navigation, disease names, all 38
 care-guide entries, saved-scan presentation, sharing, and daily reminders.
-All 38 model classes have translated display names; classes without reviewed
-guidance show a translated advisory. Model labels and saved identifiers remain
-unchanged. Android 13 and newer also expose these languages in system app settings.
+All 38 model classes have translated display names and guidance; unknown classes
+show a translated advisory. Model labels remain unchanged, and historical HLB
+names still resolve after correcting its displayed spelling. Android 13 and newer
+also expose these languages in system app settings.
 
 Simple mode is the default, with plain-language actions and care guidance.
 Turn on **Settings > Advanced mode** to reveal model labels, confidence scores
@@ -267,7 +271,7 @@ documentation is available at `http://127.0.0.1:8000/docs`.
 | --- | --- | --- |
 | `GET` | `/` | Basic service health response |
 | `GET` | `/health` | Runtime configuration and model-loading status |
-| `GET` | `/diseases` | Reviewed disease guidance currently available from the backend |
+| `GET` | `/diseases` | Source-backed guidance for all 38 model classes |
 | `POST` | `/predict` | Accepts an image in the multipart field `image` and returns a prediction |
 
 A successful `/predict` response contains these fields: `model_label`, `disease`,
@@ -373,7 +377,7 @@ The remaining integration and validation steps are:
    including the Android scan flow and result mapping.
 2. Verify offline Android inference on a device or emulator, and reconcile the
    TensorFlow versions noted above before release.
-3. Expand reviewed disease guidance beyond the current 10 classes.
+3. Obtain independent agronomic and Bangla translation review of all 38 guidance entries.
 4. Build out the analytics screen, which is currently a placeholder.
 
 These plans describe the intended direction of the developing product and may be
