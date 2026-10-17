@@ -33,6 +33,13 @@ class SettingsActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_settings)
 
+        findViewById<SwitchCompat>(R.id.switchAdvancedMode).apply {
+            isChecked = UiPreferences.isAdvanced(this@SettingsActivity)
+            setOnCheckedChangeListener { _, enabled ->
+                UiPreferences.setAdvanced(this@SettingsActivity, enabled)
+            }
+        }
+
         switchReminders = findViewById(R.id.switchScanReminders)
         switchReminders.isChecked = preferences().getBoolean(PREF_REMINDERS, false)
         switchReminders.setOnCheckedChangeListener { _, enabled ->
