@@ -5,9 +5,12 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Button
 import android.widget.RadioGroup
+import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.ViewCompat
 import com.cropora.network.PredictionResponse
+import kotlin.math.roundToInt
 
 class MainActivity : AppCompatActivity() {
     private var setupDialog: AlertDialog? = null
@@ -106,8 +109,44 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun applyUiMode() {
-        val visibility = if (UiPreferences.isAdvanced(this)) View.VISIBLE else View.GONE
-        findViewById<Button>(R.id.buttonOpenResult).visibility = visibility
-        findViewById<Button>(R.id.buttonOpenAnalytics).visibility = visibility
+        val advanced = UiPreferences.isAdvanced(this)
+        listOf(
+            R.id.workspaceHomeHeader,
+            R.id.workspaceHomeWorkflow,
+            R.id.workspaceHomeToolsIntro
+        ).forEach { id ->
+            findViewById<View>(id).visibility = if (advanced) View.VISIBLE else View.GONE
+        }
+        findViewById<View>(R.id.workspaceHomeNormalHeader).visibility =
+            if (advanced) View.GONE else View.VISIBLE
+        findViewById<TextView>(R.id.workspaceHomeToolsTitle).apply {
+            setText(if (advanced) R.string.workspace_tools_title else R.string.quick_actions)
+            ViewCompat.setAccessibilityHeading(this, true)
+        }
+        findViewById<Button>(R.id.buttonOpenResult).visibility = View.VISIBLE
+        findViewById<Button>(R.id.buttonOpenAnalytics).visibility = View.VISIBLE
+        listOf(
+            R.id.buttonOpenScan, R.id.buttonOpenResult, R.id.buttonOpenHistory,
+            R.id.buttonOpenLibrary, R.id.buttonOpenSettings, R.id.buttonOpenAnalytics
+        ).forEach { id ->
+            findViewById<Button>(id).apply {
+                val normalHeight = if (id == R.id.buttonOpenScan) 56 else 52
+                minHeight = (normalHeight * resources.displayMetrics.density).roundToInt()
+                layoutParams = layoutParams.apply {
+                    height = if (advanced) android.view.ViewGroup.LayoutParams.WRAP_CONTENT else minHeight
+                }
+            }
+        }
+        if (advanced) {
+            findViewById<WorkflowDiagramView>(R.id.workspaceHomeDiagram).setSteps(
+                listOf(
+                    getString(R.string.workspace_step_capture),
+                    getString(R.string.workspace_step_routes),
+                    getString(R.string.workspace_step_assess),
+                    getString(R.string.workspace_step_guide)
+                ),
+                activeStep = -1
+            )
+        }
     }
 }
