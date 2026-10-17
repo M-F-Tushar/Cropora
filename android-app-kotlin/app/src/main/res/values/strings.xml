@@ -21,7 +21,6 @@
     <string name="analytics_title">Analytics</string>
 
     <string name="library_description">Browse reviewed disease guidance from the local XML library.</string>
-    <string name="placeholder_settings">Settings options will grow in later weeks.</string>
 
     <string name="disease_library_loading">Loading local disease library</string>
     <string name="disease_library_empty">No reviewed disease entries are available.</string>
@@ -98,6 +97,23 @@
     <string name="cancel">Cancel</string>
     <string name="history_deleted">Saved scan deleted.</string>
     <string name="history_delete_error">Could not delete this scan. Try again.</string>
+    <string name="history_location_format">Location: %1$.5f, %2$.5f</string>
+    <string name="history_location_unavailable">Location was not saved.</string>
+
+    <string name="share_result">Share Result</string>
+    <string name="share_result_subject">Cropora result</string>
+    <string name="share_result_chooser">Share result with</string>
+    <string name="share_result_template">Disease: %1$s\nConfidence: %2$d%%\n\nSymptoms: %3$s\n\nTreatment: %4$s\n\nPrevention: %5$s\n\nModel suggestion only; verify serious cases with a qualified agricultural source.</string>
+    <string name="include_location">Include optional last-known location when saving</string>
+    <string name="location_permission_denied">Location permission denied. Saving without location.</string>
+
+    <string name="settings_scan_reminders">Daily scan reminder</string>
+    <string name="settings_scan_reminders_description">Schedule one local reminder approximately every 24 hours.</string>
+    <string name="notification_channel_name">Leaf scan reminders</string>
+    <string name="notification_channel_description">Reminders to inspect plants and capture a fresh leaf image.</string>
+    <string name="notification_reminder_title">Check your plants</string>
+    <string name="notification_reminder_message">Capture a fresh leaf image and compare it with earlier scans.</string>
+    <string name="notification_permission_denied">Notifications remain disabled.</string>
 
     <string name="sample_model_label" translatable="false">Tomato___Healthy</string>
     <string name="sample_disease">Tomato Healthy</string>
