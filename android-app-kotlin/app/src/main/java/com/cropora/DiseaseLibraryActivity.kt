@@ -46,7 +46,7 @@ class DiseaseLibraryActivity : AppCompatActivity() {
             progressLibrary.visibility = View.VISIBLE
             try {
                 val diseases = withContext(Dispatchers.IO) {
-                    DiseaseRepository.getInstance(applicationContext).getAllDiseases()
+                    DiseaseRepository.getInstance(applicationContext).getLocalizedDiseases(this@DiseaseLibraryActivity)
                 }
                 diseaseAdapter.submitList(diseases)
                 val hasDiseases = diseases.isNotEmpty()
