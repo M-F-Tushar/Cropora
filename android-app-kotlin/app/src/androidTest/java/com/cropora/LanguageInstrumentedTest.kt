@@ -24,6 +24,7 @@ import java.util.Locale
 import org.junit.After
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertFalse
+import org.junit.Assert.assertNull
 import org.junit.Assert.assertTrue
 import org.junit.Before
 import org.junit.Test
@@ -70,7 +71,7 @@ class LanguageInstrumentedTest {
             onView(withId(R.id.radioSetupAdvanced)).check(matches(isChecked()))
             onView(withText(R.string.setup_continue)).perform(click())
             onView(withId(R.id.radioSetupBangla)).check(doesNotExist())
-            onView(withId(R.id.buttonOpenAnalytics)).perform(scrollTo()).check(matches(isDisplayed()))
+            onView(withId(R.id.advBottomBar)).check(matches(isDisplayed()))
             scenario.onActivity { activity ->
                 assertEquals("bn", activity.resources.configuration.locales[0].language)
                 assertTrue(UiPreferences.isAdvanced(activity))
@@ -107,14 +108,13 @@ class LanguageInstrumentedTest {
                 assertFalse(UiPreferences.isAdvanced(activity))
                 assertEquals(View.VISIBLE, activity.findViewById<View>(R.id.buttonOpenAnalytics).visibility)
                 assertEquals(View.VISIBLE, activity.findViewById<View>(R.id.buttonOpenResult).visibility)
-                assertEquals(View.GONE, activity.findViewById<View>(R.id.workspaceHomeHeader).visibility)
-                assertEquals(View.GONE, activity.findViewById<View>(R.id.workspaceHomeWorkflow).visibility)
+                assertNull(activity.findViewById<View>(R.id.advBottomBar))
             }
         }
     }
 
     @Test
-    fun setupDefaultsToNormalAndExplainsTheVisualWorkspace() {
+    fun setupDefaultsToNormalAndExplainsBothModes() {
         preferences.edit().putBoolean("setup_complete", false)
             .remove("advanced_ui_enabled").commit()
         ActivityScenario.launch(MainActivity::class.java).use { scenario ->
