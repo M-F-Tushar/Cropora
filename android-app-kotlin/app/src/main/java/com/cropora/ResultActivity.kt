@@ -1,13 +1,21 @@
 package com.cropora
 
+import android.Manifest
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
+import android.content.pm.PackageManager
+import android.location.Location
+import android.location.LocationManager
 import android.os.Bundle
 import android.widget.Button
+import android.widget.CheckBox
 import android.widget.ProgressBar
 import android.widget.TextView
 import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.lifecycleScope
 import com.cropora.database.AppDatabase
 import com.cropora.data.DiseaseRepository
@@ -35,6 +43,18 @@ class ResultActivity : AppCompatActivity() {
     private lateinit var treatment: String
     private lateinit var prevention: String
     private var savedToHistory = false
+
+    private val locationPermissionLauncher = registerForActivityResult(
+        ActivityResultContracts.RequestMultiplePermissions()
+    ) { result ->
+        val saveButton = findViewById<Button>(R.id.buttonSaveHistory)
+        if (result.values.any { granted -> granted }) {
+            insertHistory(saveButton, findLastKnownLocation())
+        } else {
+            Toast.makeText(this, R.string.location_permission_denied, Toast.LENGTH_SHORT).show()
+            insertHistory(saveButton, null)
+        }
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -83,6 +103,7 @@ class ResultActivity : AppCompatActivity() {
                 saveToHistory(this)
             }
         }
+        findViewById<Button>(R.id.buttonShareResult).setOnClickListener { shareResult() }
         loadLocalGuidance()
     }
 
@@ -127,6 +148,20 @@ class ResultActivity : AppCompatActivity() {
 
     private fun saveToHistory(saveButton: Button) {
         saveButton.isEnabled = false
+        val includeLocation = findViewById<CheckBox>(R.id.checkboxIncludeLocation).isChecked
+        when {
+            !includeLocation -> insertHistory(saveButton, null)
+            hasLocationPermission() -> insertHistory(saveButton, findLastKnownLocation())
+            else -> locationPermissionLauncher.launch(
+                arrayOf(
+                    Manifest.permission.ACCESS_COARSE_LOCATION,
+                    Manifest.permission.ACCESS_FINE_LOCATION
+                )
+            )
+        }
+    }
+
+    private fun insertHistory(saveButton: Button, location: Location?) {
         lifecycleScope.launch {
             try {
                 val record = ScanRecord(
@@ -139,6 +174,8 @@ class ResultActivity : AppCompatActivity() {
                     symptoms = symptoms,
                     treatment = treatment,
                     prevention = prevention,
+                    latitude = location?.latitude,
+                    longitude = location?.longitude,
                     timestamp = System.currentTimeMillis()
                 )
                 AppDatabase.getInstance(applicationContext).scanDao().insertScan(record)
@@ -160,6 +197,43 @@ class ResultActivity : AppCompatActivity() {
                     Toast.LENGTH_SHORT
                 ).show()
             }
+        }
+    }
+
+    private fun shareResult() {
+        val shareText = getString(
+            R.string.share_result_template,
+            disease,
+            (confidence * 100f).roundToInt(),
+            symptoms,
+            treatment,
+            prevention
+        )
+        val shareIntent = Intent(Intent.ACTION_SEND).apply {
+            type = "text/plain"
+            putExtra(Intent.EXTRA_SUBJECT, getString(R.string.share_result_subject))
+            putExtra(Intent.EXTRA_TEXT, shareText)
+        }
+        startActivity(Intent.createChooser(shareIntent, getString(R.string.share_result_chooser)))
+    }
+
+    private fun hasLocationPermission(): Boolean {
+        return ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) ==
+            PackageManager.PERMISSION_GRANTED ||
+            ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) ==
+            PackageManager.PERMISSION_GRANTED
+    }
+
+    @SuppressLint("MissingPermission")
+    private fun findLastKnownLocation(): Location? {
+        if (!hasLocationPermission()) return null
+        val manager = getSystemService(LocationManager::class.java) ?: return null
+        return try {
+            manager.getProviders(true)
+                .mapNotNull { provider -> manager.getLastKnownLocation(provider) }
+                .maxByOrNull { location -> location.time }
+        } catch (_: SecurityException) {
+            null
         }
     }
 
