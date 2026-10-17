@@ -54,5 +54,11 @@
                 android:minHeight="48dp"
                 android:text="@string/setup_advanced" />
         </RadioGroup>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="@string/visual_setup_description"
+            android:textColor="@color/text_secondary" />
     </LinearLayout>
 </ScrollView>
