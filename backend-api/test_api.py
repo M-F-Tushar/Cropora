@@ -1,7 +1,9 @@
 import io
 import os
 import unittest
+from pathlib import Path
 from unittest.mock import Mock, patch
+from xml.etree import ElementTree
 
 import numpy as np
 from fastapi.testclient import TestClient
@@ -44,18 +46,46 @@ class CroporaApiTest(unittest.TestCase):
                 files={"image": ("leaf.png", self.image if content is None else content, mime)},
             )
 
-    def test_health_and_reviewed_library(self):
+    def test_health_and_complete_library(self):
         for path in ("/", "/health", "/diseases"):
             with self.subTest(path=path):
                 response = self.client.get(path)
                 self.assertEqual(200, response.status_code)
                 payload = response.json()
                 if path == "/diseases":
-                    self.assertEqual(10, payload["count"])
-                    self.assertEqual(10, len(payload["diseases"]))
+                    self.assertEqual(38, payload["count"])
+                    self.assertEqual(set(main.CLASS_NAMES), {
+                        entry["model_label"] for entry in payload["diseases"]
+                    })
+                    self.assertEqual(38, len(payload["diseases"]))
                 else:
                     self.assertEqual("ok", payload["status"])
                     self.assertEqual(38, payload["class_count"])
+
+    def test_catalog_matches_offline_guidance_and_display_names(self):
+        backend_path = Path(__file__).with_name("diseases.xml")
+        android_path = backend_path.parent.parent / "android-app-kotlin/app/src/main/assets/diseases.xml"
+        self.assertEqual(android_path.read_bytes(), backend_path.read_bytes())
+        entries = ElementTree.parse(android_path).getroot().findall("disease")
+        for entry in entries:
+            label = entry.findtext("model_label")
+            with self.subTest(label=label):
+                self.assertEqual(entry.findtext("name").casefold(), main.display_label(label).casefold())
+                for field in ("symptoms", "treatment", "prevention"):
+                    self.assertEqual(entry.findtext(field), main.DISEASE_INFO[label][field])
+
+    def test_every_model_class_returns_guidance(self):
+        for label in main.CLASS_NAMES:
+            with self.subTest(label=label):
+                predictor = Mock(model_loaded=True, use_mock=False)
+                predictor.predict.return_value = (label, 0.9)
+                response = self.post_image(predictor)
+                self.assertEqual(200, response.status_code)
+                payload = response.json()
+                self.assertEqual(PREDICTION_KEYS, set(payload))
+                self.assertTrue(payload["guidance_available"])
+                for field in ("symptoms", "treatment", "prevention"):
+                    self.assertEqual(main.DISEASE_INFO[label][field], payload[field])
 
     def test_mock_prediction_keeps_response_contract(self):
         response = self.post_image()
@@ -69,7 +99,8 @@ class CroporaApiTest(unittest.TestCase):
     def test_real_prediction_uncertainty_guidance_and_raw_input(self):
         cases = (
             ("Tomato___Early_blight", "Tomato Early Blight", True),
-            ("Apple___Black_rot", "Apple Black rot", False),
+            ("Apple___Black_rot", "Apple Black rot", True),
+            ("Unknown___Condition", "Unknown Condition", False),
         )
         for label, disease, reviewed in cases:
             guidance = main.DISEASE_INFO[label] if reviewed else FALLBACK_GUIDANCE
