@@ -8,6 +8,7 @@ import android.content.pm.PackageManager
 import android.location.Location
 import android.location.LocationManager
 import android.os.Bundle
+import android.view.View
 import android.widget.Button
 import android.widget.CheckBox
 import android.widget.ProgressBar
@@ -104,6 +105,25 @@ class ResultActivity : AppCompatActivity() {
         }
         findViewById<Button>(R.id.buttonShareResult).setOnClickListener { shareResult() }
         loadLocalGuidance()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        val advanced = UiPreferences.isAdvanced(this)
+        listOf(
+            R.id.textResultModelLabel,
+            R.id.textResultConfidence,
+            R.id.progressResultConfidence
+        ).forEach { viewId ->
+            findViewById<View>(viewId).visibility = if (advanced) View.VISIBLE else View.GONE
+        }
+        findViewById<TextView>(R.id.textResultStatus).setText(
+            when {
+                uncertain -> R.string.result_uncertain
+                advanced -> R.string.result_confident
+                else -> R.string.result_simple_suggestion
+            }
+        )
     }
 
     private fun loadLocalGuidance() {
