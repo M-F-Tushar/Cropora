@@ -1,0 +1,294 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/adv_bg"
+    android:orientation="vertical">
+
+    <!-- Top bar -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingStart="16dp"
+        android:paddingTop="12dp"
+        android:paddingEnd="16dp"
+        android:paddingBottom="4dp">
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/advBack"
+            style="@style/Widget.Cropora.Adv.IconButton"
+            android:layout_width="44dp"
+            android:layout_height="44dp"
+            android:contentDescription="@string/adv_back"
+            app:icon="@drawable/adv_ic_back" />
+
+        <TextView
+            style="@style/AdvText.Title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="14dp"
+            android:layout_weight="1"
+            android:accessibilityHeading="true"
+            android:text="@string/adv_scan_title" />
+    </LinearLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingStart="20dp"
+            android:paddingTop="12dp"
+            android:paddingEnd="20dp"
+            android:paddingBottom="20dp">
+
+            <!-- Viewfinder -->
+            <FrameLayout
+                android:id="@+id/advScanViewfinder"
+                android:layout_width="match_parent"
+                android:layout_height="340dp"
+                android:background="@drawable/adv_bg_viewfinder">
+
+                <ImageView
+                    android:id="@+id/imagePreview"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:contentDescription="@string/scan_preview_description"
+                    android:scaleType="centerCrop" />
+
+                <LinearLayout
+                    android:id="@+id/advScanPlaceholder"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:gravity="center_horizontal"
+                    android:orientation="vertical"
+                    android:paddingStart="32dp"
+                    android:paddingEnd="32dp">
+
+                    <FrameLayout
+                        android:layout_width="88dp"
+                        android:layout_height="88dp"
+                        android:background="@drawable/adv_bg_glass_circle">
+
+                        <ImageView
+                            android:layout_width="48dp"
+                            android:layout_height="48dp"
+                            android:layout_gravity="center"
+                            android:importantForAccessibility="no"
+                            android:src="@drawable/ic_leaf" />
+                    </FrameLayout>
+
+                    <TextView
+                        style="@style/AdvText.Section"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:gravity="center"
+                        android:text="@string/adv_scan_placeholder_title"
+                        android:textColor="@color/white" />
+
+                    <TextView
+                        style="@style/AdvText.Body"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:gravity="center"
+                        android:text="@string/adv_scan_placeholder_hint"
+                        android:textColor="@color/adv_viewfinder_soft" />
+                </LinearLayout>
+
+                <ImageView
+                    android:layout_width="36dp"
+                    android:layout_height="36dp"
+                    android:layout_gravity="top|start"
+                    android:layout_margin="20dp"
+                    android:importantForAccessibility="no"
+                    android:src="@drawable/adv_viewfinder_corner"
+                    app:tint="@color/adv_accent" />
+
+                <ImageView
+                    android:layout_width="36dp"
+                    android:layout_height="36dp"
+                    android:layout_gravity="top|end"
+                    android:layout_margin="20dp"
+                    android:importantForAccessibility="no"
+                    android:rotation="90"
+                    android:src="@drawable/adv_viewfinder_corner"
+                    app:tint="@color/adv_accent" />
+
+                <ImageView
+                    android:layout_width="36dp"
+                    android:layout_height="36dp"
+                    android:layout_gravity="bottom|end"
+                    android:layout_margin="20dp"
+                    android:importantForAccessibility="no"
+                    android:rotation="180"
+                    android:src="@drawable/adv_viewfinder_corner"
+                    app:tint="@color/adv_accent" />
+
+                <ImageView
+                    android:layout_width="36dp"
+                    android:layout_height="36dp"
+                    android:layout_gravity="bottom|start"
+                    android:layout_margin="20dp"
+                    android:importantForAccessibility="no"
+                    android:rotation="270"
+                    android:src="@drawable/adv_viewfinder_corner"
+                    app:tint="@color/adv_accent" />
+
+                <TextView
+                    android:id="@+id/textImageStatus"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom|center_horizontal"
+                    android:layout_marginStart="64dp"
+                    android:layout_marginEnd="64dp"
+                    android:layout_marginBottom="22dp"
+                    android:accessibilityLiveRegion="polite"
+                    android:background="@drawable/adv_bg_glass_pill"
+                    android:ellipsize="end"
+                    android:fontFamily="sans-serif-medium"
+                    android:gravity="center"
+                    android:maxLines="2"
+                    android:paddingStart="14dp"
+                    android:paddingTop="6dp"
+                    android:paddingEnd="14dp"
+                    android:paddingBottom="6dp"
+                    android:text="@string/no_image_selected"
+                    android:textColor="@color/white"
+                    android:textSize="13sp" />
+
+                <LinearLayout
+                    android:id="@+id/advScanOverlay"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/adv_scrim"
+                    android:clickable="true"
+                    android:focusable="false"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:visibility="gone">
+
+                    <com.google.android.material.progressindicator.CircularProgressIndicator
+                        android:id="@+id/progressDetection"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:contentDescription="@string/detection_progress_description"
+                        android:indeterminate="true"
+                        android:visibility="gone"
+                        app:indicatorColor="@color/adv_accent"
+                        app:indicatorSize="64dp"
+                        app:trackCornerRadius="3dp"
+                        app:trackThickness="6dp" />
+
+                    <TextView
+                        style="@style/AdvText.Section"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="18dp"
+                        android:accessibilityLiveRegion="polite"
+                        android:text="@string/adv_analyzing"
+                        android:textColor="@color/white" />
+                </LinearLayout>
+            </FrameLayout>
+
+            <!-- Image sources -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:orientation="horizontal">
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/buttonTakePhoto"
+                    style="@style/Widget.Cropora.Adv.TileButton"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="6dp"
+                    android:layout_weight="1"
+                    android:text="@string/adv_camera"
+                    app:icon="@drawable/ic_camera_scan" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/buttonChooseGallery"
+                    style="@style/Widget.Cropora.Adv.TileButton"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="6dp"
+                    android:layout_weight="1"
+                    android:text="@string/adv_gallery"
+                    app:icon="@drawable/adv_ic_image" />
+            </LinearLayout>
+
+            <!-- Engine -->
+            <TextView
+                style="@style/AdvText.Label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:layout_marginTop="24dp"
+                android:text="@string/adv_engine" />
+
+            <RadioGroup
+                android:id="@+id/radioDetectionMode"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/adv_bg_segment_track"
+                android:checkedButton="@id/radioCloudMode"
+                android:orientation="horizontal"
+                android:padding="4dp">
+
+                <RadioButton
+                    android:id="@+id/radioCloudMode"
+                    style="@style/Widget.Cropora.Adv.Segment"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:drawableStart="@drawable/adv_ic_cloud"
+                    android:text="@string/adv_engine_cloud" />
+
+                <RadioButton
+                    android:id="@+id/radioOfflineMode"
+                    style="@style/Widget.Cropora.Adv.Segment"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:drawableStart="@drawable/adv_ic_phone"
+                    android:text="@string/adv_engine_device" />
+            </RadioGroup>
+
+            <TextView
+                android:id="@+id/textDetectionModeDescription"
+                style="@style/AdvText.Caption"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="4dp"
+                android:text="@string/detection_mode_cloud_description"
+                android:textSize="13sp" />
+        </LinearLayout>
+    </ScrollView>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/buttonDetectDisease"
+        style="@style/Widget.Cropora.Adv.Button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="20dp"
+        android:enabled="false"
+        android:text="@string/adv_analyze"
+        app:icon="@drawable/adv_ic_sparkle" />
+</LinearLayout>
