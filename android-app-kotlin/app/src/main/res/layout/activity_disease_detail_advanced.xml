@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/adv_bg"
+    android:orientation="vertical">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <!-- Hero -->
+            <FrameLayout
+                android:id="@+id/advDiseaseHero"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/adv_bg_hero_bottom"
+                android:paddingStart="16dp"
+                android:paddingTop="12dp"
+                android:paddingEnd="16dp"
+                android:paddingBottom="28dp">
+
+                <View
+                    android:layout_width="220dp"
+                    android:layout_height="220dp"
+                    android:layout_gravity="top|end"
+                    android:layout_marginTop="-80dp"
+                    android:layout_marginEnd="-80dp"
+                    android:background="@drawable/adv_bg_ring_deco"
+                    android:importantForAccessibility="no" />
+
+                <View
+                    android:layout_width="110dp"
+                    android:layout_height="110dp"
+                    android:layout_gravity="bottom|start"
+                    android:layout_marginStart="-40dp"
+                    android:layout_marginBottom="-50dp"
+                    android:background="@drawable/adv_bg_glass_circle"
+                    android:importantForAccessibility="no" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_horizontal"
+                    android:orientation="vertical">
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/advBack"
+                        style="@style/Widget.Cropora.Adv.IconButton.Glass"
+                        android:layout_width="44dp"
+                        android:layout_height="44dp"
+                        android:layout_gravity="start"
+                        android:contentDescription="@string/adv_back"
+                        app:icon="@drawable/adv_ic_back" />
+
+                    <TextView
+                        android:id="@+id/advDiseaseAvatar"
+                        android:layout_width="76dp"
+                        android:layout_height="76dp"
+                        android:layout_marginTop="4dp"
+                        android:fontFamily="sans-serif-medium"
+                        android:gravity="center"
+                        android:importantForAccessibility="no"
+                        android:textColor="@color/white"
+                        android:textSize="30sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/textDiseaseDetailName"
+                        style="@style/AdvText.Display"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:accessibilityHeading="true"
+                        android:gravity="center"
+                        android:paddingStart="8dp"
+                        android:paddingEnd="8dp"
+                        android:textColor="@color/white" />
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="12dp"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/textDiseaseDetailPlant"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/adv_bg_glass_pill"
+                            android:fontFamily="sans-serif-medium"
+                            android:maxLines="1"
+                            android:paddingStart="12dp"
+                            android:paddingTop="5dp"
+                            android:paddingEnd="12dp"
+                            android:paddingBottom="5dp"
+                            android:textColor="@color/white"
+                            android:textSize="12sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/advDiseaseBadge"
+                            style="@style/AdvText.Pill"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:visibility="gone" />
+                    </LinearLayout>
+                </LinearLayout>
+            </FrameLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingStart="20dp"
+                android:paddingEnd="20dp"
+                android:paddingBottom="24dp">
+
+                <include layout="@layout/view_adv_care_plan" />
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/advDiseaseScan"
+        style="@style/Widget.Cropora.Adv.Button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="20dp"
+        android:text="@string/adv_scan_a_leaf"
+        app:icon="@drawable/ic_camera_scan" />
+</LinearLayout>
