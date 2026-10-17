@@ -1,6 +1,8 @@
 import io
 import logging
+from pathlib import Path
 from typing import Dict
+from xml.etree import ElementTree
 
 import numpy as np
 from fastapi import FastAPI, File, HTTPException, UploadFile
@@ -23,61 +25,32 @@ from labels import display_label, load_labels
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger("cropora-api")
 
-# Reviewed Cropora content remains limited to the original 10 supported classes.
-DISEASE_INFO: Dict[str, Dict[str, str]] = {
-    "Tomato___Early_blight": {
-        "symptoms": "Small brown spots with concentric rings, yellowing around lesions, and damage starting on older leaves.",
-        "treatment": "Remove infected leaves, improve airflow, mulch soil, and apply a labeled fungicide when pressure is high.",
-        "prevention": "Rotate crops, avoid wetting foliage in the evening, and disinfect tools between plants."
-    },
-    "Tomato___Late_blight": {
-        "symptoms": "Water-soaked patches that quickly darken, white fuzzy growth underneath leaves, and rapid whole-plant collapse.",
-        "treatment": "Isolate infected plants, remove severely affected tissue, and apply an appropriate late blight fungicide immediately.",
-        "prevention": "Use disease-free seedlings, space plants well, and avoid overhead irrigation during humid weather."
-    },
-    "Tomato___Healthy": {
-        "symptoms": "Leaf remains green, evenly colored, and free from lesions, mold, curling, or necrotic patches.",
-        "treatment": "No treatment needed. Continue normal watering, feeding, and routine scouting.",
-        "prevention": "Maintain balanced nutrition, monitor weekly, and keep weeds and debris away from the crop."
-    },
-    "Potato___Late_blight": {
-        "symptoms": "Dark blotches expand rapidly, stems blacken, and white mold may appear at lesion edges in humid conditions.",
-        "treatment": "Remove badly infected foliage, avoid moving spores between rows, and apply a recommended protectant fungicide.",
-        "prevention": "Plant resistant varieties where possible and destroy volunteer potatoes after harvest."
-    },
-    "Potato___Early_blight": {
-        "symptoms": "Dark target-like rings on older leaves followed by yellowing and premature leaf drop.",
-        "treatment": "Prune affected leaves, support plant vigor with correct fertilization, and treat with fungicide if needed.",
-        "prevention": "Rotate away from solanaceous crops and water at soil level instead of soaking the canopy."
-    },
-    "Potato___Healthy": {
-        "symptoms": "Leaves look firm, green, and free of spots, halos, wilting, or unusual discoloration.",
-        "treatment": "No treatment required beyond standard crop care.",
-        "prevention": "Keep monitoring field hygiene, irrigation balance, and nutrient supply."
-    },
-    "Corn___Cercospora_leaf_spot Gray_leaf_spot": {
-        "symptoms": "Rectangular gray or tan lesions running parallel to leaf veins, usually beginning on lower leaves.",
-        "treatment": "Scout regularly, remove heavily damaged leaves where practical, and apply fungicide based on local guidance.",
-        "prevention": "Rotate fields, manage residue, and choose resistant hybrids when available."
-    },
-    "Corn___Northern_Leaf_Blight": {
-        "symptoms": "Long cigar-shaped gray-green lesions that enlarge and reduce photosynthetic area.",
-        "treatment": "Use a registered fungicide if disease pressure is high and preserve plant vigor with good agronomy.",
-        "prevention": "Rotate crops, select resistant seed, and avoid continuous corn where blight is common."
-    },
-    "Corn___Healthy": {
-        "symptoms": "Leaves are uniformly green with normal vein structure and no blight or spotting patterns.",
-        "treatment": "No treatment required.",
-        "prevention": "Continue regular monitoring, balanced fertilization, and integrated pest management."
-    },
-    "Apple___Apple_scab": {
-        "symptoms": "Olive-brown velvety leaf lesions, fruit spotting, and leaf distortion in wet spring conditions.",
-        "treatment": "Prune for airflow, remove fallen leaves, and apply protectant fungicides during susceptible growth stages.",
-        "prevention": "Use resistant cultivars, sanitize orchard litter, and monitor wet periods carefully."
-    }
-}
-
 CLASS_NAMES = load_labels(LABELS_PATH)
+
+
+def load_guidance(path: Path) -> Dict[str, Dict[str, str]]:
+    entries = ElementTree.parse(path).getroot().findall("disease")
+    catalog = {}
+    names = set()
+    for entry in entries:
+        label = entry.findtext("model_label", "").strip()
+        name = entry.findtext("name", "").strip().casefold()
+        details = {
+            field: entry.findtext(field, "").strip()
+            for field in ("symptoms", "treatment", "prevention")
+        }
+        if (not label or not name or not all(details.values())
+                or not entry.findtext("source", "").strip()
+                or label in catalog or name in names):
+            raise ValueError(f"Incomplete or duplicate guidance entry: {label}")
+        catalog[label] = details
+        names.add(name)
+    if set(catalog) != set(CLASS_NAMES):
+        raise ValueError("Guidance catalog must cover exactly the canonical model labels")
+    return catalog
+
+
+DISEASE_INFO = load_guidance(Path(__file__).with_name("diseases.xml"))
 predictor = load_predictor(CLASS_NAMES)
 
 
