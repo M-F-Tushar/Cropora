@@ -9,6 +9,7 @@ import com.cropora.data.Disease
 import com.cropora.data.DiseasePresentation
 
 class DiseaseAdapter(
+    private val advanced: Boolean = false,
     private val onItemSelected: (Disease) -> Unit
 ) : RecyclerView.Adapter<DiseaseAdapter.DiseaseViewHolder>() {
     private val items = mutableListOf<Disease>()
@@ -20,8 +21,11 @@ class DiseaseAdapter(
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DiseaseViewHolder {
-        val view = LayoutInflater.from(parent.context)
-            .inflate(R.layout.item_disease, parent, false)
+        val view = LayoutInflater.from(parent.context).inflate(
+            if (advanced) R.layout.item_disease_advanced else R.layout.item_disease,
+            parent,
+            false
+        )
         return DiseaseViewHolder(view)
     }
 
@@ -34,12 +38,16 @@ class DiseaseAdapter(
     class DiseaseViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val textName: TextView = itemView.findViewById(R.id.textDiseaseName)
         private val textPlant: TextView = itemView.findViewById(R.id.textDiseasePlant)
-        private val textSymptoms: TextView = itemView.findViewById(R.id.textDiseaseSymptomsPreview)
+        private val textSymptoms: TextView? = itemView.findViewById(R.id.textDiseaseSymptomsPreview)
+        private val avatar: TextView? = itemView.findViewById(R.id.advDiseaseAvatar)
+        private val badge: TextView? = itemView.findViewById(R.id.advDiseaseBadge)
 
         fun bind(disease: Disease, onItemSelected: (Disease) -> Unit) {
             textName.text = DiseasePresentation.name(itemView.context, disease.name)
             textPlant.text = disease.plant
-            textSymptoms.text = disease.symptoms
+            textSymptoms?.text = disease.symptoms
+            avatar?.let { AdvancedUi.bindAvatar(it, disease.plant) }
+            badge?.let { AdvancedUi.bindDiseaseBadge(it, disease.name) }
             itemView.setOnClickListener { onItemSelected(disease) }
         }
     }
