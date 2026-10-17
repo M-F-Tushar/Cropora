@@ -9,6 +9,7 @@ import androidx.test.core.app.ActivityScenario
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.action.ViewActions.click
+import androidx.test.espresso.action.ViewActions.scrollTo
 import androidx.test.espresso.assertion.ViewAssertions.doesNotExist
 import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.matcher.ViewMatchers.isChecked
@@ -22,6 +23,7 @@ import com.cropora.data.DiseaseRepository
 import java.util.Locale
 import org.junit.After
 import org.junit.Assert.assertEquals
+import org.junit.Assert.assertFalse
 import org.junit.Assert.assertTrue
 import org.junit.Before
 import org.junit.Test
@@ -62,13 +64,13 @@ class LanguageInstrumentedTest {
         preferences.edit().putBoolean("setup_complete", false).commit()
         ActivityScenario.launch(MainActivity::class.java).use { scenario ->
             onView(withId(R.id.radioSetupBangla)).perform(click())
-            onView(withId(R.id.radioSetupAdvanced)).perform(click())
+            onView(withId(R.id.radioSetupAdvanced)).perform(scrollTo(), click())
             scenario.recreate()
             onView(withId(R.id.radioSetupBangla)).check(matches(isChecked()))
             onView(withId(R.id.radioSetupAdvanced)).check(matches(isChecked()))
             onView(withText(R.string.setup_continue)).perform(click())
             onView(withId(R.id.radioSetupBangla)).check(doesNotExist())
-            onView(withId(R.id.buttonOpenAnalytics)).check(matches(isDisplayed()))
+            onView(withId(R.id.buttonOpenAnalytics)).perform(scrollTo()).check(matches(isDisplayed()))
             scenario.onActivity { activity ->
                 assertEquals("bn", activity.resources.configuration.locales[0].language)
                 assertTrue(UiPreferences.isAdvanced(activity))
@@ -93,15 +95,66 @@ class LanguageInstrumentedTest {
             onView(withId(R.id.textSettingsTitle)).check(matches(withText("সেটিংস")))
             scenario.recreate()
             onView(withId(R.id.radioBangla)).check(matches(isChecked()))
-            onView(withId(R.id.switchAdvancedMode)).check(matches(isChecked()))
-            onView(withId(R.id.radioEnglish)).perform(click())
+            onView(withId(R.id.switchAdvancedMode)).perform(scrollTo()).check(matches(isChecked()))
+            onView(withText(R.string.visual_mode_description)).perform(scrollTo()).check(matches(isDisplayed()))
+            onView(withId(R.id.radioEnglish)).perform(scrollTo(), click())
             onView(withId(R.id.textSettingsTitle)).check(matches(withText("Settings")))
-            onView(withId(R.id.switchAdvancedMode)).perform(click())
+            onView(withId(R.id.switchAdvancedMode)).perform(scrollTo(), click())
         }
         ActivityScenario.launch(MainActivity::class.java).use { scenario ->
             scenario.onActivity { activity ->
                 assertEquals("en", activity.resources.configuration.locales[0].language)
-                assertEquals(View.GONE, activity.findViewById<View>(R.id.buttonOpenAnalytics).visibility)
+                assertFalse(UiPreferences.isAdvanced(activity))
+                assertEquals(View.VISIBLE, activity.findViewById<View>(R.id.buttonOpenAnalytics).visibility)
+                assertEquals(View.VISIBLE, activity.findViewById<View>(R.id.buttonOpenResult).visibility)
+                assertEquals(View.GONE, activity.findViewById<View>(R.id.workspaceHomeHeader).visibility)
+                assertEquals(View.GONE, activity.findViewById<View>(R.id.workspaceHomeWorkflow).visibility)
+            }
+        }
+    }
+
+    @Test
+    fun setupDefaultsToNormalAndExplainsTheVisualWorkspace() {
+        preferences.edit().putBoolean("setup_complete", false)
+            .remove("advanced_ui_enabled").commit()
+        ActivityScenario.launch(MainActivity::class.java).use { scenario ->
+            onView(withId(R.id.radioSetupSimple)).check(matches(isChecked()))
+                .check(matches(withText("Normal / সাধারণ")))
+            onView(withId(R.id.radioSetupAdvanced)).check(matches(withText("Advanced / উন্নত")))
+            onView(withText(R.string.visual_setup_description)).perform(scrollTo()).check(matches(isDisplayed()))
+            onView(withText(R.string.setup_continue)).perform(click())
+            scenario.onActivity { activity ->
+                assertFalse(UiPreferences.isAdvanced(activity))
+                assertTrue(UiPreferences.isSetupComplete(activity))
+                assertEquals(View.VISIBLE, activity.findViewById<View>(R.id.buttonOpenAnalytics).visibility)
+                assertEquals(View.VISIBLE, activity.findViewById<View>(R.id.buttonOpenResult).visibility)
+            }
+        }
+    }
+
+    @Test
+    fun modeLabelsAndDescriptionsAreAvailableInBothLanguages() {
+        listOf("en", "bn").forEach { language ->
+            val configuration = Configuration(context.resources.configuration).apply {
+                setLocale(Locale.forLanguageTag(language))
+            }
+            val localized = context.createConfigurationContext(configuration)
+            assertEquals(
+                if (language == "bn") "সাধারণ / Normal" else "Normal / সাধারণ",
+                localized.getString(R.string.setup_simple)
+            )
+            assertEquals(
+                if (language == "bn") "উন্নত / Advanced" else "Advanced / উন্নত",
+                localized.getString(R.string.setup_advanced)
+            )
+            assertEquals(
+                if (language == "bn") "উন্নত মোড" else "Advanced mode",
+                localized.getString(R.string.settings_advanced_mode)
+            )
+            listOf(R.string.visual_mode_description, R.string.visual_setup_description).forEach { id ->
+                val description = localized.getString(id)
+                assertTrue(description.isNotBlank())
+                if (language == "bn") assertTrue(description.any { it in '\u0980'..'\u09ff' })
             }
         }
     }
