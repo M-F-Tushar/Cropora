@@ -1,7 +1,7 @@
 package com.cropora
 
 import android.os.Bundle
-import android.view.View
+
 import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
@@ -27,6 +27,8 @@ class HistoryDetailActivity : AppCompatActivity() {
     private var scanId: Long = INVALID_SCAN_ID
     private var isDeleting = false
     private var uncertain = true
+    private var confidence = 0f
+    private var recordLoaded = false
     private lateinit var deleteButton: Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -60,16 +62,18 @@ class HistoryDetailActivity : AppCompatActivity() {
     }
 
     private fun applyUiMode() {
-        val advanced = UiPreferences.isAdvanced(this)
-        listOf(R.id.textDetailModelLabel, R.id.textDetailConfidence).forEach { viewId ->
-            findViewById<View>(viewId).visibility = if (advanced) View.VISIBLE else View.GONE
-        }
         findViewById<TextView>(R.id.textDetailUncertain).setText(
-            when {
-                uncertain -> R.string.result_uncertain
-                advanced -> R.string.result_confident
-                else -> R.string.result_simple_suggestion
-            }
+            if (uncertain) R.string.result_uncertain else R.string.result_confident
+        )
+        if (recordLoaded) {
+            AdvancedResultPresentation.render(
+                this, confidence, uncertain, findViewById<TextView>(R.id.textDetailGuidanceStatus).text
+            )
+        }
+        AdvancedResultPresentation.styleCare(
+            this,
+            listOf(R.id.textDetailSymptoms, R.id.textDetailTreatment, R.id.textDetailPrevention),
+            listOf(R.id.textDetailSignsHeading, R.id.textDetailActionHeading, R.id.textDetailPreventionHeading)
         )
     }
 
@@ -124,7 +128,8 @@ class HistoryDetailActivity : AppCompatActivity() {
             record.confidence * 100f
         )
         uncertain = record.uncertain
-        applyUiMode()
+        confidence = record.confidence
+        recordLoaded = true
         findViewById<TextView>(R.id.textDetailGuidanceStatus).text = getString(
             if (record.guidanceAvailable) {
                 R.string.guidance_available
@@ -156,6 +161,7 @@ class HistoryDetailActivity : AppCompatActivity() {
         findViewById<TextView>(R.id.textDetailPrevention).text = if (bangla) {
             guidance?.prevention ?: getString(R.string.generic_prevention)
         } else record.prevention
+        applyUiMode()
     }
 
     private fun confirmDelete() {
