@@ -4,16 +4,18 @@ import android.content.Context
 import androidx.work.Worker
 import androidx.work.WorkerParameters
 import com.cropora.R
+import com.cropora.UiPreferences
 
 class ScanReminderWorker(
     appContext: Context,
     workerParameters: WorkerParameters
 ) : Worker(appContext, workerParameters) {
     override fun doWork(): Result {
+        val context = UiPreferences.localizedContext(applicationContext)
         NotificationHelper.showReminder(
-            applicationContext,
-            applicationContext.getString(R.string.notification_reminder_title),
-            applicationContext.getString(R.string.notification_reminder_message)
+            context,
+            context.getString(R.string.notification_reminder_title),
+            context.getString(R.string.notification_reminder_message)
         )
         return Result.success()
     }
