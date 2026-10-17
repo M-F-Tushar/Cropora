@@ -89,7 +89,7 @@ Cropora/
 
 ### Interface modes
 
-On first launch, choose English or Bangla and Simple or Advanced mode. Both
+On first launch, choose English or Bangla and Normal or Advanced mode. Both
 choices are saved. Change the language under **Settings > Language** and the
 interface mode under **Settings > Advanced mode** at any time. Language changes
 refresh open screens and apply to navigation, disease names, all 38
@@ -99,16 +99,21 @@ show a translated advisory. Model labels remain unchanged, and historical HLB
 names still resolve after correcting its displayed spelling. Android 13 and newer
 also expose these languages in system app settings.
 
-Simple mode is the default, with plain-language actions and care guidance.
-Turn on **Settings > Advanced mode** to reveal model labels, confidence scores
-and the confidence bar on results, plus sample-result and analytics navigation
-(analytics remains a placeholder). Saved scan details follow the same preference.
-The selection is saved across app restarts; returning to the home or result
-screen refreshes its presentation. Uncertainty warnings remain visible in both modes.
+Normal (সাধারণ) is the default (`advanced_ui_enabled = false`) and includes all
+previously advanced features: sample-result and analytics navigation on home,
+model labels and confidence on results and saved scan details, and the result
+confidence bar. Advanced (উন্নত, `advanced_ui_enabled = true`) adds a visual
+workspace with workflow diagrams and structured evidence panels; it does not
+unlock predictions or data. The visual confidence uses the same prediction, and
+the evidence panel's care-guide source follows the loaded guidance status.
+Saved scan details follow the same mode preference. The selection is saved across
+app restarts; returning to a screen refreshes its presentation. Uncertainty
+warnings remain visible in both modes.
 
-This is a preference-based adaptive UI using progressive disclosure, not a role
+This is a preference-based presentation choice, not a role
 or permission system. Both modes reuse the same activities, prediction pipeline,
-guidance repository and Room history. Switching modes does not alter stored scans
+guidance repository and Room history. The Boolean preference and cloud/offline
+inference behavior are unchanged. Switching modes does not alter stored scans
 or shared result content. No separate app, duplicated detection logic, database
 migration or MVVM refactor is needed for this presentation-only change.
 
