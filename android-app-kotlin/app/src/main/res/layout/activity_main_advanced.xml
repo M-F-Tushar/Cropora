@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/adv_bg">
+
+    <FrameLayout
+        android:id="@+id/advFragmentContainer"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <!-- Floating bottom navigation with a raised scan button in the middle. -->
+    <FrameLayout
+        android:id="@+id/advBottomBarHost"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:clipChildren="false"
+        android:clipToPadding="false"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
+        android:paddingBottom="14dp">
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/advBottomBar"
+            android:layout_width="match_parent"
+            android:layout_height="68dp"
+            android:layout_marginTop="22dp"
+            app:cardBackgroundColor="@color/adv_surface"
+            app:cardCornerRadius="34dp"
+            app:cardElevation="10dp"
+            app:strokeWidth="0dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:paddingStart="6dp"
+                android:paddingEnd="6dp">
+
+                <include
+                    android:id="@+id/advTabHome"
+                    layout="@layout/item_adv_nav_tab"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1" />
+
+                <include
+                    android:id="@+id/advTabScans"
+                    layout="@layout/item_adv_nav_tab"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1" />
+
+                <Space
+                    android:layout_width="76dp"
+                    android:layout_height="match_parent" />
+
+                <include
+                    android:id="@+id/advTabLibrary"
+                    layout="@layout/item_adv_nav_tab"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1" />
+
+                <include
+                    android:id="@+id/advTabInsights"
+                    layout="@layout/item_adv_nav_tab"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1" />
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/advNavScan"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="top|center_horizontal"
+            android:contentDescription="@string/adv_nav_scan"
+            android:src="@drawable/ic_camera_scan"
+            app:backgroundTint="@color/adv_primary"
+            app:borderWidth="0dp"
+            app:fabCustomSize="64dp"
+            app:elevation="14dp"
+            app:maxImageSize="28dp"
+            app:rippleColor="@color/adv_primary_dark"
+            app:tint="@color/white" />
+    </FrameLayout>
+</FrameLayout>
