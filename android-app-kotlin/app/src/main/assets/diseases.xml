@@ -1,73 +1,350 @@
 <?xml version="1.0" encoding="utf-8"?>
 <diseases>
     <disease>
-        <name>Tomato Early Blight</name>
-        <plant>Tomato</plant>
-        <symptoms>Small brown spots with concentric rings, yellowing around lesions, and damage starting on older leaves.</symptoms>
-        <treatment>Remove infected leaves, improve airflow, mulch soil, and apply a labeled fungicide when pressure is high.</treatment>
-        <prevention>Rotate crops, avoid wetting foliage in the evening, and disinfect tools between plants.</prevention>
-    </disease>
-    <disease>
-        <name>Tomato Late Blight</name>
-        <plant>Tomato</plant>
-        <symptoms>Water-soaked patches that quickly darken, white fuzzy growth underneath leaves, and rapid whole-plant collapse.</symptoms>
-        <treatment>Isolate infected plants, remove severely affected tissue, and apply an appropriate late blight fungicide immediately.</treatment>
-        <prevention>Use disease-free seedlings, space plants well, and avoid overhead irrigation during humid weather.</prevention>
-    </disease>
-    <disease>
-        <name>Tomato Healthy</name>
-        <plant>Tomato</plant>
-        <symptoms>Leaf remains green, evenly colored, and free from lesions, mold, curling, or necrotic patches.</symptoms>
-        <treatment>No treatment needed. Continue normal watering, feeding, and routine scouting.</treatment>
-        <prevention>Maintain balanced nutrition, monitor weekly, and keep weeds and debris away from the crop.</prevention>
-    </disease>
-    <disease>
-        <name>Potato Early Blight</name>
-        <plant>Potato</plant>
-        <symptoms>Dark target-like rings on older leaves followed by yellowing and premature leaf drop.</symptoms>
-        <treatment>Prune affected leaves, support plant vigor with correct fertilization, and treat with fungicide if needed.</treatment>
-        <prevention>Rotate away from solanaceous crops and water at soil level instead of soaking the canopy.</prevention>
-    </disease>
-    <disease>
-        <name>Potato Late Blight</name>
-        <plant>Potato</plant>
-        <symptoms>Dark blotches expand rapidly, stems blacken, and white mold may appear at lesion edges in humid conditions.</symptoms>
-        <treatment>Remove badly infected foliage, avoid moving spores between rows, and apply a recommended protectant fungicide.</treatment>
-        <prevention>Plant resistant varieties where possible and destroy volunteer potatoes after harvest.</prevention>
-    </disease>
-    <disease>
-        <name>Potato Healthy</name>
-        <plant>Potato</plant>
-        <symptoms>Leaves look firm, green, and free of spots, halos, wilting, or unusual discoloration.</symptoms>
-        <treatment>No treatment required beyond standard crop care.</treatment>
-        <prevention>Keep monitoring field hygiene, irrigation balance, and nutrient supply.</prevention>
-    </disease>
-    <disease>
-        <name>Corn Gray Leaf Spot</name>
-        <plant>Corn</plant>
-        <symptoms>Rectangular gray or tan lesions running parallel to leaf veins, usually beginning on lower leaves.</symptoms>
-        <treatment>Scout regularly, remove heavily damaged leaves where practical, and apply fungicide based on local guidance.</treatment>
-        <prevention>Rotate fields, manage residue, and choose resistant hybrids when available.</prevention>
-    </disease>
-    <disease>
-        <name>Corn Northern Leaf Blight</name>
-        <plant>Corn</plant>
-        <symptoms>Long cigar-shaped gray-green lesions that enlarge and reduce photosynthetic area.</symptoms>
-        <treatment>Use a registered fungicide if disease pressure is high and preserve plant vigor with good agronomy.</treatment>
-        <prevention>Rotate crops, select resistant seed, and avoid continuous corn where blight is common.</prevention>
-    </disease>
-    <disease>
-        <name>Corn Healthy</name>
-        <plant>Corn</plant>
-        <symptoms>Leaves are uniformly green with normal vein structure and no blight or spotting patterns.</symptoms>
-        <treatment>No treatment required.</treatment>
-        <prevention>Continue regular monitoring, balanced fertilization, and integrated pest management.</prevention>
-    </disease>
-    <disease>
+        <model_label>Apple___Apple_scab</model_label>
         <name>Apple Scab</name>
         <plant>Apple</plant>
-        <symptoms>Olive-brown velvety leaf lesions, fruit spotting, and leaf distortion in wet spring conditions.</symptoms>
-        <treatment>Prune for airflow, remove fallen leaves, and apply protectant fungicides during susceptible growth stages.</treatment>
-        <prevention>Use resistant cultivars, sanitize orchard litter, and monitor wet periods carefully.</prevention>
+        <symptoms>Olive-green, velvety spots darken on leaves; affected leaves may yellow and fall early. Fruit can develop corky, cracked scabs. A leaf image alone cannot confirm apple scab.</symptoms>
+        <treatment>Remove fallen infected leaves and fruit, and prune for airflow during appropriate dry conditions. Existing scabs will not heal. If wet weather and orchard history justify protection, ask a local adviser about a fungicide registered for apple scab; follow its label, protective equipment and harvest restrictions.</treatment>
+        <prevention>Choose locally suitable scab-resistant cultivars, reduce overwintering leaf litter, avoid prolonged foliage wetness, and monitor susceptible new growth during rainy periods.</prevention>
+        <source>https://extension.umn.edu/plant-diseases/apple-scab</source>
+    </disease>
+    <disease>
+        <model_label>Apple___Black_rot</model_label>
+        <name>Apple Black Rot</name>
+        <plant>Apple</plant>
+        <symptoms>Frogeye leaf spots have tan centers and reddish-purple borders. Fruit may develop firm brown rot with concentric rings and black dots, then remain as mummies; branches may have cankers. Confirm with fruit and branch inspection.</symptoms>
+        <treatment>Remove mummified fruit and dead or cankered wood during dry weather, using clean tools. Keep infected material out of the orchard rather than home-composting it. Fungicides do not restore rotted fruit or cankered wood; consult a local fruit specialist before considering a locally registered preventive product.</treatment>
+        <prevention>Maintain tree vigor without excessive fertilizer, prevent bark injuries, prune for airflow, and remove dead wood and fruit mummies each season.</prevention>
+        <source>https://extension.umn.edu/plant-diseases/black-rot-apple</source>
+    </disease>
+    <disease>
+        <model_label>Apple___Cedar_apple_rust</model_label>
+        <name>Apple Cedar Apple Rust</name>
+        <plant>Apple</plant>
+        <symptoms>Yellow to orange leaf spots can indicate rust. Nearby junipers may carry brown galls that produce orange gelatinous growth in wet spring weather. Other rusts and leaf disorders can look similar; inspect both hosts and seek confirmation.</symptoms>
+        <treatment>Monitor the extent of leaf and fruit injury and obtain a local diagnosis. Where recurring damage warrants protection, use only an apple-rust fungicide registered locally and timed to susceptible growth under local advice; it will not repair existing lesions. Do not remove neighboring trees without permission.</treatment>
+        <prevention>Plant resistant apple cultivars where available. Avoid placing susceptible apples beside susceptible junipers, but remember windborne spores can arrive from distant hosts; host separation alone is not reliable control.</prevention>
+        <source>https://extension.umn.edu/plant-diseases/cedar-apple-rust</source>
+    </disease>
+    <disease>
+        <model_label>Apple___Healthy</model_label>
+        <name>Apple Healthy</name>
+        <plant>Apple</plant>
+        <symptoms>The photographed leaf appears free of obvious scab, rust or rot lesions. This is not a certificate of tree health: fruit, branches, roots and early infections are not assessed by this image.</symptoms>
+        <treatment>No disease treatment is indicated by this image alone. Continue appropriate watering and soil-test-based nutrition; inspect fruit and branches if growth or yield is abnormal.</treatment>
+        <prevention>Use locally adapted cultivars, prune for sunlight and airflow, remove fallen diseased fruit and leaves, and scout regularly, especially after wet weather.</prevention>
+        <source>https://extension.umn.edu/fruit/growing-apples</source>
+    </disease>
+    <disease>
+        <model_label>Blueberry___Healthy</model_label>
+        <name>Blueberry Healthy</name>
+        <plant>Blueberry</plant>
+        <symptoms>No obvious disease lesions are visible on this blueberry leaf. Seasonal red or orange foliage may be normal; a photo cannot rule out root problems, nutrient imbalance or an early infection.</symptoms>
+        <treatment>Do not apply pesticides solely because of this result. Maintain even soil moisture and drainage, and test soil acidity and nutrients before correcting poor growth or yellowing.</treatment>
+        <prevention>Use suitable acidic soil and locally adapted plants, mulch without burying the crown, provide sun and airflow, and prune old, weak or dead wood according to plant age.</prevention>
+        <source>https://extension.umn.edu/fruit/growing-blueberries-home-garden</source>
+    </disease>
+    <disease>
+        <model_label>Cherry___Powdery_mildew</model_label>
+        <name>Cherry Powdery Mildew</name>
+        <plant>Cherry</plant>
+        <symptoms>White powdery or cottony growth develops on young leaves, which may curl or blister. Fruit may show white colonies, especially near the stem. Confirm mildew rather than dust or spray residue.</symptoms>
+        <treatment>Remove unnecessary suckers and improve canopy airflow without severe defoliation. If disease threatens young growth or fruit, obtain local advice on a cherry powdery-mildew fungicide registered for the crop; follow label timing, harvest intervals and resistance-management directions.</treatment>
+        <prevention>Prune appropriately, avoid excessive nitrogen and prolonged foliage wetness, scout expanding shoots, and choose less susceptible cultivars where locally recommended.</prevention>
+        <source>https://pnwhandbooks.org/plantdisease/host-disease/cherry-prunus-spp-powdery-mildew</source>
+    </disease>
+    <disease>
+        <model_label>Cherry___Healthy</model_label>
+        <name>Cherry Healthy</name>
+        <plant>Cherry</plant>
+        <symptoms>The sampled cherry leaf has no obvious disease pattern. This does not rule out fruit rot, branch cankers, root stress or infections not yet visible.</symptoms>
+        <treatment>No disease-specific treatment is justified by this image alone. Maintain appropriate moisture and nutrition, and inspect blossoms, fruit and branches when symptoms occur elsewhere.</treatment>
+        <prevention>Choose locally adapted trees, provide sun and well-drained soil, prune for a healthy open canopy, remove diseased debris, and monitor new shoots and fruit regularly.</prevention>
+        <source>https://extension.umn.edu/fruit/growing-stone-fruits-home-garden</source>
+    </disease>
+    <disease>
+        <model_label>Corn___Cercospora_leaf_spot Gray_leaf_spot</model_label>
+        <name>Corn Gray Leaf Spot</name>
+        <plant>Corn</plant>
+        <symptoms>Long rectangular tan to gray-brown lesions are bounded by leaf veins and may merge. Disease often develops from lower leaves in warm, humid conditions, particularly where corn residue remains.</symptoms>
+        <treatment>Scout multiple plants, noting crop stage and injury near the ear leaf. Do not strip affected leaves. A local crop adviser can assess whether disease risk, hybrid susceptibility and economics justify a corn gray-leaf-spot fungicide registered locally; obey all label restrictions.</treatment>
+        <prevention>Use resistant hybrids, rotate away from continuous corn, and manage infected residue in ways compatible with soil conservation. Scout fields with previous disease during prolonged humid weather.</prevention>
+        <source>https://extension.umn.edu/corn-pest-management/gray-leaf-spot-corn</source>
+    </disease>
+    <disease>
+        <model_label>Corn___Common_rust</model_label>
+        <name>Corn Common Rust</name>
+        <plant>Corn</plant>
+        <symptoms>Cinnamon-brown, elongated powdery pustules occur on both leaf surfaces and may darken with age. Common rust must be distinguished from southern rust because risk and management differ.</symptoms>
+        <treatment>Confirm the rust type and scout crop stage, spread and hybrid susceptibility. Preserve leaves. Many fields do not need treatment; use a locally registered corn rust fungicide only when a local adviser considers the expected benefit worthwhile, following the complete label.</treatment>
+        <prevention>Choose resistant hybrids where available and monitor cool, dewy periods. Windborne spores can arrive from outside the field, so removing local residue alone will not prevent common rust.</prevention>
+        <source>https://extension.umn.edu/corn-pest-management/common-rust-corn</source>
+    </disease>
+    <disease>
+        <model_label>Corn___Northern_Leaf_Blight</model_label>
+        <name>Corn Northern Leaf Blight</name>
+        <plant>Corn</plant>
+        <symptoms>Long cigar-shaped gray-green lesions become tan and can merge into large blighted areas. Moderate temperatures and prolonged leaf wetness favor disease; other blights can look similar.</symptoms>
+        <treatment>Scout several field locations and record injury around the ear leaf and crop stage. Do not remove leaves. Consult a local adviser about a registered corn blight fungicide only if disease pressure and yield risk justify it, and follow label and harvest restrictions.</treatment>
+        <prevention>Plant resistant hybrids, rotate crops, and reduce infected residue while preserving soil cover where needed. Monitor fields with previous blight during wet weather.</prevention>
+        <source>https://extension.umn.edu/corn-pest-management/northern-corn-leaf-blight</source>
+    </disease>
+    <disease>
+        <model_label>Corn___Healthy</model_label>
+        <name>Corn Healthy</name>
+        <plant>Corn</plant>
+        <symptoms>No obvious rust or blight lesions are visible on this leaf. The result does not assess the whole field, ears, stalks or roots, or exclude early disease and nutrient stress.</symptoms>
+        <treatment>No disease-specific spray is indicated by this image alone. Check moisture, weeds and soil-test-based nutrition; investigate uneven growth or symptoms elsewhere.</treatment>
+        <prevention>Use adapted seed, rotate crops, manage weeds and residue appropriately, and scout multiple plants throughout the season. Avoid water stress, especially during reproductive growth.</prevention>
+        <source>https://extension.umn.edu/vegetables/growing-sweet-corn</source>
+    </disease>
+    <disease>
+        <model_label>Grape___Black_rot</model_label>
+        <name>Grape Black Rot</name>
+        <plant>Grape</plant>
+        <symptoms>Round tan leaf spots contain tiny black dots. Fruit may develop expanding brown rot, then shrivel into hard blue-black mummies; shoots can have dark sunken lesions. Inspect clusters as well as leaves to confirm.</symptoms>
+        <treatment>Remove mummified berries from vines and the ground and prune infected canes during appropriate dry conditions. Open the canopy through proper training. In recurrent high-risk vineyards, seek a locally registered preventive grape black-rot program, especially around bloom and young fruit; follow current labels, not old spray recipes.</treatment>
+        <prevention>Remove overwintering mummies and infected canes before new growth, maintain sunlight and airflow, and monitor wet periods. Choose less susceptible cultivars where suitable.</prevention>
+        <source>https://content.ces.ncsu.edu/north-carolina-winegrape-growers-guide/chapter-8-pest-management</source>
+    </disease>
+    <disease>
+        <model_label>Grape___Esca_(Black_Measles)</model_label>
+        <name>Grape Esca (Black Measles)</name>
+        <plant>Grape</plant>
+        <symptoms>Yellow or red areas between green veins become necrotic, producing a tiger-stripe pattern. Berries may have dark spots; affected vines may decline or collapse. Symptoms can vary between years and resemble other trunk disorders.</symptoms>
+        <treatment>Mark affected vines and seek a grape trunk-disease diagnosis. No foliar spray cures established Esca wood infection. A trained adviser may recommend removing diseased wood, retraining or replacing vines; recovery is not guaranteed. Remove diseased pruning debris safely.</treatment>
+        <prevention>Use healthy nursery stock, minimize large pruning wounds, and prune in dry weather according to local trunk-disease guidance. Use wound protection only when locally recommended and registered for grapes.</prevention>
+        <source>https://ipm.ucanr.edu/PMG/r302100511.html</source>
+        <source>https://ipm.ucanr.edu/PMG/r302100611.html</source>
+    </disease>
+    <disease>
+        <model_label>Grape___Leaf_blight_(Isariopsis_Leaf_Spot)</model_label>
+        <name>Grape Leaf Blight (Isariopsis Leaf Spot)</name>
+        <plant>Grape</plant>
+        <symptoms>Large irregular dull-red to brown leaf spots become black and brittle with age. Isariopsis leaf spot, associated with Pseudocercospora vitis, often appears late in the season. Other grape leaf spots need to be excluded.</symptoms>
+        <treatment>Confirm the diagnosis and severity before spraying; minor leaf spots may not cause important yield loss. Improve drying through appropriate shoot positioning, thinning and weed management. If defoliation risk warrants treatment, ask a local adviser about a registered grape leaf-spot program and follow its label.</treatment>
+        <prevention>Maintain plant vigor, appropriate spacing and an open trained canopy. Scout later-season foliage and integrate control with locally recommended management of the vineyard's primary diseases.</prevention>
+        <source>https://content.ces.ncsu.edu/north-carolina-winegrape-growers-guide/chapter-8-pest-management</source>
+        <source>https://fruitscout.mgcafe.uky.edu/leaf-spots-grapes</source>
+    </disease>
+    <disease>
+        <model_label>Grape___Healthy</model_label>
+        <name>Grape Healthy</name>
+        <plant>Grape</plant>
+        <symptoms>This grape leaf has no obvious disease pattern. A healthy-looking leaf does not exclude trunk infections, cluster rots, root problems or infections without visible symptoms.</symptoms>
+        <treatment>No disease treatment is indicated by the image alone. Continue suitable watering, training and nutrition, and inspect clusters, shoots and trunks if vigor or fruit quality changes.</treatment>
+        <prevention>Use healthy planting material, a sunny well-drained site, trellis support and appropriate annual pruning. Maintain airflow, remove diseased debris and monitor leaves and clusters regularly.</prevention>
+        <source>https://extension.umn.edu/fruit/growing-grapes-home-garden</source>
+    </disease>
+    <disease>
+        <model_label>Orange___Haunglongbing_(Citrus_greening)</model_label>
+        <name>Orange Huanglongbing (Citrus Greening)</name>
+        <plant>Orange</plant>
+        <symptoms>Asymmetric blotchy yellow mottling, twig dieback and small, misshapen, partly green fruit can suggest Huanglongbing (HLB). Nutrient disorders can resemble it, and infected trees may initially have no symptoms. Laboratory or official confirmation is needed.</symptoms>
+        <treatment>Contact your local plant-health authority or citrus extension service promptly. There is no cure for HLB. Do not move trees, budwood or other regulated citrus material; follow official testing, removal and psyllid-management instructions. Do not attempt unapproved antibiotic treatments.</treatment>
+        <prevention>Buy certified clean citrus from approved nurseries, obey local quarantine and movement rules, and inspect new growth for Asian citrus psyllids. Coordinate vector management with local authorities; a leaf image cannot certify planting stock.</prevention>
+        <source>https://www.aphis.usda.gov/plant-pests-diseases/citrus-diseases/citrus-greening-and-asian-citrus-psyllid</source>
+    </disease>
+    <disease>
+        <model_label>Peach___Bacterial_spot</model_label>
+        <name>Peach Bacterial Spot</name>
+        <plant>Peach</plant>
+        <symptoms>Small purple to dark leaf spots may lose their centers, leaving shot holes, followed by yellowing and leaf drop. Fruit may develop sunken, cracked or pitted lesions. Other shot-hole disorders require a differential diagnosis.</symptoms>
+        <treatment>Confirm bacterial spot, maintain tree vigor and avoid wet-canopy handling. Damaged fruit and leaves will not recover. Control is difficult; consult a local fruit specialist before any preventive bactericide program, using only products registered for peach and following crop-stage and injury precautions.</treatment>
+        <prevention>Select locally adapted resistant or tolerant varieties, reduce tree stress, provide airflow and drainage, and avoid overhead irrigation where practical. Do not expect fungicides alone to cure a bacterial infection.</prevention>
+        <source>https://hgic.clemson.edu/factsheet/peach-diseases/</source>
+    </disease>
+    <disease>
+        <model_label>Peach___Healthy</model_label>
+        <name>Peach Healthy</name>
+        <plant>Peach</plant>
+        <symptoms>No obvious disease lesions are visible on the sampled peach leaf. This does not assess blossoms, fruit, woody tissue or roots and cannot rule out early infection.</symptoms>
+        <treatment>No disease-specific pesticide is warranted by this result alone. Maintain appropriate irrigation and soil-test-based feeding, and investigate fruit damage, cankers or abnormal growth separately.</treatment>
+        <prevention>Plant adapted trees in sun and well-drained soil, prune appropriately for airflow, remove diseased fruit and debris, and scout through flowering and fruit development.</prevention>
+        <source>https://extension.umn.edu/fruit/growing-stone-fruits-home-garden</source>
+    </disease>
+    <disease>
+        <model_label>Pepper,_bell___Bacterial_spot</model_label>
+        <name>Pepper, Bell Bacterial Spot</name>
+        <plant>Bell pepper</plant>
+        <symptoms>Small water-soaked leaf spots become brown or dark with possible yellow halos; severe infection causes leaf drop. Raised, scabby spots can form on fruit. Confirm bacterial spot because fungal lesions and other bacteria can look similar.</symptoms>
+        <treatment>Avoid handling wet plants and spreading splash water. Remove severely affected plants or transplants and clean tools and trays. No product cures infected tissue; discuss a locally registered preventive bactericide with an adviser only if warranted, since resistance and crop injury can limit efficacy. Follow the label.</treatment>
+        <prevention>Use pathogen-free seed and healthy transplants, locally suitable resistant varieties, drip irrigation and mulch. Rotate away from pepper, tomato and related hosts, control volunteers and weeds, and remove infected crop debris.</prevention>
+        <source>https://content.ces.ncsu.edu/bacterial-spot-of-pepper-and-tomato</source>
+    </disease>
+    <disease>
+        <model_label>Pepper,_bell___Healthy</model_label>
+        <name>Pepper, Bell Healthy</name>
+        <plant>Bell pepper</plant>
+        <symptoms>The photographed pepper leaf has no obvious disease pattern. Healthy-looking foliage does not exclude fruit damage, root stress, hidden pests or an early infection.</symptoms>
+        <treatment>No disease treatment is indicated by this image alone. Keep moisture even without waterlogging and base fertilizer changes on soil testing rather than leaf color alone.</treatment>
+        <prevention>Use healthy transplants, warm well-drained soil, suitable spacing and mulch. Water at soil level, rotate related crops, remove volunteers and inspect leaf undersides and fruit regularly.</prevention>
+        <source>https://hgic.clemson.edu/factsheet/pepper/</source>
+    </disease>
+    <disease>
+        <model_label>Potato___Early_blight</model_label>
+        <name>Potato Early Blight</name>
+        <plant>Potato</plant>
+        <symptoms>Brown target-like spots with concentric rings develop mainly on older lower leaves, followed by yellowing and premature decline. Tuber damage may also occur; other leaf spots can resemble early blight.</symptoms>
+        <treatment>Confirm the diagnosis, reduce water and nutrient stress and avoid wetting foliage. Do not strip potato leaves as a routine treatment. If disease pressure threatens yield, consult a local adviser about a locally registered potato early-blight fungicide and follow resistance, harvest and re-entry restrictions.</treatment>
+        <prevention>Use healthy seed tubers, rotate away from potato, tomato and related crops, remove volunteers and infected debris, and maintain balanced soil-test-based nutrition and soil-level watering.</prevention>
+        <source>https://extension.umn.edu/disease-management/early-blight-tomato-and-potato</source>
+    </disease>
+    <disease>
+        <model_label>Potato___Late_blight</model_label>
+        <name>Potato Late Blight</name>
+        <plant>Potato</plant>
+        <symptoms>Rapidly expanding water-soaked gray-green to dark blotches, dark stems and white growth at lesion margins in humid weather can indicate late blight. Tubers may have brown discolored tissue and secondary rot. Urgent confirmation is important.</symptoms>
+        <treatment>Contact a local crop adviser promptly and restrict movement through affected rows. Trimming a few leaves is not reliable control. Follow local instructions for destroying infected plants or haulms and protecting remaining plants with a registered potato late-blight product. Follow labels and assess tuber and storage risks with the adviser.</treatment>
+        <prevention>Use certified healthy seed tubers and locally suitable resistant varieties. Eliminate volunteer potatoes and infected cull piles safely, avoid prolonged leaf wetness and monitor local late-blight alerts; windborne inoculum can arrive from outside the field.</prevention>
+        <source>https://extension.umn.edu/disease-management/late-blight</source>
+        <source>https://hgic.clemson.edu/factsheet/tomato-diseases-disorders/</source>
+    </disease>
+    <disease>
+        <model_label>Potato___Healthy</model_label>
+        <name>Potato Healthy</name>
+        <plant>Potato</plant>
+        <symptoms>No obvious blight lesions are visible on this potato leaf. The image cannot assess tubers or roots, certify seed health or exclude early infection elsewhere in the crop.</symptoms>
+        <treatment>No disease-specific treatment is indicated by this image alone. Continue appropriate watering, hilling and nutrition; inspect several plants and harvested tubers for problems.</treatment>
+        <prevention>Plant certified disease-free seed potatoes, rotate related crops, manage weeds and volunteers, avoid waterlogging and prolonged foliage wetness, and monitor local blight warnings.</prevention>
+        <source>https://extension.umn.edu/vegetables/growing-potatoes</source>
+    </disease>
+    <disease>
+        <model_label>Raspberry___Healthy</model_label>
+        <name>Raspberry Healthy</name>
+        <plant>Raspberry</plant>
+        <symptoms>This raspberry leaf has no obvious disease pattern. The result does not rule out viruses without visible symptoms, cane disease, root rot or fruit problems.</symptoms>
+        <treatment>No disease-specific spray is indicated by the image alone. Maintain suitable moisture without waterlogging and inspect canes and roots if vigor declines.</treatment>
+        <prevention>Use disease-free nursery plants in a sunny well-drained site. Support and thin canes, prune according to summer-bearing or fall-bearing habit, remove diseased canes and scout fruit and foliage regularly.</prevention>
+        <source>https://extension.umn.edu/fruit/growing-raspberries-home-garden</source>
+    </disease>
+    <disease>
+        <model_label>Soybean___Healthy</model_label>
+        <name>Soybean Healthy</name>
+        <plant>Soybean</plant>
+        <symptoms>No obvious leaf disease pattern is visible in this soybean image. It does not assess stand health, roots, stems or pods and cannot exclude early infection, insects or nutrient stress.</symptoms>
+        <treatment>No disease-specific treatment is justified by this result alone. Check several field locations and investigate uneven growth, wilting or pod damage using local crop advice.</treatment>
+        <prevention>Choose adapted, high-quality seed and suitable varieties, rotate crops, base nutrient management on soil tests, manage weeds and water stress, and use regular field scouting to guide integrated pest management.</prevention>
+        <source>https://extension.umn.edu/agriculture/crop-production/soybean</source>
+    </disease>
+    <disease>
+        <model_label>Squash___Powdery_mildew</model_label>
+        <name>Squash Powdery Mildew</name>
+        <plant>Squash</plant>
+        <symptoms>White powdery colonies develop on leaves and stems; leaves may yellow, distort and dry prematurely. Powdery mildew can develop without free water on leaves. Distinguish it from natural silver leaf markings and downy mildew.</symptoms>
+        <treatment>Confirm active colonies, improve airflow and avoid excessive nitrogen. If disease is increasing, seek advice on a locally registered squash powdery-mildew fungicide; early protection of healthy tissue works better than trying to restore dead leaves. Follow harvest intervals and resistance-management directions.</treatment>
+        <prevention>Choose resistant cultivars where available, provide suitable spacing and sun, scout both leaf surfaces and remove crop debris after harvest. Do not assume keeping leaves dry alone prevents powdery mildew.</prevention>
+        <source>https://hgic.clemson.edu/factsheet/cucumber-squash-melon-other-cucurbit-diseases/</source>
+    </disease>
+    <disease>
+        <model_label>Strawberry___Leaf_scorch</model_label>
+        <name>Strawberry Leaf Scorch</name>
+        <plant>Strawberry</plant>
+        <symptoms>Numerous irregular purple spots remain dark in the center, may contain tiny black structures and merge into scorched-looking areas. Older leaves can curl or dry. White-centered spots suggest a different leaf disease.</symptoms>
+        <treatment>Confirm leaf scorch and assess the production system; minor disease may not need a spray. Improve airflow and use drip irrigation. Remove old foliage only as part of a locally appropriate postharvest renovation program, not by stripping growing plants. If needed, use a locally registered strawberry leaf-scorch product under local advice and follow its label.</treatment>
+        <prevention>Use healthy plants and locally suitable resistant cultivars, avoid overcrowding and weeds, and reduce prolonged foliage wetness. Manage old infected leaves according to the planting system.</prevention>
+        <source>https://content.ces.ncsu.edu/leaf-scorch-of-strawberry</source>
+    </disease>
+    <disease>
+        <model_label>Strawberry___Healthy</model_label>
+        <name>Strawberry Healthy</name>
+        <plant>Strawberry</plant>
+        <symptoms>No obvious leaf disease is visible in this strawberry image. It cannot assess crowns, roots or fruit or exclude infections without visible symptoms.</symptoms>
+        <treatment>No disease-specific pesticide is indicated by the image alone. Keep moisture even and drainage adequate; investigate fruit rot, wilting or crown damage separately.</treatment>
+        <prevention>Use healthy plants, sun, suitable spacing and clean mulch. Limit soil splash and wet foliage, manage weeds and old diseased leaves, and use renovation practices appropriate to the variety and production system.</prevention>
+        <source>https://extension.umn.edu/fruit/growing-strawberries-home-garden</source>
+    </disease>
+    <disease>
+        <model_label>Tomato___Bacterial_spot</model_label>
+        <name>Tomato Bacterial Spot</name>
+        <plant>Tomato</plant>
+        <symptoms>Small water-soaked spots become dark brown or black, sometimes with yellow halos or torn centers. Fruit may develop raised scabby lesions and leaves may drop. Bacterial speck and fungal spots can look similar.</symptoms>
+        <treatment>Keep hands and tools out of wet foliage, reduce splash and remove severely affected plants without spreading debris. No spray cures infected tissue. Ask a local adviser whether a registered preventive tomato bactericide is useful; resistance can reduce control and labels must be followed.</treatment>
+        <prevention>Start with pathogen-free seed and healthy transplants, sanitize tools and trays, use drip irrigation and mulch, rotate away from solanaceous crops, and remove volunteers, weeds and crop debris.</prevention>
+        <source>https://content.ces.ncsu.edu/bacterial-spot-of-pepper-and-tomato</source>
+        <source>https://hgic.clemson.edu/factsheet/tomato-diseases-disorders/</source>
+    </disease>
+    <disease>
+        <model_label>Tomato___Early_blight</model_label>
+        <name>Tomato Early Blight</name>
+        <plant>Tomato</plant>
+        <symptoms>Brown concentric target-like lesions and yellow surrounding tissue usually begin on older lower leaves. Leaves may die and fruit can develop dark lesions near the stem. Similar leaf spots need confirmation.</symptoms>
+        <treatment>Remove a limited number of badly affected lower leaves when dry without excessive defoliation. Mulch, stake plants and water soil rather than foliage. For increasing disease, consult a local adviser about a registered tomato early-blight fungicide; it protects remaining tissue rather than healing lesions. Follow the label and harvest interval.</treatment>
+        <prevention>Use healthy transplants and tolerant varieties where suitable, rotate away from tomato and potato, remove volunteers and debris, and maintain airflow and balanced nutrition.</prevention>
+        <source>https://extension.umn.edu/disease-management/early-blight-tomato-and-potato</source>
+    </disease>
+    <disease>
+        <model_label>Tomato___Late_blight</model_label>
+        <name>Tomato Late Blight</name>
+        <plant>Tomato</plant>
+        <symptoms>Irregular water-soaked gray-green patches rapidly turn dark; humid conditions may produce white growth near lesion margins. Stems darken and fruit may have firm brown lesions. Rapid spread needs urgent confirmation.</symptoms>
+        <treatment>Contact a local adviser promptly. Remove and contain infected plants according to local disposal guidance; trimming a few leaves is not reliable control. Avoid moving contaminated material. Protect remaining healthy plants only with a locally registered tomato late-blight product under local advice, following label and harvest restrictions.</treatment>
+        <prevention>Use healthy transplants and locally suitable resistant varieties, remove volunteer tomato and potato plants and infected potato culls, reduce prolonged leaf wetness, and monitor local late-blight alerts.</prevention>
+        <source>https://extension.umn.edu/disease-management/late-blight</source>
+        <source>https://hgic.clemson.edu/factsheet/tomato-diseases-disorders/</source>
+    </disease>
+    <disease>
+        <model_label>Tomato___Leaf_Mold</model_label>
+        <name>Tomato Leaf Mold</name>
+        <plant>Tomato</plant>
+        <symptoms>Pale green to yellow patches on upper leaf surfaces correspond to olive-gray velvety mold underneath. Lower leaves are often affected first, especially in humid, poorly ventilated protected growing areas.</symptoms>
+        <treatment>Reduce humidity through ventilation, spacing and soil-level watering. Remove limited infected foliage when dry and clean up fallen leaves. If spread continues, obtain local advice on a tomato leaf-mold fungicide registered for the growing site, including greenhouse use where applicable; follow the label.</treatment>
+        <prevention>Use resistant varieties where suitable, avoid condensation and extended leaf wetness, maintain trellis airflow and clean growing structures, tools and crop debris between crops.</prevention>
+        <source>https://hgic.clemson.edu/factsheet/tomato-diseases-disorders/</source>
+    </disease>
+    <disease>
+        <model_label>Tomato___Septoria_leaf_spot</model_label>
+        <name>Tomato Septoria Leaf Spot</name>
+        <plant>Tomato</plant>
+        <symptoms>Many small round spots with dark borders and tan or gray centers start on lower leaves; tiny black dots may be visible in their centers. Leaves yellow and drop. Fruit is usually not directly affected.</symptoms>
+        <treatment>Remove limited affected lower leaves when dry, mulch to reduce soil splash and improve staking and airflow. If progressing, seek a locally registered tomato Septoria fungicide under local advice and follow the label; damaged leaves do not recover.</treatment>
+        <prevention>Rotate away from tomato and related hosts, remove infected debris and solanaceous weeds, water at soil level, and avoid working among wet plants.</prevention>
+        <source>https://hgic.clemson.edu/factsheet/tomato-diseases-disorders/</source>
+    </disease>
+    <disease>
+        <model_label>Tomato___Spider_mites Two-spotted_spider_mite</model_label>
+        <name>Tomato Spider Mites Two-spotted Spider Mite</name>
+        <plant>Tomato</plant>
+        <symptoms>Fine pale stippling progresses to yellowing or bronzing, often with delicate webbing. Inspect undersides with a hand lens or tap foliage over white paper to find moving mites. Hot, dry conditions favor outbreaks; a photo alone cannot confirm mites.</symptoms>
+        <treatment>Reduce water stress and dislodge mites with water where practical. Preserve predatory mites; broad-spectrum insecticides can worsen outbreaks. If needed, use only a tomato-registered insecticidal soap, horticultural oil or miticide under local advice, with underside coverage and label heat, stress and harvest precautions. Do not use household detergent.</treatment>
+        <prevention>Scout leaf undersides during hot dry weather, manage dust and weeds, maintain appropriate irrigation and avoid unnecessary insecticides that kill natural enemies.</prevention>
+        <source>https://extension.umn.edu/yard-and-garden-insects/spider-mites</source>
+    </disease>
+    <disease>
+        <model_label>Tomato___Target_Spot</model_label>
+        <name>Tomato Target Spot</name>
+        <plant>Tomato</plant>
+        <symptoms>Small brown spots enlarge into tan to gray-centered lesions with darker concentric rings, often within the canopy. Severe disease causes defoliation; fruit may have sunken pitted lesions or cracks. Early blight and bacterial spot can look similar.</symptoms>
+        <treatment>Seek confirmation of Corynespora target spot, improve canopy drying and remove infected debris. In warm wet high-risk conditions, a locally registered preventive tomato target-spot program may be needed under expert advice. Follow labels and rotate permitted modes of action because fungicide resistance can limit control.</treatment>
+        <prevention>Use healthy transplants, rotate crops, control weeds and volunteers, remove crop residues and reduce prolonged leaf wetness through spacing, staking and soil-level irrigation.</prevention>
+        <source>https://ask.ifas.ufl.edu/publication/PP351</source>
+    </disease>
+    <disease>
+        <model_label>Tomato___Tomato_Yellow_Leaf_Curl_Virus</model_label>
+        <name>Tomato Tomato Yellow Leaf Curl Virus</name>
+        <plant>Tomato</plant>
+        <symptoms>Young leaves become small, yellow at the margins and curled upward. Plants may be stunted, drop flowers and set little fruit. Whiteflies transmit the virus; nutrient and herbicide injury can resemble it.</symptoms>
+        <treatment>No pesticide cures an infected plant. Seek confirmation and contain and remove affected plants early, minimizing escape of whiteflies. Coordinate whitefly management with a local adviser; use only tomato-registered products when necessary and follow labels and resistance-management guidance.</treatment>
+        <prevention>Use healthy transplants and locally suitable resistant or tolerant varieties, exclude whiteflies from nurseries, remove host weeds and volunteers, and consider locally appropriate reflective mulch. Do not rely on seed treatment to prevent this whitefly-transmitted virus.</prevention>
+        <source>https://hgic.clemson.edu/factsheet/tomato-diseases-disorders/</source>
+    </disease>
+    <disease>
+        <model_label>Tomato___Tomato_mosaic_virus</model_label>
+        <name>Tomato Tomato Mosaic Virus</name>
+        <plant>Tomato</plant>
+        <symptoms>Light and dark green mosaic mottling, distorted or narrow leaves, stunting and uneven fruit ripening can occur. Tomato mosaic virus and tobacco mosaic virus are distinct but look similar; laboratory testing is needed to identify the virus.</symptoms>
+        <treatment>There is no cure for an infected plant. Avoid pruning or handling suspect plants before healthy plants, seek confirmation and remove infected material carefully. Clean hands, tools and support materials using locally recommended tobamovirus sanitation procedures. Fungicides and insecticide sprays do not cure this virus.</treatment>
+        <prevention>Use tested healthy seed and transplants and suitable resistant varieties. Prevent mechanical spread on hands, tools and clothing during tying and pruning, remove infected debris and volunteers, and sanitize between crops.</prevention>
+        <source>https://extension.umn.edu/disease-management/tomato-mosaic-virus-and-tobacco-mosaic-virus</source>
+    </disease>
+    <disease>
+        <model_label>Tomato___Healthy</model_label>
+        <name>Tomato Healthy</name>
+        <plant>Tomato</plant>
+        <symptoms>No obvious disease pattern is visible on the photographed tomato leaf. A healthy-looking leaf does not exclude early infection, viruses without symptoms, root disease, pests or fruit disorders.</symptoms>
+        <treatment>No disease-specific pesticide is justified by this image alone. Maintain even soil moisture and soil-test-based nutrition; inspect other leaves, stems and fruit if growth or yield changes.</treatment>
+        <prevention>Start with healthy transplants, stake for airflow, mulch to limit soil splash, water at soil level, rotate related crops, remove infected debris and volunteers, and scout leaf undersides and fruit regularly.</prevention>
+        <source>https://hgic.clemson.edu/factsheet/tomato-diseases-disorders/</source>
     </disease>
 </diseases>
