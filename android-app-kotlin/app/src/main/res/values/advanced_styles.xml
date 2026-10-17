@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Text -->
+    <style name="AdvText">
+        <item name="android:fontFamily">sans-serif</item>
+        <item name="android:textColor">@color/adv_ink</item>
+        <item name="android:textSize">14sp</item>
+    </style>
+
+    <style name="AdvText.Display">
+        <item name="android:fontFamily">sans-serif-medium</item>
+        <item name="android:textSize">28sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:letterSpacing">-0.01</item>
+    </style>
+
+    <style name="AdvText.Title">
+        <item name="android:fontFamily">sans-serif-medium</item>
+        <item name="android:textSize">22sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="AdvText.Section">
+        <item name="android:fontFamily">sans-serif-medium</item>
+        <item name="android:textSize">17sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="AdvText.Value">
+        <item name="android:fontFamily">sans-serif-medium</item>
+        <item name="android:textSize">26sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="AdvText.Body">
+        <item name="android:textColor">@color/adv_ink_soft</item>
+        <item name="android:lineSpacingExtra">3dp</item>
+    </style>
+
+    <style name="AdvText.Label">
+        <item name="android:fontFamily">sans-serif-medium</item>
+        <item name="android:textColor">@color/adv_ink_soft</item>
+        <item name="android:textSize">13sp</item>
+    </style>
+
+    <style name="AdvText.Caption">
+        <item name="android:textColor">@color/adv_ink_faint</item>
+        <item name="android:textSize">12sp</item>
+    </style>
+
+    <style name="AdvText.Pill">
+        <item name="android:fontFamily">sans-serif-medium</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:paddingStart">10dp</item>
+        <item name="android:paddingEnd">12dp</item>
+        <item name="android:paddingTop">5dp</item>
+        <item name="android:paddingBottom">5dp</item>
+        <item name="android:drawablePadding">6dp</item>
+        <item name="android:drawableStart">@drawable/adv_dot</item>
+        <item name="android:maxLines">1</item>
+    </style>
+
+    <!-- Cards -->
+    <style name="Widget.Cropora.Adv.Card" parent="Widget.MaterialComponents.CardView">
+        <item name="cardCornerRadius">24dp</item>
+        <item name="cardElevation">0dp</item>
+        <item name="cardBackgroundColor">@color/adv_surface</item>
+        <item name="strokeWidth">0dp</item>
+    </style>
+
+    <!-- Buttons -->
+    <style name="Widget.Cropora.Adv.Button" parent="Widget.MaterialComponents.Button.UnelevatedButton">
+        <item name="backgroundTint">@color/adv_button_bg</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="iconTint">@color/white</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:letterSpacing">0</item>
+        <item name="android:fontFamily">sans-serif-medium</item>
+        <item name="android:minHeight">56dp</item>
+        <item name="android:insetTop">0dp</item>
+        <item name="android:insetBottom">0dp</item>
+        <item name="cornerRadius">28dp</item>
+        <item name="iconGravity">textStart</item>
+        <item name="iconPadding">10dp</item>
+    </style>
+
+    <style name="Widget.Cropora.Adv.Button.Accent">
+        <item name="backgroundTint">@color/adv_accent</item>
+        <item name="android:textColor">@color/adv_on_accent</item>
+        <item name="iconTint">@color/adv_on_accent</item>
+        <item name="android:textSize">15sp</item>
+        <item name="android:minHeight">48dp</item>
+        <item name="cornerRadius">24dp</item>
+        <item name="iconSize">20dp</item>
+        <item name="iconPadding">8dp</item>
+    </style>
+
+    <style name="Widget.Cropora.Adv.Button.Danger" parent="Widget.MaterialComponents.Button.OutlinedButton">
+        <item name="strokeColor">@color/adv_danger</item>
+        <item name="strokeWidth">1.5dp</item>
+        <item name="android:textColor">@color/adv_danger</item>
+        <item name="iconTint">@color/adv_danger</item>
+        <item name="rippleColor">@color/adv_danger_soft</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:letterSpacing">0</item>
+        <item name="android:fontFamily">sans-serif-medium</item>
+        <item name="android:minHeight">56dp</item>
+        <item name="android:insetTop">0dp</item>
+        <item name="android:insetBottom">0dp</item>
+        <item name="cornerRadius">28dp</item>
+        <item name="iconGravity">textStart</item>
+        <item name="iconPadding">10dp</item>
+    </style>
+
+    <!-- Icon-only round button; set layout size to 44dp. -->
+    <style name="Widget.Cropora.Adv.IconButton" parent="Widget.MaterialComponents.Button.UnelevatedButton">
+        <item name="backgroundTint">@color/adv_surface</item>
+        <item name="iconTint">@color/adv_ink</item>
+        <item name="rippleColor">@color/adv_primary_soft</item>
+        <item name="iconSize">22dp</item>
+        <item name="iconPadding">0dp</item>
+        <item name="iconGravity">textStart</item>
+        <item name="android:padding">0dp</item>
+        <item name="android:minWidth">0dp</item>
+        <item name="android:minHeight">0dp</item>
+        <item name="android:insetTop">0dp</item>
+        <item name="android:insetBottom">0dp</item>
+        <item name="android:insetLeft">0dp</item>
+        <item name="android:insetRight">0dp</item>
+        <item name="cornerRadius">22dp</item>
+    </style>
+
+    <style name="Widget.Cropora.Adv.IconButton.Glass">
+        <item name="backgroundTint">@color/adv_glass</item>
+        <item name="iconTint">@color/white</item>
+        <item name="rippleColor">@color/adv_glass</item>
+    </style>
+
+    <!-- Tall tile with the icon above the label. -->
+    <style name="Widget.Cropora.Adv.TileButton" parent="Widget.MaterialComponents.Button.UnelevatedButton">
+        <item name="backgroundTint">@color/adv_surface</item>
+        <item name="android:textColor">@color/adv_tile_tint</item>
+        <item name="iconTint">@color/adv_tile_tint</item>
+        <item name="rippleColor">@color/adv_primary_soft</item>
+        <item name="strokeColor">@color/adv_stroke</item>
+        <item name="strokeWidth">1dp</item>
+        <item name="iconGravity">top</item>
+        <item name="iconSize">28dp</item>
+        <item name="iconPadding">8dp</item>
+        <item name="cornerRadius">24dp</item>
+        <item name="android:minHeight">100dp</item>
+        <item name="android:insetTop">0dp</item>
+        <item name="android:insetBottom">0dp</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:letterSpacing">0</item>
+        <item name="android:fontFamily">sans-serif-medium</item>
+    </style>
+
+    <!-- Chips -->
+    <style name="Widget.Cropora.Adv.Chip" parent="Widget.MaterialComponents.Chip.Choice">
+        <item name="chipBackgroundColor">@color/adv_chip_bg</item>
+        <item name="android:textColor">@color/adv_chip_text</item>
+        <item name="chipStrokeColor">@color/adv_chip_stroke</item>
+        <item name="chipStrokeWidth">1dp</item>
+        <item name="chipCornerRadius">100dp</item>
+        <item name="chipMinHeight">40dp</item>
+        <item name="chipStartPadding">6dp</item>
+        <item name="chipEndPadding">6dp</item>
+        <item name="checkedIconVisible">false</item>
+        <item name="rippleColor">@color/adv_primary_soft</item>
+        <item name="android:textSize">14sp</item>
+    </style>
+
+    <style name="Widget.Cropora.Adv.Chip.Toggle" parent="Widget.MaterialComponents.Chip.Filter">
+        <item name="chipBackgroundColor">@color/adv_chip_bg</item>
+        <item name="android:textColor">@color/adv_chip_text</item>
+        <item name="chipStrokeColor">@color/adv_chip_stroke</item>
+        <item name="chipStrokeWidth">1dp</item>
+        <item name="chipCornerRadius">100dp</item>
+        <item name="chipMinHeight">48dp</item>
+        <item name="chipIconVisible">true</item>
+        <item name="chipIconTint">@color/adv_chip_text</item>
+        <item name="chipIconSize">18dp</item>
+        <item name="chipStartPadding">10dp</item>
+        <item name="chipEndPadding">12dp</item>
+        <item name="checkedIconVisible">false</item>
+        <item name="rippleColor">@color/adv_primary_soft</item>
+        <item name="android:textSize">14sp</item>
+    </style>
+
+    <!-- Segmented control item (RadioButton inside a track). -->
+    <style name="Widget.Cropora.Adv.Segment" parent="Widget.AppCompat.CompoundButton.RadioButton">
+        <item name="android:button">@null</item>
+        <item name="android:background">@drawable/adv_bg_segment_item</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textColor">@color/adv_segment_text</item>
+        <item name="android:drawableTint">@color/adv_segment_text</item>
+        <item name="android:drawablePadding">8dp</item>
+        <item name="android:minHeight">44dp</item>
+        <item name="android:paddingStart">12dp</item>
+        <item name="android:paddingEnd">12dp</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:fontFamily">sans-serif-medium</item>
+    </style>
+</resources>
