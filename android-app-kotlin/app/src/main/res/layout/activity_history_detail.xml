@@ -67,10 +67,7 @@
             android:layout_marginTop="4dp"
             android:textColor="@color/text_secondary" />
 
-        <include layout="@layout/visual_evidence_panel" />
-
         <TextView
-            android:id="@+id/textDetailSignsHeading"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
@@ -85,7 +82,6 @@
             android:textColor="@color/text_secondary" />
 
         <TextView
-            android:id="@+id/textDetailActionHeading"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
@@ -100,7 +96,6 @@
             android:textColor="@color/text_secondary" />
 
         <TextView
-            android:id="@+id/textDetailPreventionHeading"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
