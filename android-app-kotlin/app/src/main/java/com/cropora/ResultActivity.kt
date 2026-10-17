@@ -8,7 +8,7 @@ import android.content.pm.PackageManager
 import android.location.Location
 import android.location.LocationManager
 import android.os.Bundle
-import android.view.View
+
 import android.widget.Button
 import android.widget.CheckBox
 import android.widget.ProgressBar
@@ -115,20 +115,20 @@ class ResultActivity : AppCompatActivity() {
 
     override fun onResume() {
         super.onResume()
-        val advanced = UiPreferences.isAdvanced(this)
-        listOf(
-            R.id.textResultModelLabel,
-            R.id.textResultConfidence,
-            R.id.progressResultConfidence
-        ).forEach { viewId ->
-            findViewById<View>(viewId).visibility = if (advanced) View.VISIBLE else View.GONE
-        }
         findViewById<TextView>(R.id.textResultStatus).setText(
-            when {
-                uncertain -> R.string.result_uncertain
-                advanced -> R.string.result_confident
-                else -> R.string.result_simple_suggestion
-            }
+            if (uncertain) R.string.result_uncertain else R.string.result_confident
+        )
+        applyVisualPresentation()
+    }
+
+    private fun applyVisualPresentation() {
+        AdvancedResultPresentation.render(
+            this, confidence, uncertain, findViewById<TextView>(R.id.textGuidanceStatus).text
+        )
+        AdvancedResultPresentation.styleCare(
+            this,
+            listOf(R.id.textResultSymptoms, R.id.textResultTreatment, R.id.textResultPrevention),
+            listOf(R.id.textResultSignsHeading, R.id.textResultActionHeading, R.id.textResultPreventionHeading)
         )
     }
 
@@ -169,6 +169,7 @@ class ResultActivity : AppCompatActivity() {
             findViewById<TextView>(R.id.textResultTreatment).text = displayText(displayGuidance?.treatment, treatment, R.string.generic_treatment)
             findViewById<TextView>(R.id.textResultPrevention).text = displayText(displayGuidance?.prevention, prevention, R.string.generic_prevention)
             guidanceLoadComplete = true
+            applyVisualPresentation()
             findViewById<Button>(R.id.buttonSaveHistory).isEnabled = !savedToHistory
         }
     }
