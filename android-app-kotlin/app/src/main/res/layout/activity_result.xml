@@ -96,6 +96,8 @@
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
 
+        <include layout="@layout/visual_evidence_panel" />
+
         <!-- Guidance Card: Symptoms, Treatment, Prevention -->
         <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
@@ -114,6 +116,7 @@
                 android:padding="20dp">
 
                 <TextView
+                    android:id="@+id/textResultSignsHeading"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/symptoms_heading"
@@ -138,6 +141,7 @@
                     android:background="@color/leaf_surface" />
 
                 <TextView
+                    android:id="@+id/textResultActionHeading"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/treatment_heading"
@@ -162,6 +166,7 @@
                     android:background="@color/leaf_surface" />
 
                 <TextView
+                    android:id="@+id/textResultPreventionHeading"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/prevention_heading"
