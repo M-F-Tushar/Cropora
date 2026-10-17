@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.cropora.database.ScanRecord
+import com.cropora.data.DiseasePresentation
 import java.text.DateFormat
 import java.util.Date
 
@@ -40,14 +41,15 @@ class HistoryAdapter(
         private val textTimestamp: TextView = itemView.findViewById(R.id.textHistoryTimestamp)
 
         fun bind(record: ScanRecord, onItemSelected: (ScanRecord) -> Unit) {
-            textDisease.text = record.disease
+            textDisease.text = DiseasePresentation.name(itemView.context, record.disease, record.modelLabel)
             textConfidence.text = itemView.context.getString(
                 R.string.history_confidence_format,
                 record.confidence * 100f
             )
             val formattedTimestamp = DateFormat.getDateTimeInstance(
                 DateFormat.MEDIUM,
-                DateFormat.SHORT
+                DateFormat.SHORT,
+                itemView.resources.configuration.locales[0]
             ).format(Date(record.timestamp))
             textTimestamp.text = itemView.context.getString(
                 R.string.history_saved_at_format,
