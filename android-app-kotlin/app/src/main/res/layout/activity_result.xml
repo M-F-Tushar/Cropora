@@ -182,10 +182,28 @@
         </com.google.android.material.card.MaterialCardView>
 
         <com.google.android.material.button.MaterialButton
-            android:id="@+id/buttonSaveHistory"
+            android:id="@+id/buttonShareResult"
+            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
             android:layout_width="match_parent"
             android:layout_height="56dp"
             android:layout_marginTop="20dp"
+            android:text="@string/share_result"
+            android:textSize="16sp"
+            app:cornerRadius="12dp" />
+
+        <CheckBox
+            android:id="@+id/checkboxIncludeLocation"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:text="@string/include_location"
+            android:textColor="@color/text_secondary" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/buttonSaveHistory"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:layout_marginTop="12dp"
             android:text="@string/save_to_history"
             android:textSize="16sp"
             android:textStyle="bold"
