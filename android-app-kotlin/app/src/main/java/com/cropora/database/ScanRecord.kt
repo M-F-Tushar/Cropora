@@ -30,6 +30,10 @@ data class ScanRecord(
     val treatment: String,
     @ColumnInfo(name = "prevention")
     val prevention: String,
+    @ColumnInfo(name = "latitude")
+    val latitude: Double? = null,
+    @ColumnInfo(name = "longitude")
+    val longitude: Double? = null,
     @ColumnInfo(name = "timestamp")
     val timestamp: Long
 )
