@@ -1,7 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:fillViewport="true"
+    android:background="@color/screen_background">
+
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
     android:orientation="vertical"
     android:padding="24dp"
     android:background="@color/screen_background">
@@ -13,6 +19,16 @@
         android:text="@string/settings_title"
         android:textColor="@color/text_primary"
         android:textSize="24sp" />
+
+    <androidx.appcompat.widget.SwitchCompat
+        android:id="@+id/switchAdvancedMode"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:minHeight="48dp"
+        android:layout_marginTop="20dp"
+        android:text="@string/settings_advanced_mode"
+        android:textColor="@color/text_primary"
+        android:textSize="16sp" />
 
     <androidx.appcompat.widget.SwitchCompat
         android:id="@+id/switchScanReminders"
@@ -57,3 +73,4 @@
         android:text="@string/save_server_url" />
 
 </LinearLayout>
+</ScrollView>
