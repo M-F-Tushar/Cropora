@@ -6,4 +6,22 @@
         <item name="colorAccent">@color/leaf_green</item>
         <item name="android:windowBackground">@color/screen_background</item>
     </style>
+
+    <!-- Advanced mode draws its own top bars and bottom navigation. -->
+    <style name="Theme.Cropora.Advanced" parent="Theme.MaterialComponents.Light.NoActionBar">
+        <item name="colorPrimary">@color/adv_primary</item>
+        <item name="colorPrimaryVariant">@color/adv_primary_dark</item>
+        <item name="colorOnPrimary">@color/white</item>
+        <item name="colorSecondary">@color/adv_primary</item>
+        <item name="colorSecondaryVariant">@color/adv_primary_dark</item>
+        <item name="colorOnSecondary">@color/white</item>
+        <item name="colorSurface">@color/adv_surface</item>
+        <item name="colorOnSurface">@color/adv_ink</item>
+        <item name="android:colorBackground">@color/adv_bg</item>
+        <item name="android:windowBackground">@color/adv_bg</item>
+        <item name="android:statusBarColor">@color/adv_bg</item>
+        <item name="android:windowLightStatusBar">true</item>
+        <item name="android:textColorPrimary">@color/adv_ink</item>
+        <item name="android:textColorSecondary">@color/adv_ink_soft</item>
+    </style>
 </resources>
