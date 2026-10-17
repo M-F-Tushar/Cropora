@@ -84,6 +84,21 @@ Cropora/
 
 ## Android application
 
+### Interface modes
+
+Simple mode is the default, with plain-language actions and care guidance.
+Turn on **Settings > Advanced mode** to reveal model labels, confidence scores
+and the confidence bar on results, plus sample-result and analytics navigation
+(analytics remains a placeholder). Saved scan details follow the same preference.
+The selection is saved across app restarts; returning to the home or result
+screen refreshes its presentation. Uncertainty warnings remain visible in both modes.
+
+This is a preference-based adaptive UI using progressive disclosure, not a role
+or permission system. Both modes reuse the same activities, prediction pipeline,
+guidance repository and Room history. Switching modes does not alter stored scans
+or shared result content. No separate app, duplicated detection logic, database
+migration or MVVM refactor is needed for this presentation-only change.
+
 ### Requirements
 
 - Android Studio with Android SDK 34
