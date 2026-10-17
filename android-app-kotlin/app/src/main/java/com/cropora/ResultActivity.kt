@@ -23,7 +23,6 @@ import com.cropora.database.ScanRecord
 import com.cropora.network.PredictionResponse
 import java.io.IOException
 import java.util.UUID
-import kotlin.math.roundToInt
 import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -72,7 +71,7 @@ class ResultActivity : AppCompatActivity() {
         symptoms = intent.getStringExtra(EXTRA_SYMPTOMS) ?: getString(R.string.guidance_unavailable)
         treatment = intent.getStringExtra(EXTRA_TREATMENT) ?: getString(R.string.guidance_unavailable)
         prevention = intent.getStringExtra(EXTRA_PREVENTION) ?: getString(R.string.guidance_unavailable)
-        val confidencePercent = (confidence * 100f).roundToInt()
+        val confidencePercent = ResultTextFormatter.confidencePercent(confidence)
 
         findViewById<TextView>(R.id.textResultDisease).text = disease
         findViewById<TextView>(R.id.textResultModelLabel).text = getString(
@@ -201,10 +200,9 @@ class ResultActivity : AppCompatActivity() {
     }
 
     private fun shareResult() {
-        val shareText = getString(
-            R.string.share_result_template,
+        val shareText = ResultTextFormatter.shareText(
             disease,
-            (confidence * 100f).roundToInt(),
+            confidence,
             symptoms,
             treatment,
             prevention
