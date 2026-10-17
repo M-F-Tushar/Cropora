@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
+    android:paddingStart="32dp"
+    android:paddingTop="40dp"
+    android:paddingEnd="32dp"
+    android:paddingBottom="40dp">
+
+    <FrameLayout
+        android:layout_width="96dp"
+        android:layout_height="96dp"
+        android:background="@drawable/adv_bg_circle"
+        android:backgroundTint="@color/adv_primary_soft">
+
+        <ImageView
+            android:id="@+id/advEmptyIcon"
+            android:layout_width="44dp"
+            android:layout_height="44dp"
+            android:layout_gravity="center"
+            android:importantForAccessibility="no"
+            android:src="@drawable/ic_history"
+            app:tint="@color/adv_primary" />
+    </FrameLayout>
+
+    <TextView
+        android:id="@+id/advEmptyTitle"
+        style="@style/AdvText.Section"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:accessibilityLiveRegion="polite"
+        android:gravity="center" />
+
+    <TextView
+        android:id="@+id/advEmptyBody"
+        style="@style/AdvText.Body"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="6dp"
+        android:gravity="center" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/advEmptyAction"
+        style="@style/Widget.Cropora.Adv.Button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:paddingStart="24dp"
+        android:paddingEnd="24dp"
+        android:text="@string/adv_home_start_scan"
+        app:icon="@drawable/ic_camera_scan" />
+</LinearLayout>
