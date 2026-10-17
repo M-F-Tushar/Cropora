@@ -10,6 +10,7 @@ import android.os.Environment
 import android.view.View
 import android.widget.Button
 import android.widget.ImageView
+import android.widget.LinearLayout
 import android.widget.ProgressBar
 import android.widget.RadioGroup
 import android.widget.TextView
@@ -27,6 +28,7 @@ import java.io.File
 import java.io.FileOutputStream
 import java.io.IOException
 import java.util.concurrent.Executors
+import kotlin.math.roundToInt
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
 import okhttp3.RequestBody.Companion.asRequestBody
@@ -135,6 +137,7 @@ class ScanActivity : AppCompatActivity() {
                     R.string.detection_mode_cloud_description
                 }
             )
+            updateWorkspace()
         }
 
         // Open camera (with permission check) when user taps Take Photo
@@ -164,6 +167,88 @@ class ScanActivity : AppCompatActivity() {
         if (savedInstanceState?.getBoolean(KEY_UPLOAD_IN_PROGRESS) == true) {
             textImageStatus.setText(R.string.upload_interrupted)
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        applyUiMode()
+    }
+
+    private fun applyUiMode() {
+        val advanced = UiPreferences.isAdvanced(this)
+        listOf(
+            R.id.workspaceScanHeader, R.id.workspaceScanWorkflow,
+            R.id.workspaceScanCapture, R.id.workspaceScanRoute, R.id.workspaceScanReview
+        ).forEach { id ->
+            findViewById<View>(id).visibility = if (advanced) View.VISIBLE else View.GONE
+        }
+        listOf(R.id.textScanTitle, R.id.textScanInstruction).forEach { id ->
+            findViewById<View>(id).visibility = if (advanced) View.GONE else View.VISIBLE
+        }
+        radioDetectionMode.orientation = if (advanced) LinearLayout.VERTICAL else LinearLayout.HORIZONTAL
+        findViewById<LinearLayout>(R.id.workspaceScanSources).orientation =
+            if (advanced) LinearLayout.VERTICAL else LinearLayout.HORIZONTAL
+        val density = resources.displayMetrics.density
+        listOf(R.id.buttonTakePhoto, R.id.buttonChooseGallery).forEach { id ->
+            findViewById<Button>(id).apply {
+                minHeight = (52 * density).roundToInt()
+                layoutParams = (layoutParams as LinearLayout.LayoutParams).apply {
+                    width = if (advanced) LinearLayout.LayoutParams.MATCH_PARENT else 0
+                    height = if (advanced) LinearLayout.LayoutParams.WRAP_CONTENT else minHeight
+                    weight = if (advanced) 0f else 1f
+                    marginStart = if (!advanced && id == R.id.buttonChooseGallery) (6 * density).roundToInt() else 0
+                    marginEnd = if (!advanced && id == R.id.buttonTakePhoto) (6 * density).roundToInt() else 0
+                }
+            }
+        }
+        buttonDetectDisease.apply {
+            minHeight = (56 * density).roundToInt()
+            layoutParams = layoutParams.apply {
+                height = if (advanced) LinearLayout.LayoutParams.WRAP_CONTENT else minHeight
+            }
+        }
+        updateWorkspace()
+    }
+
+    private fun updateWorkspace() {
+        val advanced = UiPreferences.isAdvanced(this)
+        findViewById<View>(R.id.workspaceScanPreviewPlaceholder).visibility =
+            if (advanced && selectedImageUri == null) View.VISIBLE else View.GONE
+        if (!advanced) return
+
+        val offline = radioDetectionMode.checkedRadioButtonId == R.id.radioOfflineMode
+        val inProgress = progressDetection.visibility == View.VISIBLE
+        val hasImage = selectedImageUri != null
+        findViewById<WorkflowDiagramView>(R.id.workspaceScanDiagram).setSteps(
+            listOf(
+                getString(R.string.workspace_step_capture),
+                getString(if (offline) R.string.workspace_step_offline else R.string.workspace_step_cloud),
+                getString(R.string.workspace_step_assess),
+                getString(R.string.workspace_step_guide)
+            ),
+            activeStep = if (inProgress) 2 else if (hasImage) 1 else 0
+        )
+        findViewById<TextView>(R.id.workspaceScanState).setText(
+            when {
+                inProgress && offline -> R.string.workspace_state_offline_running
+                inProgress -> R.string.workspace_state_cloud_running
+                hasImage -> R.string.workspace_state_ready
+                else -> R.string.workspace_state_empty
+            }
+        )
+        findViewById<TextView>(R.id.workspaceScanStateDetail).setText(
+            when {
+                inProgress -> R.string.workspace_state_running_detail
+                hasImage -> R.string.workspace_state_ready_detail
+                else -> R.string.workspace_state_empty_detail
+            }
+        )
+        findViewById<TextView>(R.id.workspaceScanRouteLabel).setText(
+            if (offline) R.string.workspace_route_offline else R.string.workspace_route_cloud
+        )
+        findViewById<TextView>(R.id.workspaceScanRouteDetail).setText(
+            if (offline) R.string.workspace_route_offline_detail else R.string.workspace_route_cloud_detail
+        )
     }
 
     /**
@@ -225,6 +310,7 @@ class ScanActivity : AppCompatActivity() {
         imagePreview.setImageURI(uri)
         textImageStatus.setText(R.string.image_ready_for_detection)
         buttonDetectDisease.isEnabled = true
+        updateWorkspace()
     }
 
     /**
@@ -444,6 +530,7 @@ class ScanActivity : AppCompatActivity() {
         for (index in 0 until radioDetectionMode.childCount) {
             radioDetectionMode.getChildAt(index).isEnabled = !inProgress
         }
+        updateWorkspace()
     }
 
     /**
