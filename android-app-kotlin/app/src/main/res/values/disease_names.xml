@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="disease_keys" translatable="false">
+        <item>Apple Scab</item><item>Apple Black rot</item><item>Apple Cedar apple rust</item><item>Apple Healthy</item>
+        <item>Blueberry Healthy</item><item>Cherry Powdery mildew</item><item>Cherry Healthy</item>
+        <item>Corn Gray Leaf Spot</item><item>Corn Common rust</item><item>Corn Northern Leaf Blight</item><item>Corn Healthy</item>
+        <item>Grape Black rot</item><item>Grape Esca (Black Measles)</item><item>Grape Leaf blight (Isariopsis Leaf Spot)</item><item>Grape Healthy</item>
+        <item>Orange Haunglongbing (Citrus greening)</item><item>Peach Bacterial spot</item><item>Peach Healthy</item>
+        <item>Pepper, bell Bacterial spot</item><item>Pepper, bell Healthy</item>
+        <item>Potato Early Blight</item><item>Potato Late Blight</item><item>Potato Healthy</item>
+        <item>Raspberry Healthy</item><item>Soybean Healthy</item><item>Squash Powdery mildew</item>
+        <item>Strawberry Leaf scorch</item><item>Strawberry Healthy</item>
+        <item>Tomato Bacterial spot</item><item>Tomato Early Blight</item><item>Tomato Late Blight</item>
+        <item>Tomato Leaf Mold</item><item>Tomato Septoria leaf spot</item><item>Tomato Spider mites Two-spotted spider mite</item>
+        <item>Tomato Target Spot</item><item>Tomato Tomato Yellow Leaf Curl Virus</item><item>Tomato Tomato mosaic virus</item><item>Tomato Healthy</item>
+    </string-array>
+    <string-array name="disease_names">
+        <item>Apple Scab</item><item>Apple Black Rot</item><item>Apple Cedar Apple Rust</item><item>Healthy Apple</item>
+        <item>Healthy Blueberry</item><item>Cherry Powdery Mildew</item><item>Healthy Cherry</item>
+        <item>Corn Gray Leaf Spot</item><item>Corn Common Rust</item><item>Corn Northern Leaf Blight</item><item>Healthy Corn</item>
+        <item>Grape Black Rot</item><item>Grape Esca (Black Measles)</item><item>Grape Leaf Blight (Isariopsis Leaf Spot)</item><item>Healthy Grape</item>
+        <item>Orange Huanglongbing (Citrus Greening)</item><item>Peach Bacterial Spot</item><item>Healthy Peach</item>
+        <item>Bell Pepper Bacterial Spot</item><item>Healthy Bell Pepper</item>
+        <item>Potato Early Blight</item><item>Potato Late Blight</item><item>Healthy Potato</item>
+        <item>Healthy Raspberry</item><item>Healthy Soybean</item><item>Squash Powdery Mildew</item>
+        <item>Strawberry Leaf Scorch</item><item>Healthy Strawberry</item>
+        <item>Tomato Bacterial Spot</item><item>Tomato Early Blight</item><item>Tomato Late Blight</item>
+        <item>Tomato Leaf Mold</item><item>Tomato Septoria Leaf Spot</item><item>Tomato Two-Spotted Spider Mites</item>
+        <item>Tomato Target Spot</item><item>Tomato Yellow Leaf Curl Virus</item><item>Tomato Mosaic Virus</item><item>Healthy Tomato</item>
+    </string-array>
+</resources>
