@@ -18,7 +18,6 @@ import com.cropora.network.PredictionResponse
 import org.junit.After
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertFalse
-import org.junit.Assert.assertTrue
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -54,6 +53,7 @@ class ResultActivityInstrumentedTest {
                 scenario.recreate()
                 awaitGuidance(scenario)
                 scenario.onActivity { activity ->
+                    fun text(id: Int) = activity.findViewById<TextView>(id).text.toString()
                     listOf(
                         R.id.textResultModelLabel,
                         R.id.textResultConfidence,
@@ -61,34 +61,33 @@ class ResultActivityInstrumentedTest {
                     ).forEach { viewId ->
                         assertEquals(View.VISIBLE, activity.findViewById<View>(viewId).visibility)
                     }
-                    assertEquals(
-                        if (advanced) View.VISIBLE else View.GONE,
-                        activity.findViewById<View>(R.id.visualEvidencePanel).visibility
-                    )
-                    assertEquals(
-                        DiseasePresentation.name(activity, "Tomato Early Blight", "Tomato___Early_blight"),
-                        activity.findViewById<TextView>(R.id.textResultDisease).text.toString()
-                    )
-                    assertEquals(
-                        activity.getString(R.string.model_label_format, "Tomato___Early_blight"),
-                        activity.findViewById<TextView>(R.id.textResultModelLabel).text.toString()
-                    )
-                    assertEquals(
-                        activity.getString(R.string.confidence_format, 87),
-                        activity.findViewById<TextView>(R.id.textResultConfidence).text.toString()
-                    )
                     assertEquals(87, activity.findViewById<ProgressBar>(R.id.progressResultConfidence).progress)
                     assertEquals(
                         activity.getString(R.string.result_confident),
-                        activity.findViewById<TextView>(R.id.textResultStatus).text.toString()
+                        text(R.id.textResultStatus)
                     )
-                    val data = listOf(
-                        R.id.textResultDisease, R.id.textResultModelLabel, R.id.textResultConfidence,
-                        R.id.textResultStatus, R.id.textGuidanceStatus, R.id.textResultSymptoms,
-                        R.id.textResultTreatment, R.id.textResultPrevention
-                    ).map { activity.findViewById<TextView>(it).text.toString() }
+                    if (advanced) {
+                        assertEquals("Tomato___Early_blight", text(R.id.textResultModelLabel))
+                        assertAdvancedHero(activity, uncertain = false)
+                    } else {
+                        assertEquals(
+                            activity.getString(R.string.model_label_format, "Tomato___Early_blight"),
+                            text(R.id.textResultModelLabel)
+                        )
+                        assertEquals(activity.getString(R.string.confidence_format, 87), text(R.id.textResultConfidence))
+                    }
+                    val care = if (advanced) {
+                        listOf(R.id.advCareSigns, R.id.advCareTreatment, R.id.advCarePrevention)
+                    } else {
+                        listOf(R.id.textResultSymptoms, R.id.textResultTreatment, R.id.textResultPrevention)
+                    }
+                    val data = (listOf(R.id.textResultDisease, R.id.textResultStatus, R.id.textGuidanceStatus) + care)
+                        .map(::text)
+                    assertEquals(
+                        DiseasePresentation.name(activity, "Tomato Early Blight", "Tomato___Early_blight"),
+                        data.first()
+                    )
                     if (normalData == null) normalData = data else assertEquals(normalData, data)
-                    if (advanced) assertVisualEvidence(activity, uncertain = false)
                 }
             }
         }
@@ -107,11 +106,7 @@ class ResultActivityInstrumentedTest {
                     val status = activity.findViewById<TextView>(R.id.textResultStatus)
                     assertEquals(View.VISIBLE, status.visibility)
                     assertEquals(activity.getString(R.string.result_uncertain), status.text.toString())
-                    assertEquals(
-                        if (advanced) View.VISIBLE else View.GONE,
-                        activity.findViewById<View>(R.id.visualEvidencePanel).visibility
-                    )
-                    if (advanced) assertVisualEvidence(activity, uncertain = true)
+                    if (advanced) assertAdvancedHero(activity, uncertain = true)
                 }
             }
         }
@@ -129,7 +124,8 @@ class ResultActivityInstrumentedTest {
                     activity.getString(R.string.guidance_local_library),
                     activity.findViewById<TextView>(R.id.textGuidanceStatus).text.toString()
                 )
-                assertVisualEvidence(activity, uncertain = false)
+                assertAdvancedHero(activity, uncertain = false)
+                assertEquals(View.VISIBLE, activity.findViewById<View>(R.id.advResultPlant).visibility)
             }
         }
     }
@@ -151,30 +147,29 @@ class ResultActivityInstrumentedTest {
         }
     }
 
-    private fun assertVisualEvidence(activity: ResultActivity, uncertain: Boolean) {
-        val value = activity.findViewById<TextView>(R.id.visualConfidenceValue)
-        assertEquals(activity.getString(R.string.visual_confidence_value, 87), value.text.toString())
+    private fun assertAdvancedHero(activity: ResultActivity, uncertain: Boolean) {
+        val value = activity.findViewById<TextView>(R.id.textResultConfidence)
+        assertEquals(activity.getString(R.string.adv_percent, 87), value.text.toString())
         assertEquals(activity.getString(R.string.confidence_format, 87), value.contentDescription.toString())
-        assertEquals(87, activity.findViewById<ProgressBar>(R.id.visualConfidenceRing).progress)
         assertEquals(
-            activity.getString(if (uncertain) R.string.visual_review_required else R.string.visual_threshold_met),
-            activity.findViewById<TextView>(R.id.visualUncertaintyStatus).text.toString()
+            activity.getString(if (uncertain) R.string.adv_status_review else R.string.adv_status_disease),
+            activity.findViewById<TextView>(R.id.advResultStatusPill).text.toString()
         )
         assertEquals(
-            activity.findViewById<TextView>(R.id.textGuidanceStatus).text.toString(),
-            activity.findViewById<TextView>(R.id.visualGuidanceSource).text.toString()
+            if (uncertain) View.VISIBLE else View.GONE,
+            activity.findViewById<View>(R.id.advResultReviewBanner).visibility
         )
-        val diagram = activity.findViewById<View>(R.id.visualReviewDiagram)
-        assertEquals(View.IMPORTANT_FOR_ACCESSIBILITY_YES, diagram.importantForAccessibility)
-        val description = diagram.contentDescription?.toString().orEmpty()
-        var previousIndex = -1
-        listOf(
-            R.string.visual_step_signal, R.string.visual_step_observe,
-            R.string.visual_step_verify, R.string.visual_step_plan
-        ).forEach { step ->
-            val index = description.indexOf(activity.getString(step))
-            assertTrue("Missing or unordered accessible review step: $description", index > previousIndex)
-            previousIndex = index
+    }
+
+    @Test
+    fun advancedResultShowsShareLocationAndSaveControls() {
+        UiPreferences.setAdvanced(context, true)
+        ActivityScenario.launch<ResultActivity>(
+            ResultActivity.createIntent(context, prediction())
+        ).use {
+            listOf(R.id.buttonShareResult, R.id.checkboxIncludeLocation, R.id.buttonSaveHistory).forEach { id ->
+                onView(withId(id)).check(matches(isDisplayed()))
+            }
         }
     }
 
