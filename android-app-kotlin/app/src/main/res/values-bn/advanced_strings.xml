@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="visual_mode_description">উন্নত মোডে ড্যাশবোর্ড, বিশ্লেষণ ও আরও বিস্তারিত রোগনির্ণয় দেখা যায়। সাধারণ মোডে প্রতিটি পর্দা সহজ থাকে।</string>
+    <string name="visual_setup_description">সাধারণ: সহজ ও পরিষ্কার। উন্নত: ড্যাশবোর্ড, চার্ট ও বিশ্লেষণ।</string>
+
+    <string name="adv_nav_home">হোম</string>
+    <string name="adv_nav_scans">স্ক্যান</string>
+    <string name="adv_nav_scan">নতুন স্ক্যান</string>
+    <string name="adv_nav_library">লাইব্রেরি</string>
+    <string name="adv_nav_insights">বিশ্লেষণ</string>
+
+    <string name="adv_greeting_morning">শুভ সকাল</string>
+    <string name="adv_greeting_afternoon">শুভ অপরাহ্ন</string>
+    <string name="adv_greeting_evening">শুভ সন্ধ্যা</string>
+    <string name="adv_home_badge">এআই উদ্ভিদ চিকিৎসক</string>
+    <string name="adv_home_hero_title">দ্রুত স্ক্যান</string>
+    <string name="adv_home_hero_subtitle">একটি পাতার ছবি তুলুন। কয়েক সেকেন্ডে ফলাফল পান।</string>
+    <string name="adv_home_start_scan">স্ক্যান শুরু করুন</string>
+    <string name="adv_home_scans_label">সংরক্ষিত স্ক্যান</string>
+    <string name="adv_home_library_label">রোগের তথ্য</string>
+    <string name="adv_plant_health">উদ্ভিদের স্বাস্থ্য</string>
+    <string name="adv_healthy">সুস্থ</string>
+    <string name="adv_diseased">রোগাক্রান্ত</string>
+    <string name="adv_needs_review">যাচাই প্রয়োজন</string>
+    <string name="adv_healthy_caption">সুস্থ</string>
+    <string name="adv_percent">%1$d%%</string>
+    <string name="adv_recent_scans">সাম্প্রতিক স্ক্যান</string>
+    <string name="adv_see_all">সব দেখুন</string>
+    <string name="adv_no_scans_title">এখনও কোনো স্ক্যান নেই</string>
+    <string name="adv_no_scans_body">আপনার সংরক্ষিত ফলাফল এখানে দেখা যাবে।</string>
+    <string name="adv_engines">শনাক্তকরণ ইঞ্জিন</string>
+    <string name="adv_engine_cloud">ক্লাউড এআই</string>
+    <string name="adv_engine_device">ফোনেই</string>
+    <string name="adv_engine_device_caption">TFLite · ইন্টারনেট ছাড়াই</string>
+    <string name="adv_sample_title">নমুনা ফলাফল</string>
+    <string name="adv_sample_caption">একটি ফলাফল কেমন দেখায় দেখুন</string>
+
+    <string name="adv_filter_all">সব</string>
+    <string name="adv_filter_empty">এই ফিল্টারে কোনো স্ক্যান নেই।</string>
+    <string name="adv_search_hint">রোগ বা ফসল খুঁজুন</string>
+    <string name="adv_badge_disease">রোগ</string>
+    <string name="adv_library_no_match">কিছু পাওয়া যায়নি</string>
+
+    <string name="adv_avg_confidence">গড় আস্থা</string>
+    <string name="adv_with_location">অবস্থানসহ</string>
+    <string name="adv_conditions_found">শনাক্ত রোগ</string>
+    <string name="adv_most_common">সবচেয়ে বেশি</string>
+    <string name="adv_last_7_days">গত ৭ দিন</string>
+    <string name="adv_top_results">শীর্ষ ফলাফল</string>
+    <string name="adv_insights_empty_title">এখনও কোনো বিশ্লেষণ নেই</string>
+    <string name="adv_insights_empty_body">প্রবণতা দেখতে কয়েকটি স্ক্যান সংরক্ষণ করুন।</string>
+    <string name="adv_health_summary_desc">%1$d টি সুস্থ, %2$d টি রোগাক্রান্ত, %3$d টি যাচাই প্রয়োজন</string>
+    <string name="adv_chart_day_value">%1$s: %2$d</string>
+    <string name="adv_total_scans_caption">স্ক্যান</string>
+
+    <string name="adv_scan_title">নতুন স্ক্যান</string>
+    <string name="adv_scan_placeholder_title">একটি পাতা ফ্রেমে রাখুন</string>
+    <string name="adv_scan_placeholder_hint">ভালো আলো, স্পষ্ট ফোকাস</string>
+    <string name="adv_camera">ক্যামেরা</string>
+    <string name="adv_gallery">গ্যালারি</string>
+    <string name="adv_engine">ইঞ্জিন</string>
+    <string name="adv_analyze">পাতা বিশ্লেষণ করুন</string>
+    <string name="adv_analyzing">পাতা বিশ্লেষণ হচ্ছে…</string>
+    <string name="adv_back">ফিরে যান</string>
+
+    <string name="adv_result_title">রোগনির্ণয়</string>
+    <string name="adv_confidence_caption">আস্থা</string>
+    <string name="adv_status_healthy">সুস্থ</string>
+    <string name="adv_status_disease">রোগ শনাক্ত</string>
+    <string name="adv_status_review">যাচাই প্রয়োজন</string>
+    <string name="adv_details">বিস্তারিত</string>
+    <string name="adv_model_label">মডেল লেবেল</string>
+    <string name="adv_guidance">পরামর্শ</string>
+    <string name="adv_care_plan">পরিচর্যা পরিকল্পনা</string>
+    <string name="adv_care_signs">লক্ষণ</string>
+    <string name="adv_care_treatment">চিকিৎসা</string>
+    <string name="adv_care_prevention">প্রতিরোধ</string>
+    <string name="adv_add_location">অবস্থান যোগ করুন</string>
+    <string name="adv_saved_on">সংরক্ষিত</string>
+    <string name="adv_location">অবস্থান</string>
+    <string name="adv_location_value">%1$.5f, %2$.5f</string>
+    <string name="adv_location_none">সংরক্ষিত নয়</string>
+    <string name="adv_open_map">মানচিত্রে খুলুন</string>
+    <string name="adv_no_map_app">কোনো মানচিত্র অ্যাপ নেই।</string>
+    <string name="adv_scan_a_leaf">একটি পাতা স্ক্যান করুন</string>
+
+    <string name="adv_settings_interface">ইন্টারফেস</string>
+    <string name="adv_settings_notifications">বিজ্ঞপ্তি</string>
+    <string name="adv_settings_server">ক্লাউড সার্ভার</string>
+    <string name="adv_version">ক্রপোরা %1$s</string>
+
+    <plurals name="adv_scans_count">
+        <item quantity="one">%d টি স্ক্যান</item>
+        <item quantity="other">%d টি স্ক্যান</item>
+    </plurals>
+    <plurals name="adv_library_count">
+        <item quantity="one">%d টি রোগের তথ্য</item>
+        <item quantity="other">%d টি রোগের তথ্য</item>
+    </plurals>
+    <plurals name="adv_insights_subtitle">
+        <item quantity="one">%d টি সংরক্ষিত স্ক্যানের ভিত্তিতে</item>
+        <item quantity="other">%d টি সংরক্ষিত স্ক্যানের ভিত্তিতে</item>
+    </plurals>
+    <plurals name="adv_week_count">
+        <item quantity="one">এই সপ্তাহে %d টি</item>
+        <item quantity="other">এই সপ্তাহে %d টি</item>
+    </plurals>
+</resources>
