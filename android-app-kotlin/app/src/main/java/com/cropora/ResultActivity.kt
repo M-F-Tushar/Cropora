@@ -8,14 +8,13 @@ import android.content.pm.PackageManager
 import android.location.Location
 import android.location.LocationManager
 import android.os.Bundle
-
+import android.view.View
 import android.widget.Button
 import android.widget.CheckBox
 import android.widget.ProgressBar
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.lifecycleScope
 import com.cropora.database.AppDatabase
@@ -24,6 +23,7 @@ import com.cropora.data.Disease
 import com.cropora.data.DiseasePresentation
 import com.cropora.database.ScanRecord
 import com.cropora.network.PredictionResponse
+import com.google.android.material.progressindicator.CircularProgressIndicator
 import java.io.IOException
 import java.util.UUID
 import kotlinx.coroutines.CancellationException
@@ -32,7 +32,7 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import org.xmlpull.v1.XmlPullParserException
 
-class ResultActivity : AppCompatActivity() {
+class ResultActivity : ModeAwareActivity() {
 
     private lateinit var resultId: String
     private lateinit var modelLabel: String
@@ -50,6 +50,10 @@ class ResultActivity : AppCompatActivity() {
     private fun displayText(localized: String?, original: String, fallback: Int): String =
         localized ?: if (resources.configuration.locales[0].language == "bn") getString(fallback) else original
 
+    private val symptomsId get() = if (advanced) R.id.advCareSigns else R.id.textResultSymptoms
+    private val treatmentId get() = if (advanced) R.id.advCareTreatment else R.id.textResultTreatment
+    private val preventionId get() = if (advanced) R.id.advCarePrevention else R.id.textResultPrevention
+
     private val locationPermissionLauncher = registerForActivityResult(
         ActivityResultContracts.RequestMultiplePermissions()
     ) { result ->
@@ -64,7 +68,7 @@ class ResultActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_result)
+        setContentView(if (advanced) R.layout.activity_result_advanced else R.layout.activity_result)
 
         resultId = intent.getStringExtra(EXTRA_RESULT_ID) ?: UUID.randomUUID().toString()
         modelLabel = intent.getStringExtra(EXTRA_MODEL_LABEL) ?: getString(R.string.result_unknown)
@@ -81,14 +85,19 @@ class ResultActivity : AppCompatActivity() {
         val confidencePercent = ResultTextFormatter.confidencePercent(confidence)
 
         findViewById<TextView>(R.id.textResultDisease).text = DiseasePresentation.name(this, disease, modelLabel)
-        findViewById<TextView>(R.id.textResultModelLabel).text = getString(
-            R.string.model_label_format,
+        findViewById<TextView>(R.id.textResultModelLabel).text = if (advanced) {
             modelLabel
-        )
-        findViewById<TextView>(R.id.textResultConfidence).text = getString(
-            R.string.confidence_format,
-            confidencePercent
-        )
+        } else {
+            getString(R.string.model_label_format, modelLabel)
+        }
+        findViewById<TextView>(R.id.textResultConfidence).apply {
+            if (advanced) {
+                text = AdvancedUi.percent(this@ResultActivity, confidence)
+                contentDescription = getString(R.string.confidence_format, confidencePercent)
+            } else {
+                text = getString(R.string.confidence_format, confidencePercent)
+            }
+        }
         findViewById<ProgressBar>(R.id.progressResultConfidence).progress = confidencePercent
         findViewById<TextView>(R.id.textResultStatus).text = getString(
             if (uncertain) R.string.result_uncertain else R.string.result_confident
@@ -96,9 +105,9 @@ class ResultActivity : AppCompatActivity() {
         findViewById<TextView>(R.id.textGuidanceStatus).text = getString(
             if (guidanceAvailable) R.string.guidance_available else R.string.guidance_not_reviewed
         )
-        findViewById<TextView>(R.id.textResultSymptoms).text = displayText(null, symptoms, R.string.generic_symptoms)
-        findViewById<TextView>(R.id.textResultTreatment).text = displayText(null, treatment, R.string.generic_treatment)
-        findViewById<TextView>(R.id.textResultPrevention).text = displayText(null, prevention, R.string.generic_prevention)
+        findViewById<TextView>(symptomsId).text = displayText(null, symptoms, R.string.generic_symptoms)
+        findViewById<TextView>(treatmentId).text = displayText(null, treatment, R.string.generic_treatment)
+        findViewById<TextView>(preventionId).text = displayText(null, prevention, R.string.generic_prevention)
         savedToHistory = savedInstanceState?.getBoolean(STATE_SAVED_TO_HISTORY) ?: false
         findViewById<Button>(R.id.buttonSaveHistory).apply {
             isEnabled = !savedToHistory && guidanceLoadComplete
@@ -110,37 +119,38 @@ class ResultActivity : AppCompatActivity() {
             }
         }
         findViewById<Button>(R.id.buttonShareResult).setOnClickListener { shareResult() }
+        if (advanced) bindAdvancedHero()
         loadLocalGuidance()
     }
 
-    override fun onResume() {
-        super.onResume()
-        findViewById<TextView>(R.id.textResultStatus).setText(
-            if (uncertain) R.string.result_uncertain else R.string.result_confident
-        )
-        applyVisualPresentation()
+    private fun bindAdvancedHero() {
+        val status = AdvancedUi.status(disease, modelLabel, uncertain)
+        AdvancedUi.bindStatusPill(findViewById(R.id.advResultStatusPill), status)
+        AdvancedUi.tintRing(findViewById<CircularProgressIndicator>(R.id.progressResultConfidence), status)
+        findViewById<View>(R.id.advResultReviewBanner).visibility = if (uncertain) View.VISIBLE else View.GONE
+        findViewById<View>(R.id.advBack).setOnClickListener { finish() }
     }
 
-    private fun applyVisualPresentation() {
-        AdvancedResultPresentation.render(
-            this, confidence, uncertain, findViewById<TextView>(R.id.textGuidanceStatus).text
-        )
-        AdvancedResultPresentation.styleCare(
-            this,
-            listOf(R.id.textResultSymptoms, R.id.textResultTreatment, R.id.textResultPrevention),
-            listOf(R.id.textResultSignsHeading, R.id.textResultActionHeading, R.id.textResultPreventionHeading)
-        )
+    private fun bindPlant(plant: String?) {
+        if (!advanced) return
+        findViewById<TextView>(R.id.advResultPlant).apply {
+            visibility = if (plant.isNullOrBlank()) View.GONE else View.VISIBLE
+            text = plant
+            AdvancedUi.stylePill(this, R.color.adv_primary, R.color.adv_primary_soft)
+        }
     }
 
     private fun loadLocalGuidance() {
         lifecycleScope.launch {
             var localGuidanceFound = false
+            var plant: String? = null
             try {
                 val localDisease = withContext(Dispatchers.IO) {
                     val repository = DiseaseRepository.getInstance(applicationContext)
                     displayGuidance = repository.findLocalizedByName(this@ResultActivity, disease)
                     repository.findByName(disease)
                 }
+                plant = displayGuidance?.plant ?: localDisease?.plant
                 if (localDisease != null) {
                     symptoms = localDisease.symptoms
                     treatment = localDisease.treatment
@@ -165,11 +175,11 @@ class ResultActivity : AppCompatActivity() {
                     else -> R.string.guidance_not_reviewed
                 }
             )
-            findViewById<TextView>(R.id.textResultSymptoms).text = displayText(displayGuidance?.symptoms, symptoms, R.string.generic_symptoms)
-            findViewById<TextView>(R.id.textResultTreatment).text = displayText(displayGuidance?.treatment, treatment, R.string.generic_treatment)
-            findViewById<TextView>(R.id.textResultPrevention).text = displayText(displayGuidance?.prevention, prevention, R.string.generic_prevention)
+            findViewById<TextView>(symptomsId).text = displayText(displayGuidance?.symptoms, symptoms, R.string.generic_symptoms)
+            findViewById<TextView>(treatmentId).text = displayText(displayGuidance?.treatment, treatment, R.string.generic_treatment)
+            findViewById<TextView>(preventionId).text = displayText(displayGuidance?.prevention, prevention, R.string.generic_prevention)
             guidanceLoadComplete = true
-            applyVisualPresentation()
+            bindPlant(plant)
             findViewById<Button>(R.id.buttonSaveHistory).isEnabled = !savedToHistory
         }
     }
@@ -214,7 +224,11 @@ class ResultActivity : AppCompatActivity() {
                     R.string.history_saved,
                     Toast.LENGTH_SHORT
                 ).show()
-                startActivity(Intent(this@ResultActivity, HistoryActivity::class.java))
+                if (advanced) {
+                    startActivity(MainActivity.tabIntent(this@ResultActivity, AdvancedTab.SCANS))
+                } else {
+                    startActivity(Intent(this@ResultActivity, HistoryActivity::class.java))
+                }
             } catch (error: CancellationException) {
                 throw error
             } catch (_: Exception) {
