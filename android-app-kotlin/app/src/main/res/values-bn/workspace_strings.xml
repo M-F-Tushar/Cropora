@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="workspace_research_label">ক্রপোরা / গবেষণা কর্মক্ষেত্র</string>
+    <string name="workspace_home_title">গাছের স্বাস্থ্য,\nআরও সুস্পষ্ট প্রক্রিয়ায়।</string>
+    <string name="workspace_home_intro">পাতা পর্যবেক্ষণ করুন, বিশ্লেষণের পদ্ধতি বেছে নিন এবং মূল্যায়নের ভিত্তিতে যত্নের সিদ্ধান্ত নিন।</string>
+    <string name="workspace_workflow_title">পর্যবেক্ষণ থেকে করণীয়</string>
+    <string name="workspace_workflow_intro">একটি ছবি। বিশ্লেষণের দুটি পথ। পরবর্তী করণীয়।</string>
+    <string name="workspace_step_capture">ছবি নিন</string>
+    <string name="workspace_step_routes">ক্লাউড / অফলাইন</string>
+    <string name="workspace_step_cloud">ক্লাউড</string>
+    <string name="workspace_step_offline">অফলাইন</string>
+    <string name="workspace_step_assess">মূল্যায়ন</string>
+    <string name="workspace_step_guide">করণীয়</string>
+    <string name="workspace_home_workflow_note">ক্লাউডে নির্বাচিত ছবি নির্ধারিত সার্ভারে পাঠানো হয়। অফলাইনে এই ডিভাইসের মডেল ব্যবহার করা হয়। ফলাফল ও যত্নের নির্দেশনা থাকলে তা পর্যালোচনা করুন।</string>
+    <string name="workspace_tools_title">আপনার কর্মক্ষেত্র ঘুরে দেখুন</string>
+    <string name="workspace_tools_intro">আগের স্ক্যান দেখুন, রোগের তথ্যভান্ডার পড়ুন বা সংরক্ষিত ফলাফলের প্রবণতা দেখুন। নমুনা ফলাফলটি শুধু উদাহরণ, বর্তমান মূল্যায়ন নয়।</string>
+    <string name="workspace_scan_label">ক্রপোরা / স্ক্যান কর্মক্ষেত্র</string>
+    <string name="workspace_scan_title">গাছের স্বাস্থ্য\nআরও কাছ থেকে দেখুন।</string>
+    <string name="workspace_scan_intro">পাতার একটি পরিষ্কার ছবি দিয়ে শুরু করুন। কোথায় বিশ্লেষণ হবে বেছে নিন, তারপর যত্নের সিদ্ধান্তের আগে মূল্যায়ন দেখুন।</string>
+    <string name="workspace_scan_workflow_title">আপনার বিশ্লেষণের ধাপ</string>
+    <string name="workspace_state_empty">পাতার ছবির অপেক্ষায়</string>
+    <string name="workspace_state_ready">ছবি নির্বাচিত · বিশ্লেষণের জন্য প্রস্তুত</string>
+    <string name="workspace_state_cloud_running">ক্লাউড সেবায় বিশ্লেষণ চলছে</string>
+    <string name="workspace_state_offline_running">এই ডিভাইসে বিশ্লেষণ চলছে</string>
+    <string name="workspace_state_empty_detail">ছবি তুলুন বা গ্যালারি থেকে বেছে নিন। ছবি নির্বাচনের পর বিশ্লেষণ করা যাবে।</string>
+    <string name="workspace_state_ready_detail">ছবির ফোকাস ও আলো পরীক্ষা করুন। বিশ্লেষণ শুরুর আগে চাইলে ছবি বদলাতে পারেন।</string>
+    <string name="workspace_state_running_detail">নির্বাচিত ছবির বিশ্লেষণ শেষ হওয়া পর্যন্ত অপেক্ষা করুন। ছবি ও পদ্ধতি বাছাইয়ের বোতামগুলো সাময়িকভাবে বন্ধ আছে।</string>
+    <string name="workspace_capture_title">০১ / পাতা পর্যবেক্ষণ করুন</string>
+    <string name="workspace_capture_hint">সমান আলোতে স্পষ্ট ছবি তুলুন, যাতে পাতার লক্ষণগুলো সহজে দেখা যায়।</string>
+    <string name="workspace_preview_empty">আপনার পাতার ছবি এখানে দেখা যাবে</string>
+    <string name="workspace_route_title">০২ / বিশ্লেষণের পদ্ধতি বেছে নিন</string>
+    <string name="workspace_route_cloud">ক্লাউড · সার্ভারে বিশ্লেষণ</string>
+    <string name="workspace_route_offline">অফলাইন · ডিভাইসে বিশ্লেষণ</string>
+    <string name="workspace_route_cloud_detail">ইন্টারনেট সংযোগ ব্যবহার করে নির্বাচিত ছবি বিশ্লেষণের জন্য নির্ধারিত সার্ভারে পাঠানো হয়।</string>
+    <string name="workspace_route_offline_detail">ছবি আপলোড না করে এই ডিভাইসের মডেল চালানো হয়। ফলাফল ক্লাউড মডেলের চেয়ে ভিন্ন হতে পারে।</string>
+    <string name="workspace_review_title">০৩ / ফলাফল দেখে সিদ্ধান্ত নিন</string>
+    <string name="workspace_review_detail">ফলাফলে মডেলের মূল্যায়ন এবং যত্নের নির্দেশনা থাকলে তা দেখানো হয়। পূর্বাভাস নিশ্চিত রোগনির্ণয় নয়; দৃশ্যমান লক্ষণ ও স্থানীয় বিশেষজ্ঞের পরামর্শ বিবেচনা করুন।</string>
+</resources>
