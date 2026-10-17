@@ -7,8 +7,9 @@ Lite inference. The offline classifier expects these files in this directory:
   `[1, 38]` probabilities.
 - `labels.txt` — the 38 output labels in the exact canonical order from
   `model/labels-38.txt` and `backend-api/labels-38.txt`.
-- `diseases.xml` — the reviewed local disease guidance used by both the disease
+- `diseases.xml` — the source-backed local disease guidance used by both the disease
   library and offline prediction results.
+- `diseases-bn.xml` — Bangla guidance for the same 38 canonical entries.
 
 Generate `model.tflite` from the approved Keras artifact at the project root:
 
@@ -26,8 +27,16 @@ Offline mode shares the cloud result data contract. It resizes RGB images to
 224x224 with bilinear filtering, passes raw float32 pixel values in `[0, 255]`
 (the model contains its own normalization), selects the highest class
 probability, and uses the same 0.50 uncertainty threshold as the backend default.
-The local XML catalog has reviewed details for only 10 classes; other classes
-receive generic guidance, as they do when the backend has no reviewed entry.
+The local XML catalog contains symptoms, management and prevention for all 38
+classes. Healthy entries explain the limits of a leaf-only prediction. Unknown
+labels still receive generic guidance. Confidence and uncertainty are independent
+of guidance availability.
+
+Each English entry records its model label and source URLs. The backend packages
+an identical copy at `backend-api/diseases.xml`; API tests check exact parity.
+See [the source audit](../../../../../docs/guidance-sources.md) for all references,
+safety limits and synchronization instructions. This content is research-based
+guidance, not independent agronomist-reviewed diagnosis.
 
 The converted binary is generated locally and is not present in this checkout.
 See [`../../../../../model/model_notes.md`](../../../../../model/model_notes.md) and
