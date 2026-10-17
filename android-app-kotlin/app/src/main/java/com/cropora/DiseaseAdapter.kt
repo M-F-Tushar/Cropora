@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.cropora.data.Disease
+import com.cropora.data.DiseasePresentation
 
 class DiseaseAdapter(
     private val onItemSelected: (Disease) -> Unit
@@ -36,7 +37,7 @@ class DiseaseAdapter(
         private val textSymptoms: TextView = itemView.findViewById(R.id.textDiseaseSymptomsPreview)
 
         fun bind(disease: Disease, onItemSelected: (Disease) -> Unit) {
-            textName.text = disease.name
+            textName.text = DiseasePresentation.name(itemView.context, disease.name)
             textPlant.text = disease.plant
             textSymptoms.text = disease.symptoms
             itemView.setOnClickListener { onItemSelected(disease) }
