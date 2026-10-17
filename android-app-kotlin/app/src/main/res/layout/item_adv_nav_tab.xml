@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- One bottom-navigation slot; selection is shown via setSelected on the root. -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="0dp"
+    android:layout_height="match_parent"
+    android:background="?attr/selectableItemBackgroundBorderless"
+    android:clickable="true"
+    android:focusable="true"
+    android:gravity="center"
+    android:orientation="vertical">
+
+    <FrameLayout
+        android:layout_width="52dp"
+        android:layout_height="30dp"
+        android:background="@drawable/adv_bg_nav_indicator"
+        android:duplicateParentState="true">
+
+        <ImageView
+            android:id="@+id/advTabIcon"
+            android:layout_width="22dp"
+            android:layout_height="22dp"
+            android:layout_gravity="center"
+            android:duplicateParentState="true"
+            android:importantForAccessibility="no"
+            app:tint="@color/adv_nav_tint" />
+    </FrameLayout>
+
+    <TextView
+        android:id="@+id/advTabLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="2dp"
+        android:duplicateParentState="true"
+        android:fontFamily="sans-serif-medium"
+        android:maxLines="1"
+        android:textColor="@color/adv_nav_tint"
+        android:textSize="11sp" />
+</LinearLayout>
