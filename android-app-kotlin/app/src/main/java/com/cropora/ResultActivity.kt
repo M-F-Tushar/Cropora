@@ -20,6 +20,8 @@ import androidx.core.content.ContextCompat
 import androidx.lifecycle.lifecycleScope
 import com.cropora.database.AppDatabase
 import com.cropora.data.DiseaseRepository
+import com.cropora.data.Disease
+import com.cropora.data.DiseasePresentation
 import com.cropora.database.ScanRecord
 import com.cropora.network.PredictionResponse
 import java.io.IOException
@@ -43,6 +45,10 @@ class ResultActivity : AppCompatActivity() {
     private lateinit var treatment: String
     private lateinit var prevention: String
     private var savedToHistory = false
+    private var displayGuidance: Disease? = null
+
+    private fun displayText(localized: String?, original: String, fallback: Int): String =
+        localized ?: if (resources.configuration.locales[0].language == "bn") getString(fallback) else original
 
     private val locationPermissionLauncher = registerForActivityResult(
         ActivityResultContracts.RequestMultiplePermissions()
@@ -74,7 +80,7 @@ class ResultActivity : AppCompatActivity() {
         prevention = intent.getStringExtra(EXTRA_PREVENTION) ?: getString(R.string.guidance_unavailable)
         val confidencePercent = ResultTextFormatter.confidencePercent(confidence)
 
-        findViewById<TextView>(R.id.textResultDisease).text = disease
+        findViewById<TextView>(R.id.textResultDisease).text = DiseasePresentation.name(this, disease, modelLabel)
         findViewById<TextView>(R.id.textResultModelLabel).text = getString(
             R.string.model_label_format,
             modelLabel
@@ -90,9 +96,9 @@ class ResultActivity : AppCompatActivity() {
         findViewById<TextView>(R.id.textGuidanceStatus).text = getString(
             if (guidanceAvailable) R.string.guidance_available else R.string.guidance_not_reviewed
         )
-        findViewById<TextView>(R.id.textResultSymptoms).text = symptoms
-        findViewById<TextView>(R.id.textResultTreatment).text = treatment
-        findViewById<TextView>(R.id.textResultPrevention).text = prevention
+        findViewById<TextView>(R.id.textResultSymptoms).text = displayText(null, symptoms, R.string.generic_symptoms)
+        findViewById<TextView>(R.id.textResultTreatment).text = displayText(null, treatment, R.string.generic_treatment)
+        findViewById<TextView>(R.id.textResultPrevention).text = displayText(null, prevention, R.string.generic_prevention)
         savedToHistory = savedInstanceState?.getBoolean(STATE_SAVED_TO_HISTORY) ?: false
         findViewById<Button>(R.id.buttonSaveHistory).apply {
             isEnabled = !savedToHistory && guidanceLoadComplete
@@ -131,7 +137,9 @@ class ResultActivity : AppCompatActivity() {
             var localGuidanceFound = false
             try {
                 val localDisease = withContext(Dispatchers.IO) {
-                    DiseaseRepository.getInstance(applicationContext).findByName(disease)
+                    val repository = DiseaseRepository.getInstance(applicationContext)
+                    displayGuidance = repository.findLocalizedByName(this@ResultActivity, disease)
+                    repository.findByName(disease)
                 }
                 if (localDisease != null) {
                     symptoms = localDisease.symptoms
@@ -157,9 +165,9 @@ class ResultActivity : AppCompatActivity() {
                     else -> R.string.guidance_not_reviewed
                 }
             )
-            findViewById<TextView>(R.id.textResultSymptoms).text = symptoms
-            findViewById<TextView>(R.id.textResultTreatment).text = treatment
-            findViewById<TextView>(R.id.textResultPrevention).text = prevention
+            findViewById<TextView>(R.id.textResultSymptoms).text = displayText(displayGuidance?.symptoms, symptoms, R.string.generic_symptoms)
+            findViewById<TextView>(R.id.textResultTreatment).text = displayText(displayGuidance?.treatment, treatment, R.string.generic_treatment)
+            findViewById<TextView>(R.id.textResultPrevention).text = displayText(displayGuidance?.prevention, prevention, R.string.generic_prevention)
             guidanceLoadComplete = true
             findViewById<Button>(R.id.buttonSaveHistory).isEnabled = !savedToHistory
         }
@@ -220,12 +228,13 @@ class ResultActivity : AppCompatActivity() {
     }
 
     private fun shareResult() {
-        val shareText = ResultTextFormatter.shareText(
-            disease,
-            confidence,
-            symptoms,
-            treatment,
-            prevention
+        val shareText = getString(
+            R.string.share_result_template,
+            DiseasePresentation.name(this, disease, modelLabel),
+            ResultTextFormatter.confidencePercent(confidence),
+            displayText(displayGuidance?.symptoms, symptoms, R.string.generic_symptoms),
+            displayText(displayGuidance?.treatment, treatment, R.string.generic_treatment),
+            displayText(displayGuidance?.prevention, prevention, R.string.generic_prevention)
         )
         val shareIntent = Intent(Intent.ACTION_SEND).apply {
             type = "text/plain"
