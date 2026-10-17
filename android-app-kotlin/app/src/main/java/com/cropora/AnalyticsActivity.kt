@@ -67,30 +67,24 @@ class AnalyticsActivity : AppCompatActivity() {
         textAnalyticsEmpty.visibility = View.GONE
         layoutAnalyticsContent.visibility = View.VISIBLE
 
-        val totalCount = scans.size
-        val healthyCount = scans.count {
-            it.disease.contains("Healthy", ignoreCase = true) ||
-                it.modelLabel.contains("Healthy", ignoreCase = true)
-        }
-        val diseasedCount = totalCount - healthyCount
-        val avgConfidence = (scans.sumOf { it.confidence.toDouble() } / totalCount) * 100.0
-        val uncertainCount = scans.count { it.uncertain }
-        val locationCount = scans.count { (it.latitude != null) && (it.longitude != null) }
-
-        val topDiseaseEntry = scans.groupBy { it.disease }.maxByOrNull { it.value.size }
+        val insights = ScanInsights.from(scans)
+        val topDiseaseEntry = insights.topResults.maxByOrNull { it.second }
         val topDiseaseName = if (topDiseaseEntry != null) {
-            val sample = topDiseaseEntry.value.first()
+            val sample = topDiseaseEntry.first
             DiseasePresentation.name(this, sample.disease, sample.modelLabel)
         } else {
             getString(R.string.analytics_no_disease_detected)
         }
 
-        textTotalScans.text = getString(R.string.analytics_total_scans_format, totalCount)
-        textHealthyScans.text = getString(R.string.analytics_healthy_scans_format, healthyCount)
-        textDiseasedScans.text = getString(R.string.analytics_diseased_scans_format, diseasedCount)
-        textAverageConfidence.text = getString(R.string.analytics_avg_confidence_format, avgConfidence)
-        textUncertainScans.text = getString(R.string.analytics_uncertain_scans_format, uncertainCount)
-        textLocationScans.text = getString(R.string.analytics_location_scans_format, locationCount)
+        textTotalScans.text = getString(R.string.analytics_total_scans_format, insights.total)
+        textHealthyScans.text = getString(R.string.analytics_healthy_scans_format, insights.healthy)
+        textDiseasedScans.text = getString(R.string.analytics_diseased_scans_format, insights.diseased)
+        textAverageConfidence.text = getString(
+            R.string.analytics_avg_confidence_format,
+            insights.averageConfidence * 100.0
+        )
+        textUncertainScans.text = getString(R.string.analytics_uncertain_scans_format, insights.uncertain)
+        textLocationScans.text = getString(R.string.analytics_location_scans_format, insights.withLocation)
         textTopDisease.text = getString(R.string.analytics_top_disease_format, topDiseaseName)
     }
 }
