@@ -102,6 +102,13 @@ class HistoryDetailActivity : AppCompatActivity() {
             R.string.history_saved_at_format,
             formattedTimestamp
         )
+        findViewById<TextView>(R.id.textDetailLocation).text = if (
+            record.latitude != null && record.longitude != null
+        ) {
+            getString(R.string.history_location_format, record.latitude, record.longitude)
+        } else {
+            getString(R.string.history_location_unavailable)
+        }
         findViewById<TextView>(R.id.textDetailSymptoms).text = record.symptoms
         findViewById<TextView>(R.id.textDetailTreatment).text = record.treatment
         findViewById<TextView>(R.id.textDetailPrevention).text = record.prevention
