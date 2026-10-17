@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingStart="20dp"
+        android:paddingTop="20dp"
+        android:paddingEnd="20dp">
+
+        <TextView
+            style="@style/AdvText.Display"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:accessibilityHeading="true"
+            android:text="@string/adv_nav_library" />
+
+        <TextView
+            android:id="@+id/advLibraryCount"
+            style="@style/AdvText.Label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:hint="@string/adv_search_hint"
+            app:boxBackgroundColor="@color/adv_surface"
+            app:boxCornerRadiusBottomEnd="100dp"
+            app:boxCornerRadiusBottomStart="100dp"
+            app:boxCornerRadiusTopEnd="100dp"
+            app:boxCornerRadiusTopStart="100dp"
+            app:boxStrokeColor="@color/adv_primary"
+            app:boxStrokeWidth="0dp"
+            app:boxStrokeWidthFocused="1.5dp"
+            app:endIconMode="clear_text"
+            app:endIconTint="@color/adv_ink_faint"
+            app:hintEnabled="false"
+            app:startIconDrawable="@drawable/adv_ic_search"
+            app:startIconTint="@color/adv_ink_faint">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/advLibrarySearch"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/adv_search_hint"
+                android:imeOptions="actionSearch"
+                android:inputType="text"
+                android:maxLines="1"
+                android:minHeight="52dp"
+                android:textColor="@color/adv_ink"
+                android:textColorHint="@color/adv_ink_faint"
+                android:textSize="15sp" />
+        </com.google.android.material.textfield.TextInputLayout>
+    </LinearLayout>
+
+    <HorizontalScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:clipToPadding="false"
+        android:paddingStart="20dp"
+        android:paddingEnd="20dp"
+        android:scrollbars="none">
+
+        <com.google.android.material.chip.ChipGroup
+            android:id="@+id/advLibraryCrops"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:chipSpacingHorizontal="8dp"
+            app:selectionRequired="true"
+            app:singleLine="true"
+            app:singleSelection="true" />
+    </HorizontalScrollView>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/advLibraryList"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:clipToPadding="false"
+            android:paddingStart="20dp"
+            android:paddingTop="12dp"
+            android:paddingEnd="20dp"
+            android:paddingBottom="120dp" />
+
+        <com.google.android.material.progressindicator.CircularProgressIndicator
+            android:id="@+id/advLibraryProgress"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="48dp"
+            android:contentDescription="@string/disease_library_loading"
+            android:indeterminate="true"
+            app:indicatorColor="@color/adv_primary" />
+
+        <ScrollView
+            android:id="@+id/advLibraryEmptyScroll"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:clipToPadding="false"
+            android:paddingBottom="120dp"
+            android:visibility="gone">
+
+            <include
+                android:id="@+id/advLibraryEmpty"
+                layout="@layout/view_adv_empty" />
+        </ScrollView>
+    </FrameLayout>
+</LinearLayout>
