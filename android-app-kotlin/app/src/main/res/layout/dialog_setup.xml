@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="24dp">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/setup_language"
+            android:textSize="18sp" />
+        <RadioGroup
+            android:id="@+id/groupSetupLanguage"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:checkedButton="@id/radioSetupEnglish">
+            <RadioButton
+                android:id="@+id/radioSetupEnglish"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:minHeight="48dp"
+                android:text="@string/language_english" />
+            <RadioButton
+                android:id="@+id/radioSetupBangla"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:minHeight="48dp"
+                android:text="@string/language_bangla" />
+        </RadioGroup>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="@string/setup_mode"
+            android:textSize="18sp" />
+        <RadioGroup
+            android:id="@+id/groupSetupMode"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:checkedButton="@id/radioSetupSimple">
+            <RadioButton
+                android:id="@+id/radioSetupSimple"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:minHeight="48dp"
+                android:text="@string/setup_simple" />
+            <RadioButton
+                android:id="@+id/radioSetupAdvanced"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:minHeight="48dp"
+                android:text="@string/setup_advanced" />
+        </RadioGroup>
+    </LinearLayout>
+</ScrollView>
