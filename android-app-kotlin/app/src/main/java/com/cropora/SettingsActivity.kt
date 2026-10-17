@@ -6,6 +6,7 @@ import android.os.Build
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
+import android.widget.RadioGroup
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
@@ -32,6 +33,17 @@ class SettingsActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_settings)
+
+        findViewById<RadioGroup>(R.id.groupLanguage).apply {
+            check(if (resources.configuration.locales[0].language == "bn") {
+                R.id.radioBangla
+            } else {
+                R.id.radioEnglish
+            })
+            setOnCheckedChangeListener { _, checkedId ->
+                UiPreferences.setLanguage(this@SettingsActivity, if (checkedId == R.id.radioBangla) "bn" else "en")
+            }
+        }
 
         findViewById<SwitchCompat>(R.id.switchAdvancedMode).apply {
             isChecked = UiPreferences.isAdvanced(this@SettingsActivity)
