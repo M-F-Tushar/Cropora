@@ -2,6 +2,7 @@ package com.cropora
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
 import com.cropora.network.PredictionResponse
@@ -45,5 +46,12 @@ class MainActivity : AppCompatActivity() {
         findViewById<Button>(R.id.buttonOpenAnalytics).setOnClickListener {
             startActivity(Intent(this, AnalyticsActivity::class.java))
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        val visibility = if (UiPreferences.isAdvanced(this)) View.VISIBLE else View.GONE
+        findViewById<Button>(R.id.buttonOpenResult).visibility = visibility
+        findViewById<Button>(R.id.buttonOpenAnalytics).visibility = visibility
     }
 }
