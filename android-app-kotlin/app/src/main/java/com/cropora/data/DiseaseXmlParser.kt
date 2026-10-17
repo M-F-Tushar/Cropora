@@ -72,5 +72,6 @@ object DiseaseXmlParser {
         return diseases
     }
 
-    fun normalizeName(value: String): String = value.trim().lowercase(Locale.US)
+    fun normalizeName(value: String): String =
+        value.trim().lowercase(Locale.US).replace("haunglongbing", "huanglongbing")
 }
