@@ -12,6 +12,100 @@
         android:orientation="vertical"
         android:padding="20dp">
 
+        <LinearLayout
+            android:id="@+id/workspaceScanHeader"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/workspace_header"
+            android:orientation="vertical"
+            android:padding="24dp"
+            android:visibility="gone">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/workspace_badge"
+                android:padding="8dp"
+                android:text="@string/workspace_scan_label"
+                android:textColor="#D8F6E8"
+                android:textSize="12sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:accessibilityHeading="true"
+                android:text="@string/workspace_scan_title"
+                android:textColor="#FFFFFF"
+                android:textSize="30sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:lineSpacingExtra="3dp"
+                android:text="@string/workspace_scan_intro"
+                android:textColor="#D8F6E8"
+                android:textSize="16sp" />
+        </LinearLayout>
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/workspaceScanWorkflow"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:visibility="gone"
+            app:cardBackgroundColor="#EEF4FD"
+            app:cardCornerRadius="20dp"
+            app:cardElevation="0dp"
+            app:strokeColor="#C3D3EB"
+            app:strokeWidth="1dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:accessibilityHeading="true"
+                    android:text="@string/workspace_scan_workflow_title"
+                    android:textColor="#203F68"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+
+                <com.cropora.WorkflowDiagramView
+                    android:id="@+id/workspaceScanDiagram"
+                    android:layout_width="match_parent"
+                    android:layout_height="190dp"
+                    android:layout_marginTop="8dp" />
+
+                <TextView
+                    android:id="@+id/workspaceScanState"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:accessibilityLiveRegion="polite"
+                    android:text="@string/workspace_state_empty"
+                    android:textColor="#203F68"
+                    android:textSize="17sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/workspaceScanStateDetail"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="6dp"
+                    android:lineSpacingExtra="3dp"
+                    android:text="@string/workspace_state_empty_detail"
+                    android:textColor="#3D526D"
+                    android:textSize="14sp" />
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
         <TextView
             android:id="@+id/textScanTitle"
             android:layout_width="match_parent"
@@ -30,6 +124,35 @@
             android:textColor="@color/text_secondary"
             android:textSize="15sp" />
 
+        <LinearLayout
+            android:id="@+id/workspaceScanCapture"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:background="#E3F3EB"
+            android:orientation="vertical"
+            android:padding="16dp"
+            android:visibility="gone">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:accessibilityHeading="true"
+                android:text="@string/workspace_capture_title"
+                android:textColor="#174D3C"
+                android:textSize="19sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
+                android:lineSpacingExtra="3dp"
+                android:text="@string/workspace_capture_hint"
+                android:textColor="#305C4D"
+                android:textSize="14sp" />
+        </LinearLayout>
+
         <!-- Image Preview Card -->
         <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
@@ -41,12 +164,30 @@
             app:strokeWidth="1dp"
             app:strokeColor="@color/leaf_green">
 
-            <ImageView
-                android:id="@+id/imagePreview"
+            <FrameLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:contentDescription="@string/scan_preview_description"
-                android:scaleType="centerCrop" />
+                android:layout_height="match_parent">
+
+                <ImageView
+                    android:id="@+id/imagePreview"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:contentDescription="@string/scan_preview_description"
+                    android:scaleType="centerCrop" />
+
+                <TextView
+                    android:id="@+id/workspaceScanPreviewPlaceholder"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    app:drawableTopCompat="@drawable/ic_leaf"
+                    android:drawablePadding="12dp"
+                    android:gravity="center"
+                    android:padding="32dp"
+                    android:text="@string/workspace_preview_empty"
+                    android:textColor="@color/leaf_green_dark"
+                    android:textSize="16sp"
+                    android:visibility="gone" />
+            </FrameLayout>
         </com.google.android.material.card.MaterialCardView>
 
         <TextView
@@ -60,6 +201,7 @@
 
         <!-- Source Selection Buttons -->
         <LinearLayout
+            android:id="@+id/workspaceScanSources"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
@@ -88,6 +230,46 @@
                 android:textColor="@color/leaf_green_dark"
                 app:strokeColor="@color/leaf_green"
                 app:cornerRadius="10dp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/workspaceScanRoute"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:background="#FFF2D9"
+            android:orientation="vertical"
+            android:padding="16dp"
+            android:visibility="gone">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:accessibilityHeading="true"
+                android:text="@string/workspace_route_title"
+                android:textColor="#65471C"
+                android:textSize="19sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/workspaceScanRouteLabel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:text="@string/workspace_route_cloud"
+                android:textColor="#65471C"
+                android:textSize="14sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/workspaceScanRouteDetail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
+                android:lineSpacingExtra="3dp"
+                android:text="@string/workspace_route_cloud_detail"
+                android:textColor="#65471C"
+                android:textSize="14sp" />
         </LinearLayout>
 
         <TextView
@@ -146,6 +328,35 @@
             android:layout_marginTop="12dp"
             android:contentDescription="@string/detection_progress_description"
             android:visibility="gone" />
+
+        <LinearLayout
+            android:id="@+id/workspaceScanReview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:background="#EFEAFA"
+            android:orientation="vertical"
+            android:padding="16dp"
+            android:visibility="gone">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:accessibilityHeading="true"
+                android:text="@string/workspace_review_title"
+                android:textColor="#4D386E"
+                android:textSize="19sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
+                android:lineSpacingExtra="3dp"
+                android:text="@string/workspace_review_detail"
+                android:textColor="#4D386E"
+                android:textSize="14sp" />
+        </LinearLayout>
 
     </LinearLayout>
 </ScrollView>
