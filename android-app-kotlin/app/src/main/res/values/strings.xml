@@ -18,6 +18,15 @@
     <string name="history_title">Saved Scans</string>
     <string name="library_title">Plant Diseases</string>
     <string name="settings_title">Settings</string>
+    <string name="settings_language">Language</string>
+    <string name="language_english" translatable="false">English</string>
+    <string name="language_bangla" translatable="false">বাংলা</string>
+    <string name="setup_title">Welcome to Cropora / ক্রপোরায় স্বাগতম</string>
+    <string name="setup_language">Language / ভাষা</string>
+    <string name="setup_mode">Mode / মোড</string>
+    <string name="setup_simple">Simple / সহজ</string>
+    <string name="setup_advanced">Advanced / বিস্তারিত</string>
+    <string name="setup_continue">Continue / শুরু করুন</string>
     <string name="settings_advanced_mode">Advanced mode</string>
     <string name="analytics_title">Analytics</string>
 
@@ -79,6 +88,9 @@
     <string name="treatment_heading">What to Do</string>
     <string name="prevention_heading">How to Prevent It</string>
     <string name="guidance_unavailable">No information available.</string>
+    <string name="generic_symptoms">Detailed symptoms and treatment guidance are not available in this version.</string>
+    <string name="generic_treatment">Please verify this result with a local agricultural expert or plant-disease reference.</string>
+    <string name="generic_prevention">Capture a clear close-up and continue monitoring. This result is not a confirmed diagnosis.</string>
 
     <string name="save_to_history">Save Scan</string>
     <string name="saved_to_history">Scan Saved</string>
