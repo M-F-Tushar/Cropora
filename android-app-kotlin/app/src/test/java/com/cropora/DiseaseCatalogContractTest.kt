@@ -9,14 +9,16 @@ import org.w3c.dom.Element
 
 class DiseaseCatalogContractTest {
     @Test
-    fun catalogHasTenCompleteUniqueEntries() {
+    fun catalogCoversEveryModelLabelWithCompleteUniqueEntries() {
         val file = File("src/main/assets/diseases.xml")
         val document = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(file)
         val entries = document.getElementsByTagName("disease")
-        assertEquals(10, entries.length)
+        val labels = File("src/main/assets/labels.txt").readLines().filter { it.isNotBlank() }
+        assertEquals(38, entries.length)
 
-        val requiredTags = listOf("name", "plant", "symptoms", "treatment", "prevention")
+        val requiredTags = listOf("model_label", "name", "plant", "symptoms", "treatment", "prevention", "source")
         val names = mutableSetOf<String>()
+        val catalogLabels = mutableSetOf<String>()
         for (index in 0 until entries.length) {
             val element = entries.item(index) as Element
             for (tag in requiredTags) {
@@ -26,6 +28,9 @@ class DiseaseCatalogContractTest {
             val normalizedName = element.getElementsByTagName("name")
                 .item(0).textContent.trim().lowercase()
             assertTrue("duplicate disease name", names.add(normalizedName))
+            val label = element.getElementsByTagName("model_label").item(0).textContent.trim()
+            assertTrue("duplicate model label", catalogLabels.add(label))
         }
+        assertEquals(labels.toSet(), catalogLabels)
     }
 }
