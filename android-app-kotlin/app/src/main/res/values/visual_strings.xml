@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="visual_mode_description">Normal includes model labels, confidence, sample results and analytics. Advanced adds a visual workspace, workflow diagrams and structured evidence panels. Both use the same predictions and saved scans.</string>
+    <string name="visual_setup_description">Normal: full results and confidence. Advanced: visual workflows and structured evidence.</string>
+    <string name="visual_evidence_eyebrow">ADVANCED • EVIDENCE WORKSPACE</string>
+    <string name="visual_evidence_title">Read the signal.\nReview the evidence.</string>
+    <string name="visual_evidence_subtitle">Separate the model suggestion from the observations you verify in the field.</string>
+    <string name="visual_model_confidence">Model confidence</string>
+    <string name="visual_confidence_value">%1$d%%</string>
+    <string name="visual_confidence_explanation">Confidence describes the model output, not the probability of a correct diagnosis or disease severity.</string>
+    <string name="visual_review_required">Expert review needed</string>
+    <string name="visual_threshold_met">Above uncertainty threshold</string>
+    <string name="visual_guide_heading">CARE-GUIDE SOURCE</string>
+    <string name="visual_decision_heading">A structured review path</string>
+    <string name="visual_step_signal">Model signal</string>
+    <string name="visual_step_observe">Compare signs</string>
+    <string name="visual_step_verify">Expert review</string>
+    <string name="visual_step_plan">Plan care</string>
+    <string name="visual_decision_note">A reading guide, not completed tasks. Compare symptoms and verify the suggestion before choosing treatment.</string>
+    <string name="visual_current_stage">%1$s (current stage)</string>
+    <string name="visual_signs">01  /  OBSERVE • Signs to look for</string>
+    <string name="visual_action">02  /  RESPOND • Care and treatment</string>
+    <string name="visual_prevention">03  /  PROTECT • Prevention plan</string>
+</resources>
