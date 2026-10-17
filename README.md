@@ -86,6 +86,15 @@ Cropora/
 
 ### Interface modes
 
+On first launch, choose English or Bangla and Simple or Advanced mode. Both
+choices are saved. Change the language under **Settings > Language** and the
+interface mode under **Settings > Advanced mode** at any time. Language changes
+refresh open screens and apply to navigation, disease names, the 10 reviewed
+care-guide entries, saved-scan presentation, sharing, and daily reminders.
+All 38 model classes have translated display names; classes without reviewed
+guidance show a translated advisory. Model labels and saved identifiers remain
+unchanged. Android 13 and newer also expose these languages in system app settings.
+
 Simple mode is the default, with plain-language actions and care guidance.
 Turn on **Settings > Advanced mode** to reveal model labels, confidence scores
 and the confidence bar on results, plus sample-result and analytics navigation
