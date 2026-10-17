@@ -6,6 +6,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import com.cropora.data.Disease
+import com.cropora.data.DiseasePresentation
 import com.cropora.data.DiseaseRepository
 import java.io.IOException
 import kotlinx.coroutines.Dispatchers
@@ -30,7 +31,7 @@ class DiseaseDetailActivity : AppCompatActivity() {
         lifecycleScope.launch {
             try {
                 val disease = withContext(Dispatchers.IO) {
-                    DiseaseRepository.getInstance(applicationContext).findByName(name)
+                    DiseaseRepository.getInstance(applicationContext).findLocalizedByName(this@DiseaseDetailActivity, name)
                 }
                 if (disease == null) {
                     showErrorAndFinish(R.string.disease_not_found)
@@ -46,7 +47,7 @@ class DiseaseDetailActivity : AppCompatActivity() {
     }
 
     private fun renderDisease(disease: Disease) {
-        findViewById<TextView>(R.id.textDiseaseDetailName).text = disease.name
+        findViewById<TextView>(R.id.textDiseaseDetailName).text = DiseasePresentation.name(this, disease.name)
         findViewById<TextView>(R.id.textDiseaseDetailPlant).text = getString(
             R.string.disease_plant_format,
             disease.plant
