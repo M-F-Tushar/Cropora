@@ -137,8 +137,11 @@ The offline model contract matches the cloud contract:
   float32 values `[0, 255]`. Android's filtered bitmap scaling and the Python
   cloud/tooling preprocessing use bilinear resize. Do not normalize in the caller;
   the approved model embeds the `[0, 255]` to `[-1, 1]` transform.
-- The predicted class is `argmax`; confidence is its probability, and the local
-  uncertainty threshold is 0.50, matching the backend default.
+- The predicted class is `argmax`; confidence is its probability. The uncertainty
+  threshold defaults to 0.50, matching the backend default, and users can set it
+  from 5% to 95% in Settings. Cloud results are re-flagged on the device with the
+  same threshold, so the backend's `CONFIDENCE_THRESHOLD` no longer changes what
+  the app shows.
 
 ### Convert and validate
 
