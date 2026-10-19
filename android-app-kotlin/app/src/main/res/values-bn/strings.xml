@@ -118,6 +118,8 @@
     <string name="location_permission_denied">অবস্থানের অনুমতি দেওয়া হয়নি। অবস্থান ছাড়াই সংরক্ষণ হচ্ছে।</string>
     <string name="settings_scan_reminders">প্রতিদিন পরীক্ষার অনুস্মারক</string>
     <string name="settings_scan_reminders_description">প্রতিদিন প্রায় একবার গাছ পরীক্ষা করতে মনে করিয়ে দিন।</string>
+    <string name="settings_confidence_threshold_format">অনিশ্চয়তার সীমা: %1$d%%</string>
+    <string name="settings_confidence_threshold_description">এই মানের চেয়ে কম আস্থার মাত্রাযুক্ত ফলাফল অনিশ্চিত হিসেবে চিহ্নিত হবে। মান কম হলে কম ফলাফল অনিশ্চিত দেখাবে।</string>
     <string name="notification_channel_name">পাতা পরীক্ষার অনুস্মারক</string>
     <string name="notification_channel_description">গাছ দেখার ও পাতার নতুন ছবি তোলার অনুস্মারক।</string>
     <string name="notification_reminder_title">আপনার গাছ পরীক্ষা করুন</string>
