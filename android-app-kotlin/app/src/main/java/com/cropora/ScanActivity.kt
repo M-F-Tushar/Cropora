@@ -252,6 +252,7 @@ class ScanActivity : ModeAwareActivity() {
         }
 
         setDetectionInProgress(true)
+        val uncertaintyThreshold = UiPreferences.getConfidenceThreshold(this)
         imageProcessingExecutor.execute {
             var bitmap: Bitmap? = null
             val predictionResult = try {
@@ -260,7 +261,7 @@ class ScanActivity : ModeAwareActivity() {
                 } ?: throw IOException("Unable to decode selected image")
                 val classifier = localClassifier
                     ?: TFLiteClassifier(applicationContext).also { localClassifier = it }
-                Result.success(classifier.classify(bitmap))
+                Result.success(classifier.classify(bitmap, uncertaintyThreshold))
             } catch (exception: Exception) {
                 Result.failure(exception)
             } finally {
@@ -353,7 +354,14 @@ class ScanActivity : ModeAwareActivity() {
                     ).show()
                     return
                 }
-                startActivity(ResultActivity.createIntent(this@ScanActivity, prediction))
+                // The server's uncertain flag uses its own threshold; apply the user's setting here.
+                val uncertaintyThreshold = UiPreferences.getConfidenceThreshold(this@ScanActivity)
+                startActivity(
+                    ResultActivity.createIntent(
+                        this@ScanActivity,
+                        prediction.copy(uncertain = prediction.confidence < uncertaintyThreshold)
+                    )
+                )
             }
 
             override fun onFailure(
