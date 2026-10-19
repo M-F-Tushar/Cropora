@@ -184,6 +184,85 @@
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
 
+            <!-- Detection -->
+            <TextView
+                style="@style/AdvText.Label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:layout_marginTop="24dp"
+                android:accessibilityHeading="true"
+                android:text="@string/adv_settings_detection" />
+
+            <com.google.android.material.card.MaterialCardView
+                style="@style/Widget.Cropora.Adv.Card"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="18dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <FrameLayout
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:background="@drawable/adv_bg_icon_badge"
+                            android:backgroundTint="@color/adv_primary_soft">
+
+                            <ImageView
+                                android:layout_width="22dp"
+                                android:layout_height="22dp"
+                                android:layout_gravity="center"
+                                android:importantForAccessibility="no"
+                                android:src="@drawable/adv_ic_shield"
+                                app:tint="@color/adv_primary" />
+                        </FrameLayout>
+
+                        <TextView
+                            android:id="@+id/textConfidenceThresholdValue"
+                            style="@style/AdvText"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="14dp"
+                            android:layout_weight="1"
+                            android:fontFamily="sans-serif-medium"
+                            android:text="@string/settings_confidence_threshold_format"
+                            android:textSize="15sp"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+
+                    <com.google.android.material.slider.Slider
+                        android:id="@+id/sliderConfidenceThreshold"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:stepSize="1"
+                        android:value="50"
+                        android:valueFrom="5"
+                        android:valueTo="95"
+                        app:thumbColor="@color/adv_primary"
+                        app:trackColorActive="@color/adv_primary"
+                        app:trackColorInactive="@color/adv_primary_soft" />
+
+                    <TextView
+                        style="@style/AdvText.Caption"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:text="@string/settings_confidence_threshold_description"
+                        android:textSize="13sp" />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
             <!-- Notifications -->
             <TextView
                 style="@style/AdvText.Label"
