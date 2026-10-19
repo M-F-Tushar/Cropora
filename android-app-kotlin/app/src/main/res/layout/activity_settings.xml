@@ -81,6 +81,32 @@
         android:textColor="@color/text_secondary" />
 
     <TextView
+        android:id="@+id/textConfidenceThresholdValue"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="@string/settings_confidence_threshold_format"
+        android:textColor="@color/text_primary"
+        android:textSize="16sp" />
+
+    <com.google.android.material.slider.Slider
+        android:id="@+id/sliderConfidenceThreshold"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:stepSize="1"
+        android:value="50"
+        android:valueFrom="5"
+        android:valueTo="95" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:text="@string/settings_confidence_threshold_description"
+        android:textColor="@color/text_secondary" />
+
+    <TextView
         android:id="@+id/textServerUrlLabel"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
