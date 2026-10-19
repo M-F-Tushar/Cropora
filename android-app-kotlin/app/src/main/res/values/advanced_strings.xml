@@ -93,6 +93,7 @@
 
     <!-- Settings -->
     <string name="adv_settings_interface">Interface</string>
+    <string name="adv_settings_detection">Detection</string>
     <string name="adv_settings_notifications">Notifications</string>
     <string name="adv_settings_server">Cloud server</string>
     <string name="adv_version">Cropora %1$s</string>
