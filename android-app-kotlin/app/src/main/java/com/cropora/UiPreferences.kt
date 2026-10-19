@@ -9,6 +9,12 @@ import androidx.core.os.LocaleListCompat
 import java.util.Locale
 
 object UiPreferences {
+    const val DEFAULT_CONFIDENCE_THRESHOLD = 0.50f
+
+    // Must match the Slider range in the settings layouts.
+    private const val MIN_CONFIDENCE_THRESHOLD = 0.05f
+    private const val MAX_CONFIDENCE_THRESHOLD = 0.95f
+
     fun setLanguage(context: Context, language: String) {
         require(language == "en" || language == "bn")
         context.getSharedPreferences("cropora_settings", Context.MODE_PRIVATE)
@@ -45,5 +51,16 @@ object UiPreferences {
     fun setAdvanced(context: Context, enabled: Boolean) {
         context.getSharedPreferences("cropora_settings", Context.MODE_PRIVATE)
             .edit().putBoolean("advanced_ui_enabled", enabled).apply()
+    }
+
+    fun getConfidenceThreshold(context: Context): Float =
+        context.getSharedPreferences("cropora_settings", Context.MODE_PRIVATE)
+            .getFloat("confidence_threshold", DEFAULT_CONFIDENCE_THRESHOLD)
+            .coerceIn(MIN_CONFIDENCE_THRESHOLD, MAX_CONFIDENCE_THRESHOLD)
+
+    fun setConfidenceThreshold(context: Context, threshold: Float) {
+        require(threshold in MIN_CONFIDENCE_THRESHOLD..MAX_CONFIDENCE_THRESHOLD)
+        context.getSharedPreferences("cropora_settings", Context.MODE_PRIVATE)
+            .edit().putFloat("confidence_threshold", threshold).apply()
     }
 }
