@@ -85,6 +85,7 @@
     <string name="adv_scan_a_leaf">একটি পাতা স্ক্যান করুন</string>
 
     <string name="adv_settings_interface">ইন্টারফেস</string>
+    <string name="adv_settings_detection">শনাক্তকরণ</string>
     <string name="adv_settings_notifications">বিজ্ঞপ্তি</string>
     <string name="adv_settings_server">ক্লাউড সার্ভার</string>
     <string name="adv_version">ক্রপোরা %1$s</string>
