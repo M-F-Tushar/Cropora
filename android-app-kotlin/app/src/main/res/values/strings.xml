@@ -132,6 +132,8 @@
 
     <string name="settings_scan_reminders">Daily scan reminder</string>
     <string name="settings_scan_reminders_description">Remind me to check my plants about once a day.</string>
+    <string name="settings_confidence_threshold_format">Uncertainty threshold: %1$d%%</string>
+    <string name="settings_confidence_threshold_description">Results with confidence below this value are marked uncertain. Lower values flag fewer results.</string>
     <string name="notification_channel_name">Leaf scan reminders</string>
     <string name="notification_channel_description">Reminders to inspect plants and capture a fresh leaf image.</string>
     <string name="notification_reminder_title">Check your plants</string>
