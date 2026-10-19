@@ -1,6 +1,7 @@
 package com.cropora
 
 import android.content.Context
+import android.widget.TextView
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.action.ViewActions.click
@@ -10,8 +11,10 @@ import androidx.test.espresso.matcher.ViewMatchers.isDisplayed
 import androidx.test.espresso.matcher.ViewMatchers.withId
 import androidx.test.ext.junit.rules.ActivityScenarioRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
+import com.google.android.material.slider.Slider
 import org.hamcrest.Matchers.not
 import org.junit.After
+import org.junit.Assert.assertEquals
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -20,13 +23,15 @@ import org.junit.runner.RunWith
 class SettingsActivityInstrumentedTest {
     private val context = ApplicationProvider.getApplicationContext<Context>()
     private val originalAdvanced = UiPreferences.isAdvanced(context)
+    private val originalThreshold = UiPreferences.getConfidenceThreshold(context)
 
     @get:Rule
     val activityRule = ActivityScenarioRule(SettingsActivity::class.java)
 
     @After
-    fun restoreMode() {
+    fun restoreSettings() {
         UiPreferences.setAdvanced(context, originalAdvanced)
+        UiPreferences.setConfidenceThreshold(context, originalThreshold)
     }
 
     @Test
@@ -45,5 +50,18 @@ class SettingsActivityInstrumentedTest {
     @Test
     fun reminderSwitchIsVisible() {
         onView(withId(R.id.switchScanReminders)).check(matches(isDisplayed()))
+    }
+
+    @Test
+    fun savedConfidenceThresholdIsShownAfterRecreate() {
+        UiPreferences.setConfidenceThreshold(context, 0.70f)
+        activityRule.scenario.recreate()
+        activityRule.scenario.onActivity { activity ->
+            assertEquals(70f, activity.findViewById<Slider>(R.id.sliderConfidenceThreshold).value, 0f)
+            assertEquals(
+                activity.getString(R.string.settings_confidence_threshold_format, 70),
+                activity.findViewById<TextView>(R.id.textConfidenceThresholdValue).text.toString()
+            )
+        }
     }
 }
