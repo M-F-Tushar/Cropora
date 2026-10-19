@@ -3,6 +3,7 @@ package com.cropora.ml
 import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.Color
+import com.cropora.UiPreferences
 import com.cropora.data.DiseaseRepository
 import com.cropora.network.PredictionResponse
 import java.io.BufferedReader
@@ -59,7 +60,10 @@ class TFLiteClassifier @Throws(IOException::class) constructor(
         }
     }
 
-    fun classify(bitmap: Bitmap): PredictionResponse {
+    fun classify(
+        bitmap: Bitmap,
+        uncertaintyThreshold: Float = UiPreferences.DEFAULT_CONFIDENCE_THRESHOLD
+    ): PredictionResponse {
         val activeInterpreter = checkNotNull(interpreter) { "TFLite interpreter is closed" }
         val output = Array(1) { FloatArray(outputClasses) }
         activeInterpreter.run(preprocess(bitmap), output)
@@ -77,7 +81,7 @@ class TFLiteClassifier @Throws(IOException::class) constructor(
             modelLabel = modelLabel,
             disease = displayName,
             confidence = confidence,
-            uncertain = confidence < CONFIDENCE_THRESHOLD,
+            uncertain = confidence < uncertaintyThreshold,
             guidanceAvailable = guidance != null,
             symptoms = guidance?.symptoms ?: GENERIC_SYMPTOMS,
             treatment = guidance?.treatment ?: GENERIC_TREATMENT,
@@ -170,7 +174,6 @@ class TFLiteClassifier @Throws(IOException::class) constructor(
         private const val RGB_CHANNELS = 3
         private const val FLOAT_BYTES = 4
         private const val EXPECTED_CLASSES = 38
-        private const val CONFIDENCE_THRESHOLD = 0.50f
         private const val PROBABILITY_SUM_TOLERANCE = 0.000011
         private const val GENERIC_SYMPTOMS =
             "Detailed symptoms and treatment guidance are not available in this version."
