@@ -26,7 +26,8 @@ the model directly from the APK. The expected extension is `.tflite` (not
 Offline mode shares the cloud result data contract. It resizes RGB images to
 224x224 with bilinear filtering, passes raw float32 pixel values in `[0, 255]`
 (the model contains its own normalization), selects the highest class
-probability, and uses the same 0.50 uncertainty threshold as the backend default.
+probability, and flags results below the uncertainty threshold. The threshold
+defaults to 0.50, matching the backend default, and can be changed in Settings.
 The local XML catalog contains symptoms, management and prevention for all 38
 classes. Healthy entries explain the limits of a leaf-only prediction. Unknown
 labels still receive generic guidance. Confidence and uncertainty are independent
