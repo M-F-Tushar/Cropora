@@ -15,6 +15,8 @@ import androidx.appcompat.widget.SwitchCompat
 import androidx.core.content.ContextCompat
 import com.cropora.network.ServerPreferences
 import com.cropora.utils.NotificationHelper
+import com.google.android.material.slider.Slider
+import kotlin.math.roundToInt
 
 class SettingsActivity : ModeAwareActivity() {
     private lateinit var switchReminders: SwitchCompat
@@ -67,6 +69,19 @@ class SettingsActivity : ModeAwareActivity() {
                 notificationPermissionLauncher.launch(Manifest.permission.POST_NOTIFICATIONS)
             } else {
                 setRemindersEnabled(enabled)
+            }
+        }
+
+        val sliderConfidenceThreshold = findViewById<Slider>(R.id.sliderConfidenceThreshold)
+        val textConfidenceThresholdValue = findViewById<TextView>(R.id.textConfidenceThresholdValue)
+        val thresholdPercent = (UiPreferences.getConfidenceThreshold(this) * 100).roundToInt()
+        sliderConfidenceThreshold.value = thresholdPercent.toFloat()
+        textConfidenceThresholdValue.text = getString(R.string.settings_confidence_threshold_format, thresholdPercent)
+        sliderConfidenceThreshold.addOnChangeListener { _, value, fromUser ->
+            val percent = value.roundToInt()
+            textConfidenceThresholdValue.text = getString(R.string.settings_confidence_threshold_format, percent)
+            if (fromUser) {
+                UiPreferences.setConfidenceThreshold(this@SettingsActivity, percent / 100f)
             }
         }
 
