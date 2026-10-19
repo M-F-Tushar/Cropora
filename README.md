@@ -30,7 +30,7 @@ Both paths produce a common result containing the disease name, confidence score
 uncertainty status, symptoms, treatment, and prevention guidance. The result can
 be saved to the local scan history.
 
-![Cropora logo](android-app-kotlin/app_icon_source.png.jpg)
+![Cropora logo](docs/branding/cropora-logo-with-name.jpg)
 
 More detail about the original architecture is available in
 [`docs/evidence/week-01/system-sketch.md`](docs/evidence/week-01/system-sketch.md).
@@ -206,6 +206,10 @@ The backend address can also be changed after install from the app's Settings
 screen. The entered value is validated, persisted, and overrides the compiled
 default immediately, so switching servers does not require a rebuild.
 
+The uncertainty threshold can also be changed from the same screen. It defaults
+to 50%. Results with a confidence below the selected value are marked uncertain,
+for both on-device and cloud predictions.
+
 ## Backend API
 
 ### Requirements
@@ -264,7 +268,7 @@ Settings are read from environment variables (or `backend-api/.env`) in `config.
 | `MODEL_PATH` | `backend-api/models/cropora_model.keras` | Path to the Keras model. |
 | `LABELS_PATH` | `backend-api/labels-38.txt` | Serving label file; order must match the model. |
 | `IMAGE_SIZE` | `224` | Input size. Must remain `224` for the approved model. |
-| `CONFIDENCE_THRESHOLD` | `0.50` | Predictions below this value are flagged `uncertain`. |
+| `CONFIDENCE_THRESHOLD` | `0.50` | Predictions below this value are flagged `uncertain`. The Android app recalculates `uncertain` from its own Settings threshold. |
 | `MAX_IMAGE_SIZE_BYTES` | `10485760` (10 MB) | Upload size limit; larger files return HTTP 413. |
 | `ALLOWED_ORIGINS` | `*` | Comma-separated CORS origins. |
 | `PORT` | `8000` | Port used by the Docker image. |
