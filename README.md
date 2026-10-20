@@ -11,7 +11,7 @@ flow, cloud API integration, offline inference integration, local history, and
 disease library are implemented. The approved Keras artifact is supplied locally,
 and a generated TensorFlow Lite asset (`model.tflite`) is committed under the
 Android assets. Model validation, on-device verification, and several application
-features remain in progress.
+features remain in progress. 
 
 > Cropora is an educational project and is not a substitute for diagnosis or
 > advice from a qualified agricultural professional.
