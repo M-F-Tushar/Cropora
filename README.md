@@ -24,7 +24,7 @@ Cropora uses two prediction paths:
   the FastAPI backend. The backend validates and preprocesses the image, runs a
   TensorFlow/Keras model, and returns a structured prediction.
 - **Offline Mode** — the Android app runs a TensorFlow Lite model stored on the
-  device, allowing predictions without an internet connection.
+  device, allowing predictions without an internet connection. 
 
 Both paths produce a common result containing the disease name, confidence score,
 uncertainty status, symptoms, treatment, and prevention guidance. The result can
