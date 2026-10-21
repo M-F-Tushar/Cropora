@@ -28,11 +28,11 @@
                 android:backgroundTint="@color/adv_surface">
 
                 <ImageView
-                    android:layout_width="28dp"
-                    android:layout_height="28dp"
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
                     android:layout_gravity="center"
                     android:importantForAccessibility="no"
-                    android:src="@drawable/ic_leaf" />
+                    android:src="@mipmap/ic_launcher" />
             </FrameLayout>
 
             <LinearLayout
