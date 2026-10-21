@@ -40,6 +40,7 @@ class AdvancedHomeFragment : AdvancedTabFragment(R.layout.fragment_adv_home) {
             R.string.adv_no_scans_title, R.string.adv_no_scans_body
         ) { navigator.startScan() }
 
+        view.findViewById<TextView>(R.id.advHomeGreeting).setText(AdvancedUi.greeting())
         loadLibraryCount(view.findViewById(R.id.advHomeLibraryCount))
         observeScans(::render)
     }
